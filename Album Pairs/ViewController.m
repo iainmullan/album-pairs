@@ -23,11 +23,12 @@ static const int WIDTH = 6;
 
 @interface ViewController ()
 
-@property (strong, nonatomic) IBOutlet UIView *gridView;
+@property (strong, nonatomic) UIView *gridView;
 @property (strong, nonatomic) NSMutableArray *cards;
 
 @property (strong, nonatomic) APCard *pick1;
 @property (strong, nonatomic) APCard *pick2;
+@property (strong, nonatomic) UIButton *restartGameButton;
 
 @end
 
@@ -38,8 +39,35 @@ static const int WIDTH = 6;
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [self createGrid];
+    self.restartGameButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.restartGameButton setTitle:@"New Game" forState:UIControlStateNormal];
+    self.restartGameButton.frame = CGRectMake(894, 50, 100, 30);
     
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(restartGameButtonWasTapped:)];
+    self.restartGameButton.userInteractionEnabled = YES;
+    [self.restartGameButton addGestureRecognizer:tapGesture];
+
+    [self.view addSubview:self.restartGameButton];
+
+    [self newGame];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void) restartGameButtonWasTapped:(UITapGestureRecognizer*)recognizer
+{
+    [self newGame];
+}
+
+- (void)newGame
+{
+
+    [self createGrid];
+
     int numberOfPairs = (WIDTH*WIDTH)/2;
     
     #if (TARGET_IPHONE_SIMULATOR)
@@ -47,13 +75,7 @@ static const int WIDTH = 6;
     #else
         [self loadAlbumsFromLibrary:numberOfPairs];
     #endif
-    
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSArray*)shuffle:(NSArray*)input
@@ -149,7 +171,6 @@ static const int WIDTH = 6;
     [LastFm sharedInstance].apiSecret = @"ddf36276bf879232f93165598ce43c4c";
     [LastFm sharedInstance].username = @"ebotunes";
 
-    // Get images for an artist
     [[LastFm sharedInstance] getTopAlbumsForUserOrNil:@"ebotunes" period:kLastFmPeriodOverall limit:50 successHandler:^(NSArray *result) {
         
         NSArray *albums = [self shuffle:result];
@@ -228,11 +249,15 @@ static const int WIDTH = 6;
 
 - (void) createGrid
 {
+    
+    if (self.gridView) {
+        [self.gridView removeFromSuperview];
+    }
+    
+    int gridArea = (CARD_SIZE * WIDTH) + (CARD_MARGIN * WIDTH-1);
+    CGRect gridFrame = CGRectMake(30, 50, gridArea, gridArea);
 
-    CGRect gridFrame = CGRectMake(50, 50, 600, 600);
     self.gridView = [[UIView alloc] initWithFrame:gridFrame];
-
-    self.gridView.backgroundColor = [UIColor colorWithRed:0.7 green:0.9 blue:0.7 alpha:0];
     
     [self.view addSubview:self.gridView];
 }
