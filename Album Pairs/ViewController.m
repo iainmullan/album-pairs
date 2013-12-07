@@ -17,8 +17,8 @@
 #import "LastFm.h"
 #import "APCard.h"
 
-static const int PIECE_SIZE = 100;
-static const int PIECE_MARGIN = 10;
+static const int CARD_SIZE = 100;
+static const int CARD_MARGIN = 10;
 static const int WIDTH = 6;
 
 @interface ViewController ()
@@ -119,7 +119,7 @@ static const int WIDTH = 6;
     for(NSDictionary *album in albums) {
 
         MPMediaItemArtwork *artwork = [album valueForKey:MPMediaItemPropertyArtwork];
-        UIImage *artworkImage = [artwork imageWithSize: CGSizeMake (PIECE_SIZE, PIECE_SIZE)];
+        UIImage *artworkImage = [artwork imageWithSize: CGSizeMake (CARD_SIZE, CARD_SIZE)];
 
         if (artworkImage) {
             // make two cards for each album
@@ -240,10 +240,10 @@ static const int WIDTH = 6;
 + (CGRect) frameForPositionX:(int) x y:(int)y
 {
     
-    int xpos = x * (PIECE_SIZE + PIECE_MARGIN);
-    int ypos = y * (PIECE_SIZE + PIECE_MARGIN);
+    int xpos = x * (CARD_SIZE + CARD_MARGIN);
+    int ypos = y * (CARD_SIZE + CARD_MARGIN);
     
-    return CGRectMake(xpos, ypos, PIECE_SIZE, PIECE_SIZE);
+    return CGRectMake(xpos, ypos, CARD_SIZE, CARD_SIZE);
 }
 
 @end

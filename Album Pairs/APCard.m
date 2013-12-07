@@ -21,13 +21,24 @@
     return self;
 }
 
+-(void)setArtwork:(UIImage*)image
+{
+    
+    CGRect frame = CGRectMake(0, 0, 100, 100);
+    
+    self.albumArtwork = [[UIImageView alloc] initWithImage:image];
+    self.albumArtwork.frame = frame;
+
+    self.back = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"card-back.png"]];
+    self.back.frame = frame;
+}
 
 - (id)initWithImage:(UIImage*)image albumId:(int)albumId
 {
     self = [self init];
     self.albumId = albumId;
-    self.albumArtwork = image;
-    self.back = [UIImage imageWithContentsOfFile:@"card-back.png"];
+
+    [self setArtwork:image];
 
     UIColor *grey = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0f];
     self.layer.borderColor = grey.CGColor;
@@ -48,10 +59,7 @@
     
     self.albumId = albumId;
     
-    self.albumArtwork = image;
-    self.back = [UIImage imageNamed:@"card-back.png"];
-    
-    NSLog(@"%@", self.back);
+    [self setArtwork:image];
     
     UIColor *grey = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0f];
     self.layer.borderColor = grey.CGColor;
@@ -67,19 +75,16 @@
     self.layer.opacity = 1.0;
     self.shown = true;
     
-    [self setImage:self.albumArtwork];
-    
-//    [UIView transitionWithView:containerView
-//                      duration:0.2
-//                       options:UIViewAnimationOptionTransitionFlipFromLeft
-//                    animations:^{ [fromView removeFromSuperview]; [containerView addSubview:toView]; }
-//                    completion:NULL];
+    [UIView transitionWithView:self
+                      duration:0.6
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{ [self.back removeFromSuperview]; [self addSubview:self.albumArtwork]; }
+                    completion:NULL];
     
 }
 
 - (void)highlight
 {
-    self.layer.opacity = 1.0;
     self.shown = true;
 
     UIColor *green = [UIColor colorWithRed:0.2 green:1.0 blue:0.2 alpha:1.0f];
@@ -89,11 +94,15 @@
 
 - (void)hide
 {
-//    NSLog(@"hide");
-    self.layer.opacity = 0.2;
+    self.layer.opacity = 0.5;
+    
     self.shown = false;
     
-    [self setImage:self.back];
+    [UIView transitionWithView:self
+                      duration:0.6
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{ [self.albumArtwork removeFromSuperview]; [self addSubview:self.back]; }
+                    completion:NULL];
 }
 
 - (void)remove
