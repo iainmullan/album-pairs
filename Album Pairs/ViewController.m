@@ -18,7 +18,7 @@
 #import "APCard.h"
 
 static const int PIECE_SIZE = 100;
-static const int PIECE_MARGIN = 20;
+static const int PIECE_MARGIN = 10;
 static const int WIDTH = 6;
 
 @interface ViewController ()
@@ -202,18 +202,20 @@ static const int WIDTH = 6;
 
 -(void)correct
 {
-    NSLog(@"correct");
-    
     AudioServicesPlaySystemSound (1025);
-    
-    [self reset];
+
+    [self.pick1 highlight];
+    [self.pick2 highlight];
+
+    self.pick1 = nil;
+    self.pick2 = nil;
 }
 
 -(void)incorrect
 {
-    NSLog(@"incorrect");
     AudioServicesPlaySystemSound(1000);
-    [self reset];
+    
+    [self performSelector:@selector(reset) withObject:nil afterDelay:2.0];
 }
 
 -(void)reset

@@ -23,6 +23,7 @@
 		AE5B98FD1853527000C7F8D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE5B98FB1853527000C7F8D1 /* InfoPlist.strings */; };
 		AE5B98FF1853527000C7F8D1 /* Album_PairsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5B98FE1853527000C7F8D1 /* Album_PairsTests.m */; };
 		AE5B990F1853752000C7F8D1 /* APCard.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5B990E1853752000C7F8D1 /* APCard.m */; };
+		AE5B99111853B53000C7F8D1 /* card-back.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5B99101853B53000C7F8D1 /* card-back.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		AE5B98FE1853527000C7F8D1 /* Album_PairsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Album_PairsTests.m; sourceTree = "<group>"; };
 		AE5B990D1853752000C7F8D1 /* APCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APCard.h; sourceTree = "<group>"; };
 		AE5B990E1853752000C7F8D1 /* APCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APCard.m; sourceTree = "<group>"; };
+		AE5B99101853B53000C7F8D1 /* card-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "card-back.png"; path = "Album Pairs/Resources/card-back.png"; sourceTree = "<group>"; };
 		BB3AE41C54ED46F1A96510EF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 		AE5B98C71853527000C7F8D1 = {
 			isa = PBXGroup;
 			children = (
+				AE5B99101853B53000C7F8D1 /* card-back.png */,
 				AE5B98D91853527000C7F8D1 /* Album Pairs */,
 				AE5B98F81853527000C7F8D1 /* Album PairsTests */,
 				AE5B98D21853527000C7F8D1 /* Frameworks */,
@@ -244,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE5B99111853B53000C7F8D1 /* card-back.png in Resources */,
 				AE5B98EC1853527000C7F8D1 /* Images.xcassets in Resources */,
 				AE5B98DE1853527000C7F8D1 /* InfoPlist.strings in Resources */,
 				AE5B98E71853527000C7F8D1 /* Main.storyboard in Resources */,

@@ -26,11 +26,15 @@
 {
     self = [self init];
     self.albumId = albumId;
-    
-    [self setImage:image];
-    
+    self.albumArtwork = image;
+    self.back = [UIImage imageWithContentsOfFile:@"card-back.png"];
+
+    UIColor *grey = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0f];
+    self.layer.borderColor = grey.CGColor;
+    self.layer.borderWidth = 3.0;
+
     [self hide];
-    
+
     return self;
 }
 
@@ -44,8 +48,15 @@
     
     self.albumId = albumId;
     
-    [self setImage:image];// = image;
+    self.albumArtwork = image;
+    self.back = [UIImage imageNamed:@"card-back.png"];
     
+    NSLog(@"%@", self.back);
+    
+    UIColor *grey = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0f];
+    self.layer.borderColor = grey.CGColor;
+    self.layer.borderWidth = 3.0;
+
     [self hide];
     
     return self;
@@ -55,6 +66,25 @@
 {
     self.layer.opacity = 1.0;
     self.shown = true;
+    
+    [self setImage:self.albumArtwork];
+    
+//    [UIView transitionWithView:containerView
+//                      duration:0.2
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{ [fromView removeFromSuperview]; [containerView addSubview:toView]; }
+//                    completion:NULL];
+    
+}
+
+- (void)highlight
+{
+    self.layer.opacity = 1.0;
+    self.shown = true;
+
+    UIColor *green = [UIColor colorWithRed:0.2 green:1.0 blue:0.2 alpha:1.0f];
+
+    self.layer.borderColor = green.CGColor;
 }
 
 - (void)hide
@@ -62,6 +92,8 @@
 //    NSLog(@"hide");
     self.layer.opacity = 0.2;
     self.shown = false;
+    
+    [self setImage:self.back];
 }
 
 - (void)remove
