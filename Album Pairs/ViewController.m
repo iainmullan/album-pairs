@@ -30,6 +30,8 @@ static const int WIDTH = 6;
 @property (strong, nonatomic) APCard *pick2;
 @property (strong, nonatomic) UIButton *restartGameButton;
 
+@property BOOL isBeingIncorrect;
+
 @end
 
 @implementation ViewController
@@ -202,6 +204,11 @@ static const int WIDTH = 6;
     if (piece.shown) {
         return;
     }
+    
+    if (self.isBeingIncorrect) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(reset) object: nil];
+        [self reset];
+    }
 
     if (self.pick1 == nil) {
         self.pick1 = piece;
@@ -235,15 +242,20 @@ static const int WIDTH = 6;
 {
     AudioServicesPlaySystemSound(1000);
     
+    self.isBeingIncorrect = true;
     [self performSelector:@selector(reset) withObject:nil afterDelay:2.0];
 }
 
 -(void)reset
 {
-    [self.pick1 hide];
-    [self.pick2 hide];
-    self.pick1 = nil;
-    self.pick2 = nil;
+    if (self.isBeingIncorrect) {
+        [self.pick1 hide];
+        [self.pick2 hide];
+        self.pick1 = nil;
+        self.pick2 = nil;
+        
+        self.isBeingIncorrect = false;
+    }
 }
 
 - (void) createGrid
