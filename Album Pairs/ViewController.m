@@ -168,7 +168,6 @@ static const int WIDTH = 6;
     self.cards = [[NSMutableArray alloc] init];
 
     [LastFm sharedInstance].apiKey = @"79de4922efbb54e68613e47d36de1b9f";
-    [LastFm sharedInstance].apiSecret = @"ddf36276bf879232f93165598ce43c4c";
     [LastFm sharedInstance].username = @"ebotunes";
 
     [[LastFm sharedInstance] getTopAlbumsForUserOrNil:@"ebotunes" period:kLastFmPeriodOverall limit:50 successHandler:^(NSArray *result) {
