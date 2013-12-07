@@ -22,6 +22,7 @@
 		AE5B98F51853527000C7F8D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D71853527000C7F8D1 /* UIKit.framework */; };
 		AE5B98FD1853527000C7F8D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE5B98FB1853527000C7F8D1 /* InfoPlist.strings */; };
 		AE5B98FF1853527000C7F8D1 /* Album_PairsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5B98FE1853527000C7F8D1 /* Album_PairsTests.m */; };
+		AE5B990F1853752000C7F8D1 /* APCard.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5B990E1853752000C7F8D1 /* APCard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		AE5B98FA1853527000C7F8D1 /* Album PairsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Album PairsTests-Info.plist"; sourceTree = "<group>"; };
 		AE5B98FC1853527000C7F8D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE5B98FE1853527000C7F8D1 /* Album_PairsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Album_PairsTests.m; sourceTree = "<group>"; };
+		AE5B990D1853752000C7F8D1 /* APCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APCard.h; sourceTree = "<group>"; };
+		AE5B990E1853752000C7F8D1 /* APCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APCard.m; sourceTree = "<group>"; };
 		BB3AE41C54ED46F1A96510EF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +121,8 @@
 		AE5B98D91853527000C7F8D1 /* Album Pairs */ = {
 			isa = PBXGroup;
 			children = (
+				AE5B990D1853752000C7F8D1 /* APCard.h */,
+				AE5B990E1853752000C7F8D1 /* APCard.m */,
 				AE5B98E21853527000C7F8D1 /* AppDelegate.h */,
 				AE5B98E31853527000C7F8D1 /* AppDelegate.m */,
 				AE5B98E51853527000C7F8D1 /* Main.storyboard */,
@@ -207,6 +212,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Iain Mullan";
 				TargetAttributes = {
+					AE5B98CF1853527000C7F8D1 = {
+						DevelopmentTeam = 356MFXZF77;
+					};
 					AE5B98F01853527000C7F8D1 = {
 						TestTargetID = AE5B98CF1853527000C7F8D1;
 					};
@@ -292,6 +300,7 @@
 			files = (
 				AE5B98EA1853527000C7F8D1 /* ViewController.m in Sources */,
 				AE5B98E41853527000C7F8D1 /* AppDelegate.m in Sources */,
+				AE5B990F1853752000C7F8D1 /* APCard.m in Sources */,
 				AE5B98E01853527000C7F8D1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,10 +431,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Album Pairs/Album Pairs-Prefix.pch";
 				INFOPLIST_FILE = "Album Pairs/Album Pairs-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -436,10 +448,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Album Pairs/Album Pairs-Prefix.pch";
 				INFOPLIST_FILE = "Album Pairs/Album Pairs-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -10,4 +10,8 @@
 
 @interface ViewController : UIViewController
 
+
+- (NSArray*) shuffle:(NSArray*)input;
++ (CGRect) frameForPositionX:(int) x y:(int)y;
+
 @end
