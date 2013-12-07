@@ -1,8 +1,27 @@
 {
   "images" : [
     {
-      "idiom" : "ipad",
       "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "apple-retina-58.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "apple-adhoc-57.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "apple-retina-114.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "apple-regular-29.png",
       "scale" : "1x"
     },
     {
@@ -21,13 +40,51 @@
       "scale" : "2x"
     },
     {
+      "size" : "50x50",
       "idiom" : "ipad",
-      "size" : "76x76",
+      "filename" : "apple-regular-50.png",
       "scale" : "1x"
     },
     {
+      "size" : "50x50",
       "idiom" : "ipad",
+      "filename" : "apple-retina-100.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "72x72",
+      "idiom" : "ipad",
+      "filename" : "apple-regular-72.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "72x72",
+      "idiom" : "ipad",
+      "filename" : "apple-retina-144.png",
+      "scale" : "2x"
+    },
+    {
       "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "apple-regular-76.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "apple-retina-152.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "256x256",
+      "idiom" : "mac",
+      "filename" : "apple-appstore-512.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "512x512",
+      "idiom" : "mac",
+      "filename" : "apple-appstore-1024.png",
       "scale" : "2x"
     }
   ],
