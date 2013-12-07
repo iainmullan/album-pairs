@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "LastFm.h"
 
 @interface ViewController ()
 
@@ -18,6 +19,32 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
+    [LastFm sharedInstance].apiKey = @"79de4922efbb54e68613e47d36de1b9f";
+    [LastFm sharedInstance].apiSecret = @"ddf36276bf879232f93165598ce43c4c";
+    [LastFm sharedInstance].username = @"ebotunes";
+
+    // Get images for an artist
+    [[LastFm sharedInstance] getTopAlbumsForUserOrNil:@"ebotunes" period:kLastFmPeriodOverall limit:8 successHandler:^(NSArray *result) {
+        NSLog(@"result: %@", result);
+
+        for (NSDictionary *album in result) {
+            
+            NSLog(@"Title: %@", [album valueForKey:@"image"]);
+            
+            NSURL *url =[album valueForKey:@"image"];
+            
+            NSData *imageData = [NSData dataWithContentsOfURL:url];
+            UIImage *image = [UIImage imageWithData:imageData];
+            
+        }
+
+    } failureHandler:^(NSError *error) {
+        NSLog(@"error: %@", error);
+    }];
+
+    
+
 }
 
 - (void)didReceiveMemoryWarning
