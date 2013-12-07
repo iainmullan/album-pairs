@@ -11,7 +11,6 @@
 @interface APCard : UIView
 
 - (id)initWithImage:(UIImage*)image albumId:(int)albumId;
-- (id)initWithLastFmAlbum:(NSDictionary*)album albumId:(int)albumId;
 
 - (void)highlight;
 - (void)show;

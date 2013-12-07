@@ -49,27 +49,6 @@
     return self;
 }
 
-- (id)initWithLastFmAlbum:(NSDictionary*)album albumId:(int)albumId
-{
-    self = [self init];
-
-    NSURL *url =[album valueForKey:@"image"];
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [UIImage imageWithData:imageData];
-    
-    self.albumId = albumId;
-    
-    [self setArtwork:image];
-    
-    UIColor *grey = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0f];
-    self.layer.borderColor = grey.CGColor;
-    self.layer.borderWidth = 3.0;
-
-    [self hide];
-    
-    return self;
-}
-
 - (void)show
 {
     self.layer.opacity = 1.0;
@@ -88,7 +67,6 @@
     self.shown = true;
 
     UIColor *green = [UIColor colorWithRed:0.2 green:1.0 blue:0.2 alpha:1.0f];
-
     self.layer.borderColor = green.CGColor;
 }
 

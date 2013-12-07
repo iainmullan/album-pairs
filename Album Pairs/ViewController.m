@@ -184,8 +184,13 @@ static const int WIDTH = 6;
         // make two cards for each album
         int i = 0;
         for (NSDictionary *album in albums) {
-            [self.cards addObject:[[APCard alloc] initWithLastFmAlbum:album albumId:i]];
-            [self.cards addObject:[[APCard alloc] initWithLastFmAlbum:album albumId:i]];
+            
+            NSURL *url = [album valueForKey:@"image"];
+            NSData *imageData = [NSData dataWithContentsOfURL:url];
+            UIImage *image = [UIImage imageWithData:imageData];
+
+            [self.cards addObject:[[APCard alloc] initWithImage:image albumId:i]];
+            [self.cards addObject:[[APCard alloc] initWithImage:image albumId:i]];
             i++;
         }
         
