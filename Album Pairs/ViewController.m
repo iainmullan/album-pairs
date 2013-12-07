@@ -129,6 +129,14 @@ static const int WIDTH = 6;
     
 }
 
+-(BOOL)addCardFromImage:(UIImage*)image withIndex:(int)index
+{
+    [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index]];
+    [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index]];
+    
+    return true;
+}
+
 - (void)loadAlbumsFromLibrary:(int)howMany
 {
     self.cards = [[NSMutableArray alloc] init];
@@ -147,9 +155,9 @@ static const int WIDTH = 6;
 
         if (artworkImage) {
             // make two cards for each album
-            [self.cards addObject:[[APCard alloc] initWithImage:artworkImage albumId:i]];
-            [self.cards addObject:[[APCard alloc] initWithImage:artworkImage albumId:i]];
-            i++;
+            if ([self addCardFromImage:artworkImage withIndex:i]) {
+                i++;
+            }
         } else {
 
         }
@@ -172,7 +180,7 @@ static const int WIDTH = 6;
     [LastFm sharedInstance].apiKey = @"79de4922efbb54e68613e47d36de1b9f";
     [LastFm sharedInstance].username = @"ebotunes";
 
-    [[LastFm sharedInstance] getTopAlbumsForUserOrNil:@"ebotunes" period:kLastFmPeriodOverall limit:50 successHandler:^(NSArray *result) {
+    [[LastFm sharedInstance] getTopAlbumsForUserOrNil:nil period:kLastFmPeriodOverall limit:50 successHandler:^(NSArray *result) {
         
         NSArray *albums = [self shuffle:result];
         
@@ -189,8 +197,7 @@ static const int WIDTH = 6;
             NSData *imageData = [NSData dataWithContentsOfURL:url];
             UIImage *image = [UIImage imageWithData:imageData];
 
-            [self.cards addObject:[[APCard alloc] initWithImage:image albumId:i]];
-            [self.cards addObject:[[APCard alloc] initWithImage:image albumId:i]];
+            [self addCardFromImage:image withIndex:i];
             i++;
         }
         
