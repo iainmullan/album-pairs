@@ -27,7 +27,7 @@ static const int WIDTH = 6;
 @property (strong, nonatomic) UIView *gridView;
 @property (strong, nonatomic) NSMutableArray *cards;
 @property (strong, nonatomic) NSMutableArray *songs;
-@property (strong, nonatomic) NSMutableArray *playlist;
+@property (strong, nonatomic) MPMediaItemCollection *playlist;
 @property (strong, nonatomic) MPMusicPlayerController *player;
 
 @property (strong, nonatomic) APCard *pick1;
@@ -40,6 +40,8 @@ static const int WIDTH = 6;
 @property (strong, nonatomic) NSTimer *timer;
 
 @property (strong, nonatomic) UILabel *nowPlayingLabel;
+
+@property (strong, nonatomic) UIView *playlistView;
 
 @property BOOL isBeingIncorrect;
 @property int turnCount;
@@ -81,15 +83,21 @@ static const int WIDTH = 6;
     self.timerLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:self.timerLabel];
 
+
     /* PLAYER INTERFACE */
+    self.playlistView = [[UIView alloc] initWithFrame:CGRectMake(710, 100, 300, 450)];
+    [self.playlistView setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
+    [self.view addSubview:self.playlistView];
     
-    UIView *playerView = [[UIView alloc] initWithFrame:CGRectMake(30, 718, 964, 50)];
-    
-    self.nowPlayingLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 764, 50)];
+    UIView *playerView = [[UIView alloc] initWithFrame:CGRectMake(30, 718, 964, 30)];
+
+    self.nowPlayingLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 764, 30)];
     self.nowPlayingLabel.textAlignment = NSTextAlignmentCenter;
     [playerView addSubview:self.nowPlayingLabel];
     
-    self.skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+    self.skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+    [self.skipButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.skipButton.contentHorizontalAlignment = NSTextAlignmentLeft;
     [self.skipButton setTitle:@"Skip" forState:UIControlStateNormal];
     UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipButtonWasTapped:)];
     self.skipButton.userInteractionEnabled = YES;
@@ -181,9 +189,6 @@ static const int WIDTH = 6;
     self.cards = (NSMutableArray*) [self shuffle:self.cards];
     self.cards = (NSMutableArray*) [self shuffle:self.cards];
     self.cards = (NSMutableArray*) [self shuffle:self.cards];
-    self.cards = (NSMutableArray*) [self shuffle:self.cards];
-    self.cards = (NSMutableArray*) [self shuffle:self.cards];
-
     
     int x = 0;
     int y = 0;
@@ -213,20 +218,20 @@ static const int WIDTH = 6;
     [self startTimer];
 }
 
--(BOOL)addCardFromImage:(UIImage*)image withIndex:(int)index
+-(BOOL)addCardFromImage:(UIImage*)image withIndex:(int)index title:(NSString*)title
 {
-    
+
     NSString *hash = [self imageHash:image];
     if ([self.hashes containsObject:hash]) {
         NSLog(@"found duplicate image");
         return false;
     }
-    
+
     [self.hashes addObject:hash];
-    
-    [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index]];
-    [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index]];
-    
+
+    [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index title:title]];
+    [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index title:title]];
+
     return true;
 }
 
@@ -261,10 +266,11 @@ static const int WIDTH = 6;
 
         MPMediaItemArtwork *artwork = [album valueForKey:MPMediaItemPropertyArtwork];
         UIImage *artworkImage = [artwork imageWithSize: CGSizeMake (CARD_SIZE, CARD_SIZE)];
+        NSString *title = [album valueForKey:MPMediaItemPropertyTitle];
 
         if (artworkImage) {
             // make two cards for each album
-            if ([self addCardFromImage:artworkImage withIndex:i]) {
+            if ([self addCardFromImage:artworkImage withIndex:i title:title]) {
                 [self.songs addObject:album];
                 i++;
             }
@@ -302,12 +308,14 @@ static const int WIDTH = 6;
         // make two cards for each album
         int i = 0;
         for (NSDictionary *album in albums) {
-            
+
+            NSString *title = [album valueForKey:@"name"];
+
             NSURL *url = [album valueForKey:@"image"];
             NSData *imageData = [NSData dataWithContentsOfURL:url];
             UIImage *image = [UIImage imageWithData:imageData];
 
-            [self addCardFromImage:image withIndex:i];
+            [self addCardFromImage:image withIndex:i title:title];
             i++;
         }
         
@@ -351,28 +359,79 @@ static const int WIDTH = 6;
 -(void)initPlayer
 {
     self.player = [MPMusicPlayerController applicationMusicPlayer];
-    self.playlist = [[NSMutableArray alloc] init];
 }
 
--(void)playSong:(MPMediaItem*)song
+
+
+
+- (void) updateQueueWithCollection: (MPMediaItemCollection *) collection {
+    
+    // Add 'collection' to the music player's playback queue, but only if
+    //    the user chose at least one song to play.
+    if (collection) {
+        
+        // If there's no playback queue yet...
+        if (self.playlist == nil) {
+            self.playlist = collection;
+            [self.player setQueueWithItemCollection: self.playlist];
+            [self.player play];
+            
+            // Obtain the music player's state so it can be restored after
+            //    updating the playback queue.
+        } else {
+            BOOL wasPlaying = NO;
+            if (self.player.playbackState == MPMusicPlaybackStatePlaying) {
+                wasPlaying = YES;
+            }
+            
+            // Save the now-playing item and its current playback time.
+            MPMediaItem *nowPlayingItem        = self.player.nowPlayingItem;
+            NSTimeInterval currentPlaybackTime = self.player.currentPlaybackTime;
+            
+            // Combine the previously-existing media item collection with
+            //    the new one
+            NSMutableArray *combinedMediaItems = [[self.playlist items] mutableCopy];
+
+            NSArray *newMediaItems = [collection items];
+            [combinedMediaItems addObjectsFromArray: newMediaItems];
+            
+            self.playlist =
+             [MPMediaItemCollection collectionWithItems:
+              (NSArray *) combinedMediaItems];
+            
+            [self.player setQueueWithItemCollection: self.playlist];
+            
+            // Restore the now-playing item and its current playback time.
+            self.player.nowPlayingItem      = nowPlayingItem;
+            self.player.currentPlaybackTime = currentPlaybackTime;
+            
+            if (wasPlaying) {
+                [self.player play];
+            }
+        }
+    }
+}
+
+
+
+-(void)queueSong:(MPMediaItem*)song
 {
     if (!self.player) {
         [self initPlayer];
     }
     
-    [self.playlist addObject:song];
-    MPMediaItemCollection *playlist = [MPMediaItemCollection collectionWithItems:self.playlist];
-    
-    [self.player setQueueWithItemCollection:playlist];
-    
-    if (self.player.playbackState != MPMusicPlaybackStatePlaying) {
-        [self.player play];
-    }
+    MPMediaItemCollection *playlist = [MPMediaItemCollection collectionWithItems:[NSArray arrayWithObject:song]];
+    [self updateQueueWithCollection:playlist];
+}
 
-    NSString *title = [song valueForKey:MPMediaItemPropertyTitle];
-    NSLog(@"%@", title);
-
-    [self.nowPlayingLabel setText:title];
+-(void)displaySong:(NSString*)title
+{
+    int y = (self.correctCount-1) * 25;
+    
+    UILabel *item = [[UILabel alloc] initWithFrame:CGRectMake(5, y, 300, 25)];
+    [item setText:[NSString stringWithFormat:@"%d. %@", self.correctCount, title]];
+    
+    [self.playlistView addSubview:item];
 }
 
 - (void) skipButtonWasTapped:(UITapGestureRecognizer*)recognizer
@@ -384,11 +443,15 @@ static const int WIDTH = 6;
 {
 //    AudioServicesPlaySystemSound (1025);
 
+    self.turnCount++;
+    self.correctCount++;
+
     if (self.songs) {
         MPMediaItem *song = [self.songs objectAtIndex:self.pick1.albumId];
-        [self playSong:song];
+        [self queueSong:song];
     }
-    
+
+    [self displaySong:self.pick1.title];
 
     [self.pick1 highlight];
     [self.pick2 highlight];
@@ -396,8 +459,6 @@ static const int WIDTH = 6;
     self.pick1 = nil;
     self.pick2 = nil;
     
-    self.turnCount++;
-    self.correctCount++;
     [self updateScore];
     
     if (self.correctCount == self.pairCount) {

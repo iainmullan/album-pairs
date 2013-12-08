@@ -33,10 +33,11 @@
     self.back.frame = frame;
 }
 
-- (id)initWithImage:(UIImage*)image albumId:(int)albumId
+- (id)initWithImage:(UIImage*)image albumId:(int)albumId title:(NSString*)title
 {
     self = [self init];
     self.albumId = albumId;
+    self.title = title;
 
     [self setArtwork:image];
 
@@ -74,7 +75,7 @@
 {
     self.layer.opacity = 0.3;
     self.shown = false;
-    return;
+//    return;
     
     [UIView transitionWithView:self
                       duration:0.6

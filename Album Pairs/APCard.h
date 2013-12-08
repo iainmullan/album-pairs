@@ -10,7 +10,7 @@
 
 @interface APCard : UIView
 
-- (id)initWithImage:(UIImage*)image albumId:(int)albumId;
+- (id)initWithImage:(UIImage*)image albumId:(int)albumId title:(NSString*)title;
 
 - (void)highlight;
 - (void)show;
@@ -18,6 +18,7 @@
 - (void)remove;
 
 @property (nonatomic) int albumId;
+@property (nonatomic) NSString *title;
 @property (nonatomic) UIImageView* back;
 @property (nonatomic) UIImageView* albumArtwork;
 @property (nonatomic) BOOL shown;
