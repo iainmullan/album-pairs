@@ -72,9 +72,9 @@
 
 - (void)hide
 {
-    self.layer.opacity = 0.5;
-    
+    self.layer.opacity = 0.3;
     self.shown = false;
+    return;
     
     [UIView transitionWithView:self
                       duration:0.6

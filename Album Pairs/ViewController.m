@@ -26,13 +26,20 @@ static const int WIDTH = 6;
 
 @property (strong, nonatomic) UIView *gridView;
 @property (strong, nonatomic) NSMutableArray *cards;
+@property (strong, nonatomic) NSMutableArray *songs;
+@property (strong, nonatomic) NSMutableArray *playlist;
+@property (strong, nonatomic) MPMusicPlayerController *player;
 
 @property (strong, nonatomic) APCard *pick1;
 @property (strong, nonatomic) APCard *pick2;
 @property (strong, nonatomic) UIButton *restartGameButton;
+@property (strong, nonatomic) UIButton *skipButton;
+@property (strong, nonatomic) UIButton *playPauseButton;
 @property (strong, nonatomic) UILabel *scoreLabel;
 @property (strong, nonatomic) UILabel *timerLabel;
 @property (strong, nonatomic) NSTimer *timer;
+
+@property (strong, nonatomic) UILabel *nowPlayingLabel;
 
 @property BOOL isBeingIncorrect;
 @property int turnCount;
@@ -73,7 +80,25 @@ static const int WIDTH = 6;
     self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(894, 590, 100, 30)];
     self.timerLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:self.timerLabel];
+
+    /* PLAYER INTERFACE */
     
+    UIView *playerView = [[UIView alloc] initWithFrame:CGRectMake(30, 718, 964, 50)];
+    
+    self.nowPlayingLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 764, 50)];
+    self.nowPlayingLabel.textAlignment = NSTextAlignmentCenter;
+    [playerView addSubview:self.nowPlayingLabel];
+    
+    self.skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+    [self.skipButton setTitle:@"Skip" forState:UIControlStateNormal];
+    UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipButtonWasTapped:)];
+    self.skipButton.userInteractionEnabled = YES;
+    [self.skipButton addGestureRecognizer:tapGesture2];
+
+    [playerView addSubview:self.skipButton];
+
+    [self.view addSubview:playerView];
+
     [self newGame];
 }
 
@@ -222,6 +247,7 @@ static const int WIDTH = 6;
 
 - (void)loadAlbumsFromLibrary:(int)howMany
 {
+    self.songs = [[NSMutableArray alloc] init];
     self.cards = [[NSMutableArray alloc] init];
 
     MPMediaQuery *query = [MPMediaQuery songsQuery];
@@ -239,6 +265,7 @@ static const int WIDTH = 6;
         if (artworkImage) {
             // make two cards for each album
             if ([self addCardFromImage:artworkImage withIndex:i]) {
+                [self.songs addObject:album];
                 i++;
             }
         } else {
@@ -321,10 +348,47 @@ static const int WIDTH = 6;
     }
 
 }
+-(void)initPlayer
+{
+    self.player = [MPMusicPlayerController applicationMusicPlayer];
+    self.playlist = [[NSMutableArray alloc] init];
+}
+
+-(void)playSong:(MPMediaItem*)song
+{
+    if (!self.player) {
+        [self initPlayer];
+    }
+    
+    [self.playlist addObject:song];
+    MPMediaItemCollection *playlist = [MPMediaItemCollection collectionWithItems:self.playlist];
+    
+    [self.player setQueueWithItemCollection:playlist];
+    
+    if (self.player.playbackState != MPMusicPlaybackStatePlaying) {
+        [self.player play];
+    }
+
+    NSString *title = [song valueForKey:MPMediaItemPropertyTitle];
+    NSLog(@"%@", title);
+
+    [self.nowPlayingLabel setText:title];
+}
+
+- (void) skipButtonWasTapped:(UITapGestureRecognizer*)recognizer
+{
+    [self.player skipToNextItem];
+}
 
 -(void)correct
 {
-    AudioServicesPlaySystemSound (1025);
+//    AudioServicesPlaySystemSound (1025);
+
+    if (self.songs) {
+        MPMediaItem *song = [self.songs objectAtIndex:self.pick1.albumId];
+        [self playSong:song];
+    }
+    
 
     [self.pick1 highlight];
     [self.pick2 highlight];
@@ -335,7 +399,7 @@ static const int WIDTH = 6;
     self.turnCount++;
     self.correctCount++;
     [self updateScore];
-
+    
     if (self.correctCount == self.pairCount) {
         [self complete];
     }
@@ -344,7 +408,7 @@ static const int WIDTH = 6;
 
 -(void)incorrect
 {
-    AudioServicesPlaySystemSound(1000);
+//    AudioServicesPlaySystemSound(1000);
 
     self.turnCount++;
     self.errorCount++;
