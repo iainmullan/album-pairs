@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #include <AudioToolbox/AudioToolbox.h>
+#import <CommonCrypto/CommonDigest.h>
 
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -40,6 +41,8 @@ static const int WIDTH = 6;
 @property int timerCount;
 @property int pairCount;
 
+@property NSMutableArray *hashes;
+
 @end
 
 @implementation ViewController
@@ -52,6 +55,9 @@ static const int WIDTH = 6;
     self.restartGameButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self.restartGameButton setTitle:@"New Game" forState:UIControlStateNormal];
     self.restartGameButton.frame = CGRectMake(894, 50, 100, 30);
+    [self.restartGameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.restartGameButton.layer.borderWidth=1.0f;
+    self.restartGameButton.layer.borderColor=[[UIColor blackColor] CGColor];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(restartGameButtonWasTapped:)];
     self.restartGameButton.userInteractionEnabled = YES;
@@ -64,7 +70,7 @@ static const int WIDTH = 6;
     self.scoreLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:self.scoreLabel];
     
-    self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(894, 540, 100, 30)];
+    self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(894, 590, 100, 30)];
     self.timerLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:self.timerLabel];
     
@@ -109,6 +115,9 @@ static const int WIDTH = 6;
 {
 
     [self createGrid];
+    
+    self.hashes = [[NSMutableArray alloc] init];
+    
     self.turnCount = 0;
     self.errorCount = 0;
 
@@ -137,7 +146,7 @@ static const int WIDTH = 6;
         NSInteger n = (arc4random() % nElements) + i;
         [items exchangeObjectAtIndex:i withObjectAtIndex:n];
     }
-    
+
     return items;
 }
 
@@ -145,6 +154,11 @@ static const int WIDTH = 6;
 {
     
     self.cards = (NSMutableArray*) [self shuffle:self.cards];
+    self.cards = (NSMutableArray*) [self shuffle:self.cards];
+    self.cards = (NSMutableArray*) [self shuffle:self.cards];
+    self.cards = (NSMutableArray*) [self shuffle:self.cards];
+    self.cards = (NSMutableArray*) [self shuffle:self.cards];
+
     
     int x = 0;
     int y = 0;
@@ -176,17 +190,41 @@ static const int WIDTH = 6;
 
 -(BOOL)addCardFromImage:(UIImage*)image withIndex:(int)index
 {
+    
+    NSString *hash = [self imageHash:image];
+    if ([self.hashes containsObject:hash]) {
+        NSLog(@"found duplicate image");
+        return false;
+    }
+    
+    [self.hashes addObject:hash];
+    
     [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index]];
     [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index]];
     
     return true;
 }
 
+-(NSString*)imageHash:(UIImage*)image
+{
+    unsigned char result[16];
+    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+    CC_MD5([imageData bytes], [imageData length], result);
+    NSString *imageHash = [NSString stringWithFormat:
+                           @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+                           result[0], result[1], result[2], result[3],
+                           result[4], result[5], result[6], result[7],
+                           result[8], result[9], result[10], result[11],
+                           result[12], result[13], result[14], result[15]
+                           ];
+    return imageHash;
+}
+
 - (void)loadAlbumsFromLibrary:(int)howMany
 {
     self.cards = [[NSMutableArray alloc] init];
 
-    MPMediaQuery *query = [MPMediaQuery albumsQuery];
+    MPMediaQuery *query = [MPMediaQuery songsQuery];
 
     NSArray *albums = [query items];
 
