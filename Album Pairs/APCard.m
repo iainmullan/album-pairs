@@ -24,7 +24,7 @@
 -(void)setArtwork:(UIImage*)image
 {
     
-    CGRect frame = CGRectMake(0, 0, 100, 100);
+    CGRect frame = CGRectMake(0, 0, CARD_SIZE, CARD_SIZE);
     
     self.albumArtwork = [[UIImageView alloc] initWithImage:image];
     self.albumArtwork.frame = frame;

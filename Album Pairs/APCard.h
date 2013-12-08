@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+static const int CARD_SIZE = 150;
+static const int CARD_MARGIN = 20;
+
 @interface APCard : UIView
 
 - (id)initWithImage:(UIImage*)image albumId:(int)albumId title:(NSString*)title;

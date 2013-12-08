@@ -18,8 +18,6 @@
 #import "LastFm.h"
 #import "APCard.h"
 
-static const int CARD_SIZE = 100;
-static const int CARD_MARGIN = 10;
 static const int WIDTH = 6;
 
 @interface ViewController ()
