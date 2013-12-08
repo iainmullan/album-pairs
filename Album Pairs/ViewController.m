@@ -75,11 +75,11 @@ static const int WIDTH = 6;
     [self.view addSubview:self.restartGameButton];
 
     self.scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(794, 670, 200, 30)];
-    self.scoreLabel.font=[UIFont boldSystemFontOfSize:30];
     self.scoreLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:self.scoreLabel];
     
     self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(894, 590, 100, 30)];
+    self.timerLabel.font=[UIFont boldSystemFontOfSize:30];
     self.timerLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:self.timerLabel];
 
@@ -116,9 +116,9 @@ static const int WIDTH = 6;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)increaseTimerCount
+- (void)timerTick
 {
-    int s = self.timerCount++;
+    int s = self.timerCount--;
     
     int m = (int) s / 60;
     s = s - (m*60);
@@ -135,8 +135,8 @@ static const int WIDTH = 6;
 - (IBAction)startTimer
 {
     [self.timer invalidate];
-    self.timerCount = 0;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(increaseTimerCount) userInfo:nil repeats:YES];
+    self.timerCount = 60;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
 }
 
 - (void) restartGameButtonWasTapped:(UITapGestureRecognizer*)recognizer
@@ -446,6 +446,8 @@ static const int WIDTH = 6;
     self.turnCount++;
     self.correctCount++;
 
+    self.timerCount += 5;
+    
     if (self.songs) {
         MPMediaItem *song = [self.songs objectAtIndex:self.pick1.albumId];
         [self queueSong:song];
