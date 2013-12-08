@@ -29,8 +29,16 @@ static const int WIDTH = 6;
 @property (strong, nonatomic) APCard *pick1;
 @property (strong, nonatomic) APCard *pick2;
 @property (strong, nonatomic) UIButton *restartGameButton;
+@property (strong, nonatomic) UILabel *scoreLabel;
+@property (strong, nonatomic) UILabel *timerLabel;
+@property (strong, nonatomic) NSTimer *timer;
 
 @property BOOL isBeingIncorrect;
+@property int turnCount;
+@property int errorCount;
+@property int correctCount;
+@property int timerCount;
+@property int pairCount;
 
 @end
 
@@ -51,6 +59,15 @@ static const int WIDTH = 6;
 
     [self.view addSubview:self.restartGameButton];
 
+    self.scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(794, 670, 200, 30)];
+    self.scoreLabel.font=[UIFont boldSystemFontOfSize:30];
+    self.scoreLabel.textAlignment = NSTextAlignmentRight;
+    [self.view addSubview:self.scoreLabel];
+    
+    self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(894, 540, 100, 30)];
+    self.timerLabel.textAlignment = NSTextAlignmentRight;
+    [self.view addSubview:self.timerLabel];
+    
     [self newGame];
 }
 
@@ -58,6 +75,29 @@ static const int WIDTH = 6;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)increaseTimerCount
+{
+    int s = self.timerCount++;
+    
+    int m = (int) s / 60;
+    s = s - (m*60);
+
+    NSString *text = [NSString stringWithFormat:@"%d:%d", m,s];
+
+    if (s < 10) {
+        text = [NSString stringWithFormat:@"%d:0%d", m,s];
+    }
+
+    self.timerLabel.text = text;
+}
+
+- (IBAction)startTimer
+{
+    [self.timer invalidate];
+    self.timerCount = 0;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(increaseTimerCount) userInfo:nil repeats:YES];
 }
 
 - (void) restartGameButtonWasTapped:(UITapGestureRecognizer*)recognizer
@@ -69,15 +109,19 @@ static const int WIDTH = 6;
 {
 
     [self createGrid];
+    self.turnCount = 0;
+    self.errorCount = 0;
 
-    int numberOfPairs = (WIDTH*WIDTH)/2;
+    [self updateScore];
     
-    #if (TARGET_IPHONE_SIMULATOR)
-        [self loadAlbumsFromLastFm:numberOfPairs];
-    #else
-        [self loadAlbumsFromLibrary:numberOfPairs];
-    #endif
+    self.pairCount = (WIDTH*WIDTH)/2;
 
+    #if (TARGET_IPHONE_SIMULATOR)
+        [self loadAlbumsFromLastFm:self.pairCount];
+    #else
+        [self loadAlbumsFromLibrary:self.pairCount];
+    #endif
+    
 }
 
 - (NSArray*)shuffle:(NSArray*)input
@@ -126,7 +170,8 @@ static const int WIDTH = 6;
         
         x++;
     }
-    
+ 
+    [self startTimer];
 }
 
 -(BOOL)addCardFromImage:(UIImage*)image withIndex:(int)index
@@ -248,14 +293,42 @@ static const int WIDTH = 6;
 
     self.pick1 = nil;
     self.pick2 = nil;
+    
+    self.turnCount++;
+    self.correctCount++;
+    [self updateScore];
+
+    if (self.correctCount == self.pairCount) {
+        [self complete];
+    }
+
 }
 
 -(void)incorrect
 {
     AudioServicesPlaySystemSound(1000);
-    
+
+    self.turnCount++;
+    self.errorCount++;
+    [self updateScore];
+
     self.isBeingIncorrect = true;
     [self performSelector:@selector(reset) withObject:nil afterDelay:2.0];
+}
+
+-(void)complete
+{
+    [self.timer invalidate];
+}
+-(void)gameOver
+{
+    [self.timer invalidate];
+}
+
+
+-(void)updateScore
+{
+    [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %d", self.errorCount]];
 }
 
 -(void)reset
@@ -272,7 +345,7 @@ static const int WIDTH = 6;
 
 - (void) createGrid
 {
-    
+
     if (self.gridView) {
         [self.gridView removeFromSuperview];
     }
@@ -287,10 +360,10 @@ static const int WIDTH = 6;
 
 + (CGRect) frameForPositionX:(int) x y:(int)y
 {
-    
+
     int xpos = x * (CARD_SIZE + CARD_MARGIN);
     int ypos = y * (CARD_SIZE + CARD_MARGIN);
-    
+
     return CGRectMake(xpos, ypos, CARD_SIZE, CARD_SIZE);
 }
 
