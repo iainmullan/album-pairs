@@ -18,7 +18,8 @@
 #import "LastFm.h"
 #import "APCard.h"
 
-static const int WIDTH = 6;
+static const int WIDTH = 4;
+static const int TIME_LIMIT= 20;
 
 @interface ViewController ()
 
@@ -35,6 +36,7 @@ static const int WIDTH = 6;
 @property (strong, nonatomic) UIButton *playPauseButton;
 @property (strong, nonatomic) UILabel *scoreLabel;
 @property (strong, nonatomic) UILabel *timerLabel;
+@property (strong, nonatomic) UILabel *statusLabel;
 @property (strong, nonatomic) NSTimer *timer;
 
 @property (strong, nonatomic) UILabel *nowPlayingLabel;
@@ -42,6 +44,7 @@ static const int WIDTH = 6;
 @property (strong, nonatomic) UIView *playlistView;
 
 @property BOOL isBeingIncorrect;
+@property BOOL isGameOver;
 @property int turnCount;
 @property int errorCount;
 @property int correctCount;
@@ -81,30 +84,6 @@ static const int WIDTH = 6;
     self.timerLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:self.timerLabel];
 
-
-    /* PLAYER INTERFACE */
-    self.playlistView = [[UIView alloc] initWithFrame:CGRectMake(710, 100, 300, 450)];
-    [self.playlistView setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
-    [self.view addSubview:self.playlistView];
-    
-    UIView *playerView = [[UIView alloc] initWithFrame:CGRectMake(30, 718, 964, 30)];
-
-    self.nowPlayingLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 764, 30)];
-    self.nowPlayingLabel.textAlignment = NSTextAlignmentCenter;
-    [playerView addSubview:self.nowPlayingLabel];
-    
-    self.skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
-    [self.skipButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.skipButton.contentHorizontalAlignment = NSTextAlignmentLeft;
-    [self.skipButton setTitle:@"Skip" forState:UIControlStateNormal];
-    UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipButtonWasTapped:)];
-    self.skipButton.userInteractionEnabled = YES;
-    [self.skipButton addGestureRecognizer:tapGesture2];
-
-    [playerView addSubview:self.skipButton];
-
-    [self.view addSubview:playerView];
-
     [self newGame];
 }
 
@@ -116,7 +95,11 @@ static const int WIDTH = 6;
 
 - (void)timerTick
 {
+
     int s = self.timerCount--;
+    if (s == 0) {
+        [self gameOver];
+    }
     
     int m = (int) s / 60;
     s = s - (m*60);
@@ -133,7 +116,7 @@ static const int WIDTH = 6;
 - (IBAction)startTimer
 {
     [self.timer invalidate];
-    self.timerCount = 60;
+    self.timerCount = TIME_LIMIT;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
 }
 
@@ -144,13 +127,24 @@ static const int WIDTH = 6;
 
 - (void)newGame
 {
+    self.isGameOver = false;
 
     [self createGrid];
     
+    if (self.statusLabel) {
+        [self.statusLabel removeFromSuperview];
+    } else {
+        self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
+        [self.statusLabel setTextAlignment:NSTextAlignmentCenter];
+        self.statusLabel.font=[UIFont boldSystemFontOfSize:60];
+    }
+
+
     self.hashes = [[NSMutableArray alloc] init];
     
     self.turnCount = 0;
     self.errorCount = 0;
+    self.correctCount = 0;
 
     [self updateScore];
     
@@ -162,6 +156,31 @@ static const int WIDTH = 6;
         [self loadAlbumsFromLibrary:self.pairCount];
     #endif
     
+    
+    
+    /* PLAYER INTERFACE */
+    self.playlistView = [[UIView alloc] initWithFrame:CGRectMake(710, 100, 300, 450)];
+    [self.playlistView setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
+    [self.view addSubview:self.playlistView];
+    
+    UIView *playerView = [[UIView alloc] initWithFrame:CGRectMake(30, 718, 964, 30)];
+    
+    self.nowPlayingLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 764, 30)];
+    self.nowPlayingLabel.textAlignment = NSTextAlignmentCenter;
+    [playerView addSubview:self.nowPlayingLabel];
+    
+    self.skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+    [self.skipButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.skipButton.contentHorizontalAlignment = NSTextAlignmentLeft;
+    [self.skipButton setTitle:@"Skip" forState:UIControlStateNormal];
+    UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipButtonWasTapped:)];
+    self.skipButton.userInteractionEnabled = YES;
+    [self.skipButton addGestureRecognizer:tapGesture2];
+    
+    [playerView addSubview:self.skipButton];
+    
+    [self.view addSubview:playerView];
+
 }
 
 - (NSArray*)shuffle:(NSArray*)input
@@ -327,6 +346,10 @@ static const int WIDTH = 6;
 
 - (void) cardWasTapped:(UITapGestureRecognizer*)recognizer
 {
+    if (self.isGameOver) {
+        return;
+    }
+
     APCard *piece = (APCard *) recognizer.view;
 
     if (piece.shown) {
@@ -482,11 +505,28 @@ static const int WIDTH = 6;
 -(void)complete
 {
     [self.timer invalidate];
+    
+    [self.statusLabel setText:@"YOU WIN!"];
+    [self.statusLabel setTextColor:[UIColor greenColor]];
+    
+    [self.view addSubview:self.statusLabel];
 }
+
 -(void)gameOver
 {
+    self.isGameOver = true;
+
     [self.timer invalidate];
+
+    [self.statusLabel setText:@"GAME OVER"];
+    [self.statusLabel setTextColor:[UIColor redColor]];
+
+    [self.view addSubview:self.statusLabel];
+    
+    [self.player stop];
+    
 }
+
 
 
 -(void)updateScore
