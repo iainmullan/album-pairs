@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #include <AudioToolbox/AudioToolbox.h>
-#import <CommonCrypto/CommonDigest.h>
 
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -17,41 +16,30 @@
 #import "ViewController.h"
 #import "LastFm.h"
 #import "APCard.h"
+#import "APGame.h"
+#import "PairsGameDelegate.h"
 
-static const int WIDTH = 6;
-static const int TIME_LIMIT= 60;
-
-@interface ViewController ()
+@interface ViewController () <PairsGameDelegate>
 
 @property (strong, nonatomic) UIView *gridView;
-@property (strong, nonatomic) NSMutableArray *cards;
 @property (strong, nonatomic) NSMutableArray *songs;
 @property (strong, nonatomic) MPMediaItemCollection *playlist;
 @property (strong, nonatomic) MPMusicPlayerController *player;
+@property BOOL isBeingIncorrect;
 
 @property (strong, nonatomic) APCard *pick1;
 @property (strong, nonatomic) APCard *pick2;
+
 @property (strong, nonatomic) UIButton *restartGameButton;
-@property (strong, nonatomic) UIButton *skipButton;
-@property (strong, nonatomic) UIButton *playPauseButton;
-@property (strong, nonatomic) UILabel *scoreLabel;
 @property (strong, nonatomic) UILabel *timerLabel;
 @property (strong, nonatomic) UILabel *statusLabel;
-@property (strong, nonatomic) NSTimer *timer;
 
+@property (strong, nonatomic) UIButton *skipButton;
+@property (strong, nonatomic) UIButton *playPauseButton;
 @property (strong, nonatomic) UILabel *nowPlayingLabel;
-
 @property (strong, nonatomic) UIView *playlistView;
 
-@property BOOL isBeingIncorrect;
-@property BOOL isGameOver;
-@property int turnCount;
-@property int errorCount;
-@property int correctCount;
-@property int timerCount;
-@property int pairCount;
-
-@property NSMutableArray *hashes;
+@property (strong, nonatomic) APGame *game;
 
 @end
 
@@ -75,10 +63,6 @@ static const int TIME_LIMIT= 60;
 
     [self.view addSubview:self.restartGameButton];
 
-    self.scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(794, 670, 200, 30)];
-    self.scoreLabel.textAlignment = NSTextAlignmentRight;
-    [self.view addSubview:self.scoreLabel];
-    
     self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(894, 590, 100, 30)];
     self.timerLabel.font=[UIFont boldSystemFontOfSize:30];
     self.timerLabel.textAlignment = NSTextAlignmentRight;
@@ -93,33 +77,6 @@ static const int TIME_LIMIT= 60;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)timerTick
-{
-
-    int s = self.timerCount--;
-    if (s == 0) {
-        [self gameOver];
-    }
-    
-    int m = (int) s / 60;
-    s = s - (m*60);
-
-    NSString *text = [NSString stringWithFormat:@"%d:%d", m,s];
-
-    if (s < 10) {
-        text = [NSString stringWithFormat:@"%d:0%d", m,s];
-    }
-
-    self.timerLabel.text = text;
-}
-
-- (IBAction)startTimer
-{
-    [self.timer invalidate];
-    self.timerCount = TIME_LIMIT;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
-}
-
 - (void) restartGameButtonWasTapped:(UITapGestureRecognizer*)recognizer
 {
     [self newGame];
@@ -127,9 +84,17 @@ static const int TIME_LIMIT= 60;
 
 - (void)newGame
 {
-    self.isGameOver = false;
-
-    [self createGrid];
+    self.game = [[APGame alloc ]init];
+    self.game.delegate = self;
+    
+    #if (TARGET_IPHONE_SIMULATOR)
+        [self loadAlbumsFromLastFm:self.game.pairCount];
+    #else
+        [self loadAlbumsFromLibrary:self.game.pairCount];
+    #endif
+    
+    [self drawGrid];
+    
     
     if (self.statusLabel) {
         [self.statusLabel removeFromSuperview];
@@ -138,25 +103,6 @@ static const int TIME_LIMIT= 60;
         [self.statusLabel setTextAlignment:NSTextAlignmentCenter];
         self.statusLabel.font=[UIFont boldSystemFontOfSize:60];
     }
-
-
-    self.hashes = [[NSMutableArray alloc] init];
-    
-    self.turnCount = 0;
-    self.errorCount = 0;
-    self.correctCount = 0;
-
-    [self updateScore];
-    
-    self.pairCount = (WIDTH*WIDTH)/2;
-
-    #if (TARGET_IPHONE_SIMULATOR)
-        [self loadAlbumsFromLastFm:self.pairCount];
-    #else
-        [self loadAlbumsFromLibrary:self.pairCount];
-    #endif
-    
-    
     
     /* PLAYER INTERFACE */
     self.playlistView = [[UIView alloc] initWithFrame:CGRectMake(710, 100, 300, 450)];
@@ -200,17 +146,17 @@ static const int TIME_LIMIT= 60;
     return items;
 }
 
--(void)deal
+-(void)deal:(NSArray*)cards
 {
-    
-    self.cards = (NSMutableArray*) [self shuffle:self.cards];
-    self.cards = (NSMutableArray*) [self shuffle:self.cards];
-    self.cards = (NSMutableArray*) [self shuffle:self.cards];
+    cards = (NSMutableArray*) [self shuffle:cards];
+    cards = (NSMutableArray*) [self shuffle:cards];
+    cards = (NSMutableArray*) [self shuffle:cards];
+    cards = (NSMutableArray*) [self shuffle:cards];
     
     int x = 0;
     int y = 0;
     
-    for (APCard *card in self.cards) {
+    for (APCard *card in cards) {
         
         if (x == WIDTH) {
             // start a new line
@@ -232,45 +178,13 @@ static const int TIME_LIMIT= 60;
         x++;
     }
  
-    [self startTimer];
-}
-
--(BOOL)addCardFromImage:(UIImage*)image withIndex:(int)index title:(NSString*)title
-{
-
-    NSString *hash = [self imageHash:image];
-    if ([self.hashes containsObject:hash]) {
-        NSLog(@"found duplicate image");
-        return false;
-    }
-
-    [self.hashes addObject:hash];
-
-    [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index title:title]];
-    [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index title:title]];
-
-    return true;
-}
-
--(NSString*)imageHash:(UIImage*)image
-{
-    unsigned char result[16];
-    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-    CC_MD5([imageData bytes], [imageData length], result);
-    NSString *imageHash = [NSString stringWithFormat:
-                           @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
-                           result[0], result[1], result[2], result[3],
-                           result[4], result[5], result[6], result[7],
-                           result[8], result[9], result[10], result[11],
-                           result[12], result[13], result[14], result[15]
-                           ];
-    return imageHash;
+    [self.game startTimer];
 }
 
 - (void)loadAlbumsFromLibrary:(int)howMany
 {
     self.songs = [[NSMutableArray alloc] init];
-    self.cards = [[NSMutableArray alloc] init];
+    self.game.cards = [[NSMutableArray alloc] init];
 
     MPMediaQuery *query = [MPMediaQuery songsQuery];
 
@@ -287,7 +201,7 @@ static const int TIME_LIMIT= 60;
 
         if (artworkImage) {
             // make two cards for each album
-            if ([self addCardFromImage:artworkImage withIndex:i title:title]) {
+            if ([self.game addCardFromImage:artworkImage withIndex:i title:title]) {
                 [self.songs addObject:album];
                 i++;
             }
@@ -301,15 +215,13 @@ static const int TIME_LIMIT= 60;
         
     }
 
-    [self deal];
+    [self deal:self.game.cards];
 }
 
 
 - (void)loadAlbumsFromLastFm:(int)howMany
 {
     
-    self.cards = [[NSMutableArray alloc] init];
-
     [LastFm sharedInstance].apiKey = @"79de4922efbb54e68613e47d36de1b9f";
     [LastFm sharedInstance].username = @"ebotunes";
 
@@ -332,11 +244,11 @@ static const int TIME_LIMIT= 60;
             NSData *imageData = [NSData dataWithContentsOfURL:url];
             UIImage *image = [UIImage imageWithData:imageData];
 
-            [self addCardFromImage:image withIndex:i title:title];
+            [self.game addCardFromImage:image withIndex:i title:title];
             i++;
         }
         
-        [self deal];
+        [self deal:self.game.cards];
 
     } failureHandler:^(NSError *error) {
         NSLog(@"error: %@", error);
@@ -346,42 +258,48 @@ static const int TIME_LIMIT= 60;
 
 - (void) cardWasTapped:(UITapGestureRecognizer*)recognizer
 {
-    if (self.isGameOver) {
+    if (self.game.isGameOver) {
         return;
     }
 
-    APCard *piece = (APCard *) recognizer.view;
+    APCard *card = (APCard *) recognizer.view;
 
-    if (piece.shown) {
+    if (card.shown) {
         return;
     }
-    
+
     if (self.isBeingIncorrect) {
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(reset) object: nil];
         [self reset];
     }
 
-    if (self.pick1 == nil) {
-        self.pick1 = piece;
-        [piece show];
-    } else if (self.pick2 == nil) {
-        self.pick2 = piece;
-        [piece show];
-        
-        if (self.pick1.albumId == self.pick2.albumId) {
-            [self correct];
-        } else {
-            [self incorrect];
-        }
-
+    if ([self.game pickCard:card]) {
+        [card show];
     }
 
 }
+
+-(void)reset
+{
+    NSLog(@"reset display");
+    
+    if (self.isBeingIncorrect) {
+        [self.pick1 hide];
+        [self.pick2 hide];
+        self.pick1 = nil;
+        self.pick2 = nil;
+        
+        self.isBeingIncorrect = false;
+    }
+    
+}
+
+
+
 -(void)initPlayer
 {
     self.player = [MPMusicPlayerController applicationMusicPlayer];
 }
-
 
 
 
@@ -447,10 +365,10 @@ static const int TIME_LIMIT= 60;
 
 -(void)displaySong:(NSString*)title
 {
-    int y = (self.correctCount-1) * 25;
+    int y = (self.game.correctCount-1) * 25;
     
     UILabel *item = [[UILabel alloc] initWithFrame:CGRectMake(5, y, 300, 25)];
-    [item setText:[NSString stringWithFormat:@"%d. %@", self.correctCount, title]];
+    [item setText:[NSString stringWithFormat:@"%d. %@", self.game.correctCount, title]];
     
     [self.playlistView addSubview:item];
 }
@@ -460,93 +378,7 @@ static const int TIME_LIMIT= 60;
     [self.player skipToNextItem];
 }
 
--(void)correct
-{
-//    AudioServicesPlaySystemSound (1025);
-
-    self.turnCount++;
-    self.correctCount++;
-
-    self.timerCount += 5;
-    
-    if (self.songs) {
-        MPMediaItem *song = [self.songs objectAtIndex:self.pick1.albumId];
-        [self queueSong:song];
-    }
-
-    [self displaySong:self.pick1.title];
-
-    [self.pick1 highlight];
-    [self.pick2 highlight];
-
-    self.pick1 = nil;
-    self.pick2 = nil;
-    
-    [self updateScore];
-    
-    if (self.correctCount == self.pairCount) {
-        [self complete];
-    }
-
-}
-
--(void)incorrect
-{
-//    AudioServicesPlaySystemSound(1000);
-
-    self.turnCount++;
-    self.errorCount++;
-    [self updateScore];
-
-    self.isBeingIncorrect = true;
-    [self performSelector:@selector(reset) withObject:nil afterDelay:2.0];
-}
-
--(void)complete
-{
-    [self.timer invalidate];
-    
-    [self.statusLabel setText:@"YOU WIN!"];
-    [self.statusLabel setTextColor:[UIColor greenColor]];
-    
-    [self.view addSubview:self.statusLabel];
-}
-
--(void)gameOver
-{
-    self.isGameOver = true;
-
-    [self.timer invalidate];
-
-    [self.statusLabel setText:@"GAME OVER"];
-    [self.statusLabel setTextColor:[UIColor redColor]];
-
-    [self.view addSubview:self.statusLabel];
-    
-    [self.player stop];
-    
-}
-
-
-
--(void)updateScore
-{
-    [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %d", self.errorCount]];
-}
-
--(void)reset
-{
-    if (self.isBeingIncorrect) {
-        [self.pick1 hide];
-        [self.pick2 hide];
-        self.pick1 = nil;
-        self.pick2 = nil;
-        
-        self.isBeingIncorrect = false;
-    }
-}
-
-- (void) createGrid
+- (void) drawGrid
 {
 
     if (self.gridView) {
@@ -568,6 +400,61 @@ static const int TIME_LIMIT= 60;
     int ypos = y * (CARD_SIZE + CARD_MARGIN);
 
     return CGRectMake(xpos, ypos, CARD_SIZE, CARD_SIZE);
+}
+
+-(void)pairWasFoundWIthPick1:(APCard*)pick1 pick2:(APCard*)pick2
+{
+
+    [pick1 highlight];
+    [pick2 highlight];
+    
+    [self displaySong:pick1.title];
+    
+    if (self.songs) {
+        MPMediaItem *song = [self.songs objectAtIndex:pick1.albumId];
+        //[self queueSong:song];
+    }
+    
+}
+
+-(void)pairWasNotFoundWIthPick1:(APCard*)pick1 pick2:(APCard*)pick2
+{
+    self.isBeingIncorrect = true;
+    self.pick1 = pick1;
+    self.pick2 = pick2;
+    [self performSelector:@selector(reset) withObject:nil afterDelay:2.0];
+}
+
+// game over
+-(void)gameDidEndWithResult:(BOOL)result
+{
+    
+    if (result) {
+        [self.statusLabel setText:@"YOU WIN!"];
+        [self.statusLabel setTextColor:[UIColor greenColor]];
+    } else {
+        [self.statusLabel setText:@"GAME OVER"];
+        [self.statusLabel setTextColor:[UIColor redColor]];
+    }
+
+    [self.view addSubview:self.statusLabel];
+    [self.player stop];
+}
+
+
+// timer did update
+-(void)timerDidUpdate:(int)seconds
+{
+    int m = (int) seconds / 60;
+    seconds = seconds - (m*60);
+    
+    NSString *text = [NSString stringWithFormat:@"%d:%d", m,seconds];
+    
+    if (seconds < 10) {
+        text = [NSString stringWithFormat:@"%d:0%d", m,seconds];
+    }
+    
+    self.timerLabel.text = text;
 }
 
 @end
