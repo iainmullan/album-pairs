@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-static const int CARD_SIZE = 150;
-static const int CARD_MARGIN = 20;
+static const int CARD_SIZE = 100;
+static const int CARD_MARGIN = 10;
 
 @interface APCard : UIView
 

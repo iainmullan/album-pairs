@@ -18,8 +18,8 @@
 #import "LastFm.h"
 #import "APCard.h"
 
-static const int WIDTH = 4;
-static const int TIME_LIMIT= 20;
+static const int WIDTH = 6;
+static const int TIME_LIMIT= 60;
 
 @interface ViewController ()
 
