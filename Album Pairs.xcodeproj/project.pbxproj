@@ -24,6 +24,7 @@
 		AE5B98FF1853527000C7F8D1 /* Album_PairsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5B98FE1853527000C7F8D1 /* Album_PairsTests.m */; };
 		AE5B990F1853752000C7F8D1 /* APCard.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5B990E1853752000C7F8D1 /* APCard.m */; };
 		AE5B99111853B53000C7F8D1 /* card-back.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5B99101853B53000C7F8D1 /* card-back.png */; };
+		AE5B99131854EA3900C7F8D1 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B99121854EA3900C7F8D1 /* GameKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		AE5B990D1853752000C7F8D1 /* APCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APCard.h; sourceTree = "<group>"; };
 		AE5B990E1853752000C7F8D1 /* APCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APCard.m; sourceTree = "<group>"; };
 		AE5B99101853B53000C7F8D1 /* card-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "card-back.png"; path = "Album Pairs/Resources/card-back.png"; sourceTree = "<group>"; };
+		AE5B99121854EA3900C7F8D1 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		BB3AE41C54ED46F1A96510EF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 				AE5B98D81853527000C7F8D1 /* UIKit.framework in Frameworks */,
 				AE5B98D41853527000C7F8D1 /* Foundation.framework in Frameworks */,
 				ADDD83322614433EBA99A9D3 /* libPods.a in Frameworks */,
+				AE5B99131854EA3900C7F8D1 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +115,7 @@
 		AE5B98D21853527000C7F8D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE5B99121854EA3900C7F8D1 /* GameKit.framework */,
 				AE5B98D31853527000C7F8D1 /* Foundation.framework */,
 				AE5B98D51853527000C7F8D1 /* CoreGraphics.framework */,
 				AE5B98D71853527000C7F8D1 /* UIKit.framework */,
@@ -217,6 +221,11 @@
 				TargetAttributes = {
 					AE5B98CF1853527000C7F8D1 = {
 						DevelopmentTeam = 356MFXZF77;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					AE5B98F01853527000C7F8D1 = {
 						TestTargetID = AE5B98CF1853527000C7F8D1;
