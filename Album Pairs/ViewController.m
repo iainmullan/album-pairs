@@ -52,10 +52,10 @@
     
     self.restartGameButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self.restartGameButton setTitle:@"New Game" forState:UIControlStateNormal];
-    self.restartGameButton.frame = CGRectMake(894, 50, 100, 30);
-    [self.restartGameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.restartGameButton.frame = CGRectMake(910, 50, 100, 30);
+    [self.restartGameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.restartGameButton.layer.borderWidth=1.0f;
-    self.restartGameButton.layer.borderColor=[[UIColor blackColor] CGColor];
+    self.restartGameButton.layer.borderColor=[[UIColor whiteColor] CGColor];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(restartGameButtonWasTapped:)];
     self.restartGameButton.userInteractionEnabled = YES;
@@ -63,11 +63,13 @@
 
     [self.view addSubview:self.restartGameButton];
 
-    self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(894, 590, 100, 30)];
-    self.timerLabel.font=[UIFont boldSystemFontOfSize:30];
+    self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(710, 90, 300, 60)];
+    self.timerLabel.font=[UIFont boldSystemFontOfSize:60];
     self.timerLabel.textAlignment = NSTextAlignmentRight;
+    self.timerLabel.textColor =[UIColor whiteColor];
     [self.view addSubview:self.timerLabel];
 
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0]];
     [self newGame];
 }
 
@@ -105,8 +107,8 @@
     }
     
     /* PLAYER INTERFACE */
-    self.playlistView = [[UIView alloc] initWithFrame:CGRectMake(710, 100, 300, 450)];
-    [self.playlistView setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
+    self.playlistView = [[UIView alloc] initWithFrame:CGRectMake(710, 160, 300, 450)];
+    [self.playlistView setBackgroundColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:0.9]];
     [self.view addSubview:self.playlistView];
     
     UIView *playerView = [[UIView alloc] initWithFrame:CGRectMake(30, 718, 964, 30)];
@@ -116,7 +118,7 @@
     [playerView addSubview:self.nowPlayingLabel];
     
     self.skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
-    [self.skipButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.skipButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.skipButton.contentHorizontalAlignment = NSTextAlignmentLeft;
     [self.skipButton setTitle:@"Skip" forState:UIControlStateNormal];
     UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipButtonWasTapped:)];
@@ -124,9 +126,8 @@
     [self.skipButton addGestureRecognizer:tapGesture2];
     
     [playerView addSubview:self.skipButton];
-    
-    [self.view addSubview:playerView];
 
+    [self.view addSubview:playerView];
 }
 
 - (NSArray*)shuffle:(NSArray*)input
