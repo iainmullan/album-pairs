@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    APArtworkSourceDefault,
+    APArtworkSourceLibrary,
+    APArtworkSourceLastFm,
+} APArtworkSource;
+
+
 @interface ViewController : UIViewController
 
 

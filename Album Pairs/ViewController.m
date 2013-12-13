@@ -39,6 +39,8 @@
 @property (strong, nonatomic) UILabel *nowPlayingLabel;
 @property (strong, nonatomic) UIView *playlistView;
 
+@property (nonatomic) APArtworkSource artworkSource;
+
 @property (strong, nonatomic) APGame *game;
 
 @end
@@ -88,12 +90,8 @@
 {
     self.game = [[APGame alloc ]init];
     self.game.delegate = self;
-    
-    #if (TARGET_IPHONE_SIMULATOR)
-        [self loadAlbumsFromLastFm:self.game.pairCount];
-    #else
-        [self loadAlbumsFromLibrary:self.game.pairCount];
-    #endif
+
+    [self loadAlbums];
     
     [self drawGrid];
     
@@ -180,6 +178,32 @@
     }
  
     [self.game startTimer];
+}
+
+- (void)loadAlbums
+{
+
+    self.artworkSource = APArtworkSourceDefault;
+
+    self.artworkSource = APArtworkSourceLastFm;
+
+    #if (!TARGET_IPHONE_SIMULATOR)
+        self.artworkSource = APArtworkSourceLibrary;
+    #endif
+
+    if (self.artworkSource == APArtworkSourceLibrary) {
+        [self loadAlbumsFromLibrary:self.game.pairCount];
+    } else if (self.artworkSource == APArtworkSourceLastFm) {
+        [self loadAlbumsFromLastFm:self.game.pairCount];
+    } else {
+        [self loadAlbumsFromDefault:self.game.pairCount];
+    }
+
+}
+
+- (void)loadAlbumsFromDefault:(int)howMany
+{
+    //
 }
 
 - (void)loadAlbumsFromLibrary:(int)howMany
@@ -285,17 +309,16 @@
 
 -(void)reset
 {
-    NSLog(@"reset display");
     
     if (self.isBeingIncorrect) {
         [self.pick1 hide];
         [self.pick2 hide];
         self.pick1 = nil;
         self.pick2 = nil;
-        
+
         self.isBeingIncorrect = false;
     }
-    
+
 }
 
 
