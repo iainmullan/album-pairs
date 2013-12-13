@@ -222,8 +222,11 @@
 - (void)loadAlbumsFromLastFm:(int)howMany
 {
     
-    [LastFm sharedInstance].apiKey = @"79de4922efbb54e68613e47d36de1b9f";
-    [LastFm sharedInstance].username = @"ebotunes";
+    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
+    NSDictionary *config = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+
+    [LastFm sharedInstance].apiKey = [config objectForKey:@"LastFmApiKey"];
+    [LastFm sharedInstance].username = [config objectForKey:@"LastFmUsername"];
 
     [[LastFm sharedInstance] getTopAlbumsForUserOrNil:nil period:kLastFmPeriodOverall limit:50 successHandler:^(NSArray *result) {
         
