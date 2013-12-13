@@ -25,6 +25,9 @@
 		AE5B990F1853752000C7F8D1 /* APCard.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5B990E1853752000C7F8D1 /* APCard.m */; };
 		AE5B99111853B53000C7F8D1 /* card-back.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5B99101853B53000C7F8D1 /* card-back.png */; };
 		AE5B99131854EA3900C7F8D1 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B99121854EA3900C7F8D1 /* GameKit.framework */; };
+		AE8382AA1857281000E06C10 /* PairsCard.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8382A91857281000E06C10 /* PairsCard.m */; };
+		AEDEDB2B185B937700DD1127 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEDEDB2A185B937700DD1127 /* Config.plist */; };
+		AEE3F281185666AD005B28AA /* APGame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE3F280185666AD005B28AA /* APGame.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +65,12 @@
 		AE5B990E1853752000C7F8D1 /* APCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APCard.m; sourceTree = "<group>"; };
 		AE5B99101853B53000C7F8D1 /* card-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "card-back.png"; path = "Album Pairs/Resources/card-back.png"; sourceTree = "<group>"; };
 		AE5B99121854EA3900C7F8D1 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		AE8382A81857281000E06C10 /* PairsCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PairsCard.h; sourceTree = "<group>"; };
+		AE8382A91857281000E06C10 /* PairsCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PairsCard.m; sourceTree = "<group>"; };
+		AEDEDB2A185B937700DD1127 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		AEE3F27F185666AD005B28AA /* APGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APGame.h; sourceTree = "<group>"; };
+		AEE3F280185666AD005B28AA /* APGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APGame.m; sourceTree = "<group>"; };
+		AEE3F28218566EFD005B28AA /* PairsGameDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PairsGameDelegate.h; sourceTree = "<group>"; };
 		BB3AE41C54ED46F1A96510EF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +103,7 @@
 		AE5B98C71853527000C7F8D1 = {
 			isa = PBXGroup;
 			children = (
+				AEDEDB2A185B937700DD1127 /* Config.plist */,
 				AE5B99101853B53000C7F8D1 /* card-back.png */,
 				AE5B98D91853527000C7F8D1 /* Album Pairs */,
 				AE5B98F81853527000C7F8D1 /* Album PairsTests */,
@@ -128,6 +138,7 @@
 		AE5B98D91853527000C7F8D1 /* Album Pairs */ = {
 			isa = PBXGroup;
 			children = (
+				AE8382A71857277900E06C10 /* Pairs */,
 				AE5B990D1853752000C7F8D1 /* APCard.h */,
 				AE5B990E1853752000C7F8D1 /* APCard.m */,
 				AE5B98E21853527000C7F8D1 /* AppDelegate.h */,
@@ -135,6 +146,8 @@
 				AE5B98E51853527000C7F8D1 /* Main.storyboard */,
 				AE5B98E81853527000C7F8D1 /* ViewController.h */,
 				AE5B98E91853527000C7F8D1 /* ViewController.m */,
+				AEE3F27F185666AD005B28AA /* APGame.h */,
+				AEE3F280185666AD005B28AA /* APGame.m */,
 				AE5B98EB1853527000C7F8D1 /* Images.xcassets */,
 				AE5B98DA1853527000C7F8D1 /* Supporting Files */,
 			);
@@ -168,6 +181,16 @@
 				AE5B98FB1853527000C7F8D1 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AE8382A71857277900E06C10 /* Pairs */ = {
+			isa = PBXGroup;
+			children = (
+				AEE3F28218566EFD005B28AA /* PairsGameDelegate.h */,
+				AE8382A81857281000E06C10 /* PairsCard.h */,
+				AE8382A91857281000E06C10 /* PairsCard.m */,
+			);
+			name = Pairs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +282,7 @@
 				AE5B99111853B53000C7F8D1 /* card-back.png in Resources */,
 				AE5B98EC1853527000C7F8D1 /* Images.xcassets in Resources */,
 				AE5B98DE1853527000C7F8D1 /* InfoPlist.strings in Resources */,
+				AEDEDB2B185B937700DD1127 /* Config.plist in Resources */,
 				AE5B98E71853527000C7F8D1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,8 +336,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE5B98EA1853527000C7F8D1 /* ViewController.m in Sources */,
+				AE8382AA1857281000E06C10 /* PairsCard.m in Sources */,
 				AE5B98E41853527000C7F8D1 /* AppDelegate.m in Sources */,
 				AE5B990F1853752000C7F8D1 /* APCard.m in Sources */,
+				AEE3F281185666AD005B28AA /* APGame.m in Sources */,
 				AE5B98E01853527000C7F8D1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,8 +475,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Album Pairs/Album Pairs-Prefix.pch";
 				INFOPLIST_FILE = "Album Pairs/Album Pairs-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -466,8 +494,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Album Pairs/Album Pairs-Prefix.pch";
 				INFOPLIST_FILE = "Album Pairs/Album Pairs-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
