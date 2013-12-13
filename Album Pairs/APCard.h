@@ -7,23 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PairsCard.h"
 
 static const int CARD_SIZE = 100;
 static const int CARD_MARGIN = 10;
 
-@interface APCard : UIView
-
-- (id)initWithImage:(UIImage*)image albumId:(int)albumId title:(NSString*)title;
-
-- (void)highlight;
-- (void)show;
-- (void)hide;
-- (void)remove;
+@interface APCard : PairsCard
 
 @property (nonatomic) int albumId;
-@property (nonatomic) NSString *title;
-@property (nonatomic) UIImageView* back;
-@property (nonatomic) UIImageView* albumArtwork;
-@property (nonatomic) BOOL shown;
+- (id)initWithImage:(UIImage*)image albumId:(int)albumId title:(NSString*)title;
 
 @end
