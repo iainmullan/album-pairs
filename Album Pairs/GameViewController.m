@@ -17,27 +17,29 @@
 #import "LastFm.h"
 #import "APCard.h"
 #import "APGame.h"
+#import "APMusicPlayer.h"
 #import "PairsGameDelegate.h"
 
-@interface GameViewController () <PairsGameDelegate>
+@interface GameViewController () <PairsGameDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UIView *gridView;
+@property (strong, nonatomic) NSMutableArray *foundCards;
 @property (strong, nonatomic) NSMutableArray *songs;
 @property (strong, nonatomic) MPMediaItemCollection *playlist;
-@property (strong, nonatomic) MPMusicPlayerController *player;
+@property (strong, nonatomic) APMusicPlayer *player;
 @property BOOL isBeingIncorrect;
 
 @property (strong, nonatomic) APCard *pick1;
 @property (strong, nonatomic) APCard *pick2;
 
-@property (strong, nonatomic) UIButton *restartGameButton;
-@property (strong, nonatomic) UILabel *timerLabel;
-@property (strong, nonatomic) UILabel *statusLabel;
+@property (strong, nonatomic) IBOutlet UIButton *restartGameButton;
+@property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 
-@property (strong, nonatomic) UIButton *skipButton;
-@property (strong, nonatomic) UIButton *playPauseButton;
+@property (strong, nonatomic) IBOutlet UIButton *skipButton;
+@property (strong, nonatomic) IBOutlet UIButton *playPauseButton;
 @property (strong, nonatomic) UILabel *nowPlayingLabel;
-@property (strong, nonatomic) UIView *playlistView;
+@property (strong, nonatomic) IBOutlet UITableView *playlistView;
 
 @property (strong, nonatomic) APGame *game;
 
@@ -63,11 +65,11 @@
 
     [self.view addSubview:self.restartGameButton];
 
-    self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(710, 90, 300, 60)];
-    self.timerLabel.font=[UIFont boldSystemFontOfSize:60];
-    self.timerLabel.textAlignment = NSTextAlignmentRight;
-    self.timerLabel.textColor =[UIColor whiteColor];
-    [self.view addSubview:self.timerLabel];
+//    self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(710, 90, 300, 60)];
+//    self.timerLabel.font=[UIFont boldSystemFontOfSize:60];
+//    self.timerLabel.textAlignment = NSTextAlignmentRight;
+//    self.timerLabel.textColor =[UIColor whiteColor];
+//    [self.view addSubview:self.timerLabel];
 
     [self.view setBackgroundColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0]];
     [self newGame];
@@ -89,6 +91,8 @@
     self.game = [[APGame alloc ]init];
     self.game.delegate = self;
 
+    self.foundCards = [[NSMutableArray alloc] init];
+
     [self drawGrid];
 
     [self loadAlbums];
@@ -102,10 +106,12 @@
     }
     
     /* PLAYER INTERFACE */
-    self.playlistView = [[UIView alloc] initWithFrame:CGRectMake(710, 160, 300, 450)];
-    [self.playlistView setBackgroundColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:0.9]];
-    [self.view addSubview:self.playlistView];
-    
+//    self.playlistView = [[UIView alloc] initWithFrame:CGRectMake(710, 160, 300, 450)];
+//    [self.playlistView setBackgroundColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:0.9]];
+//    [self.view addSubview:self.playlistView];
+
+    [self.playlistView setDataSource:self];
+
     UIView *playerView = [[UIView alloc] initWithFrame:CGRectMake(30, 718, 964, 30)];
     
     self.nowPlayingLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 764, 30)];
@@ -204,9 +210,8 @@
 {
 
     NSLog(@"loadAlbumsFromLibrary");
-    
+
     self.songs = [[NSMutableArray alloc] init];
-    self.game.cards = [[NSMutableArray alloc] init];
 
     MPMediaQuery *query = [MPMediaQuery songsQuery];
 
@@ -323,69 +328,70 @@
 
 -(void)initPlayer
 {
-    self.player = [MPMusicPlayerController applicationMusicPlayer];
+    self.player = [[APMusicPlayer alloc] init];
 }
 
 
-
-- (void) updateQueueWithCollection: (MPMediaItemCollection *) collection {
-    
-    // Add 'collection' to the music player's playback queue, but only if
-    //    the user chose at least one song to play.
-    if (collection) {
-        
-        // If there's no playback queue yet...
-        if (self.playlist == nil) {
-            self.playlist = collection;
-            [self.player setQueueWithItemCollection: self.playlist];
-            [self.player play];
-            
-            // Obtain the music player's state so it can be restored after
-            //    updating the playback queue.
-        } else {
-            BOOL wasPlaying = NO;
-            if (self.player.playbackState == MPMusicPlaybackStatePlaying) {
-                wasPlaying = YES;
-            }
-            
-            // Save the now-playing item and its current playback time.
-            MPMediaItem *nowPlayingItem        = self.player.nowPlayingItem;
-            NSTimeInterval currentPlaybackTime = self.player.currentPlaybackTime;
-            
-            // Combine the previously-existing media item collection with
-            //    the new one
-            NSMutableArray *combinedMediaItems = [[self.playlist items] mutableCopy];
-
-            NSArray *newMediaItems = [collection items];
-            [combinedMediaItems addObjectsFromArray: newMediaItems];
-            
-            self.playlist =
-             [MPMediaItemCollection collectionWithItems:
-              (NSArray *) combinedMediaItems];
-            
-            [self.player setQueueWithItemCollection: self.playlist];
-            
-            // Restore the now-playing item and its current playback time.
-            self.player.nowPlayingItem      = nowPlayingItem;
-            self.player.currentPlaybackTime = currentPlaybackTime;
-            
-            if (wasPlaying) {
-                [self.player play];
-            }
-        }
-    }
-}
+//
+//- (void) updateQueueWithCollection: (MPMediaItemCollection *) collection {
+//    
+//    // Add 'collection' to the music player's playback queue, but only if
+//    //    the user chose at least one song to play.
+//    if (collection) {
+//        
+//        // If there's no playback queue yet...
+//        if (self.playlist == nil) {
+//            self.playlist = collection;
+//            [self.player setQueueWithItemCollection: self.playlist];
+//            [self.player play];
+//            
+//            // Obtain the music player's state so it can be restored after
+//            //    updating the playback queue.
+//        } else {
+//            BOOL wasPlaying = NO;
+//            if (self.player.playbackState == MPMusicPlaybackStatePlaying) {
+//                wasPlaying = YES;
+//            }
+//            
+//            // Save the now-playing item and its current playback time.
+//            MPMediaItem *nowPlayingItem        = self.player.nowPlayingItem;
+//            NSTimeInterval currentPlaybackTime = self.player.currentPlaybackTime;
+//            
+//            // Combine the previously-existing media item collection with
+//            //    the new one
+//            NSMutableArray *combinedMediaItems = [[self.playlist items] mutableCopy];
+//
+//            NSArray *newMediaItems = [collection items];
+//            [combinedMediaItems addObjectsFromArray: newMediaItems];
+//            
+//            self.playlist =
+//             [MPMediaItemCollection collectionWithItems:
+//              (NSArray *) combinedMediaItems];
+//            
+//            [self.player setQueueWithItemCollection: self.playlist];
+//            
+//            // Restore the now-playing item and its current playback time.
+//            self.player.nowPlayingItem      = nowPlayingItem;
+//            self.player.currentPlaybackTime = currentPlaybackTime;
+//            
+//            if (wasPlaying) {
+//                [self.player play];
+//            }
+//        }
+//    }
+//}
 
 
 
 -(void)queueSong:(MPMediaItem*)song
 {
     if (!self.player) {
+        NSLog(@"about to init player");
         [self initPlayer];
     }
     
-    MPMediaItemCollection *playlist = [MPMediaItemCollection collectionWithItems:[NSArray arrayWithObject:song]];
-    [self updateQueueWithCollection:playlist];
+    NSLog(@"about to send song to player");
+    [self.player queueSong:song];
 }
 
 -(void)displaySong:(NSString*)title
@@ -393,6 +399,7 @@
     int y = (self.game.correctCount-1) * 25;
     
     UILabel *item = [[UILabel alloc] initWithFrame:CGRectMake(5, y, 300, 25)];
+    
     [item setText:[NSString stringWithFormat:@"%d. %@", self.game.correctCount, title]];
     
     [self.playlistView addSubview:item];
@@ -400,7 +407,7 @@
 
 - (void) skipButtonWasTapped:(UITapGestureRecognizer*)recognizer
 {
-    [self.player skipToNextItem];
+    [self.player skip];
 }
 
 - (void) drawGrid
@@ -420,12 +427,8 @@
 
 + (CGRect) frameForPositionX:(int) x y:(int)y
 {
-    
-    
     int xpos = x * (CARD_SIZE + CARD_MARGIN);
     int ypos = y * (CARD_SIZE + CARD_MARGIN);
-
-    NSLog(@"%d %d %d %d", xpos, ypos, CARD_SIZE, CARD_MARGIN);
 
     return CGRectMake(xpos, ypos, CARD_SIZE, CARD_SIZE);
 }
@@ -436,10 +439,12 @@
     [pick1 highlight];
     [pick2 highlight];
     
-    [self displaySong:pick1.title];
+    [self.foundCards addObject:pick1];
+    [self.playlistView reloadData];
 
     if (self.artworkSource == APArtworkSourceLibrary) {
         MPMediaItem *song = [self.songs objectAtIndex:pick1.albumId];
+        NSLog(@"about to queue song");
         [self queueSong:song];
     }
     
@@ -483,6 +488,25 @@
     }
     
     self.timerLabel.text = text;
+}
+
+-(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger count = [self.foundCards count];
+    return count;
+}
+
+-(UITableViewCell *)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    UITableViewCell *cell = [self.playlistView dequeueReusableCellWithIdentifier:@"playlistItem" forIndexPath:indexPath];
+    
+    APCard *card = (APCard*)[self.foundCards objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = card.title;
+    [cell.imageView setImage:card.front.image];
+    
+    return cell;
 }
 
 @end

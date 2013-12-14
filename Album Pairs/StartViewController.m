@@ -38,11 +38,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    NSLog(@"prepareForSegue");
-    
     if ([segue.identifier isEqualToString:@"NewGameSegue"]) {
-
-        NSLog(@"preparing for NewGameSegue");
 
         GameViewController *gameViewController = segue.destinationViewController;
 
@@ -63,7 +59,6 @@
 
 -(IBAction)gameWasSelected:(id)sender
 {
-    NSLog(@"game was selected");
     [self performSegueWithIdentifier:@"NewGameSegue" sender:sender];
 }
 

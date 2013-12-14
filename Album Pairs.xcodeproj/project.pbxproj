@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		ADDD83322614433EBA99A9D3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D11313F6B04344BC61F67A /* libPods.a */; };
+		AE1AA05F185BA3EC0007AE5A /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1AA05E185BA3EC0007AE5A /* StartViewController.m */; };
+		AE1AA062185C879A0007AE5A /* APMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1AA061185C879A0007AE5A /* APMusicPlayer.m */; };
 		AE5B98D41853527000C7F8D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D31853527000C7F8D1 /* Foundation.framework */; };
 		AE5B98D61853527000C7F8D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D51853527000C7F8D1 /* CoreGraphics.framework */; };
 		AE5B98D81853527000C7F8D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D71853527000C7F8D1 /* UIKit.framework */; };
@@ -15,7 +17,7 @@
 		AE5B98E01853527000C7F8D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5B98DF1853527000C7F8D1 /* main.m */; };
 		AE5B98E41853527000C7F8D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5B98E31853527000C7F8D1 /* AppDelegate.m */; };
 		AE5B98E71853527000C7F8D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE5B98E51853527000C7F8D1 /* Main.storyboard */; };
-		AE5B98EA1853527000C7F8D1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5B98E91853527000C7F8D1 /* ViewController.m */; };
+		AE5B98EA1853527000C7F8D1 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5B98E91853527000C7F8D1 /* GameViewController.m */; };
 		AE5B98EC1853527000C7F8D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5B98EB1853527000C7F8D1 /* Images.xcassets */; };
 		AE5B98F31853527000C7F8D1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98F21853527000C7F8D1 /* XCTest.framework */; };
 		AE5B98F41853527000C7F8D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D31853527000C7F8D1 /* Foundation.framework */; };
@@ -42,6 +44,10 @@
 
 /* Begin PBXFileReference section */
 		18D11313F6B04344BC61F67A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE1AA05D185BA3EC0007AE5A /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		AE1AA05E185BA3EC0007AE5A /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
+		AE1AA060185C879A0007AE5A /* APMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APMusicPlayer.h; sourceTree = "<group>"; };
+		AE1AA061185C879A0007AE5A /* APMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APMusicPlayer.m; sourceTree = "<group>"; };
 		AE5B98D01853527000C7F8D1 /* Album Pairs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Album Pairs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5B98D31853527000C7F8D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE5B98D51853527000C7F8D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,8 +59,8 @@
 		AE5B98E21853527000C7F8D1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AE5B98E31853527000C7F8D1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AE5B98E61853527000C7F8D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AE5B98E81853527000C7F8D1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AE5B98E91853527000C7F8D1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AE5B98E81853527000C7F8D1 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		AE5B98E91853527000C7F8D1 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		AE5B98EB1853527000C7F8D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AE5B98F11853527000C7F8D1 /* Album PairsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Album PairsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5B98F21853527000C7F8D1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -144,8 +150,12 @@
 				AE5B98E21853527000C7F8D1 /* AppDelegate.h */,
 				AE5B98E31853527000C7F8D1 /* AppDelegate.m */,
 				AE5B98E51853527000C7F8D1 /* Main.storyboard */,
-				AE5B98E81853527000C7F8D1 /* ViewController.h */,
-				AE5B98E91853527000C7F8D1 /* ViewController.m */,
+				AE5B98E81853527000C7F8D1 /* GameViewController.h */,
+				AE5B98E91853527000C7F8D1 /* GameViewController.m */,
+				AE1AA060185C879A0007AE5A /* APMusicPlayer.h */,
+				AE1AA061185C879A0007AE5A /* APMusicPlayer.m */,
+				AE1AA05D185BA3EC0007AE5A /* StartViewController.h */,
+				AE1AA05E185BA3EC0007AE5A /* StartViewController.m */,
 				AEE3F27F185666AD005B28AA /* APGame.h */,
 				AEE3F280185666AD005B28AA /* APGame.m */,
 				AE5B98EB1853527000C7F8D1 /* Images.xcassets */,
@@ -335,9 +345,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE5B98EA1853527000C7F8D1 /* ViewController.m in Sources */,
+				AE5B98EA1853527000C7F8D1 /* GameViewController.m in Sources */,
+				AE1AA062185C879A0007AE5A /* APMusicPlayer.m in Sources */,
 				AE8382AA1857281000E06C10 /* PairsCard.m in Sources */,
 				AE5B98E41853527000C7F8D1 /* AppDelegate.m in Sources */,
+				AE1AA05F185BA3EC0007AE5A /* StartViewController.m in Sources */,
 				AE5B990F1853752000C7F8D1 /* APCard.m in Sources */,
 				AEE3F281185666AD005B28AA /* APGame.m in Sources */,
 				AE5B98E01853527000C7F8D1 /* main.m in Sources */,
