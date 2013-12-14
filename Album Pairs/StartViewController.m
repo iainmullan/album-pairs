@@ -106,8 +106,6 @@
     if (alertView.tag == 12) {
         if (buttonIndex == 1) {
             UITextField *textfield = [alertView textFieldAtIndex:0];
-            NSLog(@"username: %@", textfield.text);
-            
             NSString *username = textfield.text;
             
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

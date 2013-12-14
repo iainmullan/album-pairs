@@ -49,13 +49,9 @@
 -(void)handle_PlaybackStateChanged:(NSNotification*)notification
 {
 
-    NSLog(@"playbackstate changed");
-
     if (self.player.playbackState == MPMusicPlaybackStateStopped) {
-        NSLog(@"playback has stopped");
         [self skip];
     } else if (self.player.playbackState == MPMusicPlaybackStatePlaying) {
-        NSLog(@"starting timer");
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
     } else {
         [self.timer invalidate];

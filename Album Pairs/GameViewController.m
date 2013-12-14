@@ -186,8 +186,6 @@
 
 - (void)loadAlbumsFromDefault:(int)howMany
 {
-    NSLog(@"loadAlbumsFromLibrary");
-    
     NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
     NSString * documentsPath = [resourcePath stringByAppendingPathComponent:@"ClassicAlbums"];
 
@@ -199,7 +197,6 @@
         NSString *filePath = [NSString stringWithFormat:@"ClassicAlbums/%@", f];
         
         UIImage *artworkImage = [UIImage imageNamed:filePath];
-        NSLog(@"%@", artworkImage);
         NSString *title = f;
         
         if ([self.game addCardFromImage:artworkImage withIndex:i title:title]) {
@@ -217,8 +214,6 @@
 
 - (void)loadAlbumsFromLibrary:(int)howMany
 {
-
-    NSLog(@"loadAlbumsFromLibrary");
 
     self.songs = [[NSMutableArray alloc] init];
 
@@ -259,8 +254,6 @@
 
 - (void)loadAlbumsFromLastFm:(int)howMany
 {
-    NSLog(@"loadAlbumsFromLastFm");
-
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
     NSDictionary *config = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     [LastFm sharedInstance].apiKey = [config objectForKey:@"LastFmApiKey"];
