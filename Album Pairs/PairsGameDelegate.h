@@ -11,10 +11,10 @@
 @protocol PairsGameDelegate <NSObject>
 
 // correct
--(void)pairWasFoundWIthPick1:(APCard*)pick1 pick2:(APCard*)pick2;
+-(void)pairWasFoundWithPick1:(APCard*)pick1 pick2:(APCard*)pick2;
 
 // incorrect
--(void)pairWasNotFoundWIthPick1:(APCard*)pick1 pick2:(APCard*)pick2;
+-(void)pairWasNotFoundWithPick1:(APCard*)pick1 pick2:(APCard*)pick2;
 
 // game over
 -(void)gameDidEndWithResult:(BOOL)result;

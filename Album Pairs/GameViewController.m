@@ -430,7 +430,7 @@
     return CGRectMake(xpos, ypos, CARD_SIZE, CARD_SIZE);
 }
 
--(void)pairWasFoundWIthPick1:(APCard*)pick1 pick2:(APCard*)pick2
+-(void)pairWasFoundWithPick1:(APCard*)pick1 pick2:(APCard*)pick2
 {
 
     [pick1 highlight];
@@ -445,7 +445,7 @@
     
 }
 
--(void)pairWasNotFoundWIthPick1:(APCard*)pick1 pick2:(APCard*)pick2
+-(void)pairWasNotFoundWithPick1:(APCard*)pick1 pick2:(APCard*)pick2
 {
     self.isBeingIncorrect = true;
     self.pick1 = pick1;

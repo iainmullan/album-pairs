@@ -75,7 +75,7 @@
     self.correctCount++;
     
     self.timerCount += 5;
-    [self.delegate pairWasFoundWIthPick1:self.pick1 pick2:self.pick2];
+    [self.delegate pairWasFoundWithPick1:self.pick1 pick2:self.pick2];
     [self reset];
     
     if (self.correctCount == self.pairCount) {
@@ -91,7 +91,7 @@
     self.turnCount++;
     self.errorCount++;
     
-    [self.delegate pairWasNotFoundWIthPick1:self.pick1 pick2:self.pick2];
+    [self.delegate pairWasNotFoundWithPick1:self.pick1 pick2:self.pick2];
     [self reset];
 }
 
