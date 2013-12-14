@@ -169,9 +169,9 @@
 - (void)loadAlbums
 {
 
-    #if (TARGET_IPHONE_SIMULATOR)
-        self.artworkSource = APArtworkSourceLastFm;
-    #endif
+//    #if (TARGET_IPHONE_SIMULATOR)
+//        self.artworkSource = APArtworkSourceLastFm;
+//    #endif
 
     if (self.artworkSource == APArtworkSourceLibrary) {
         [self loadAlbumsFromLibrary:self.game.pairCount];
@@ -187,6 +187,32 @@
 - (void)loadAlbumsFromDefault:(int)howMany
 {
     NSLog(@"loadAlbumsFromLibrary");
+    
+    NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
+    NSString * documentsPath = [resourcePath stringByAppendingPathComponent:@"ClassicAlbums"];
+
+    NSArray *filesList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentsPath error:nil];
+    
+    int i = 0;
+    for(NSString* f in filesList) {
+
+        NSString *filePath = [NSString stringWithFormat:@"ClassicAlbums/%@", f];
+        
+        UIImage *artworkImage = [UIImage imageNamed:filePath];
+        NSLog(@"%@", artworkImage);
+        NSString *title = f;
+        
+        if ([self.game addCardFromImage:artworkImage withIndex:i title:title]) {
+            i++;
+        }
+
+        if (i == howMany) {
+            break;
+        }
+
+    }
+    
+    [self deal:self.game.cards];
 }
 
 - (void)loadAlbumsFromLibrary:(int)howMany

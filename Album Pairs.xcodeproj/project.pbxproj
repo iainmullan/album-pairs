@@ -10,6 +10,7 @@
 		ADDD83322614433EBA99A9D3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D11313F6B04344BC61F67A /* libPods.a */; };
 		AE1AA05F185BA3EC0007AE5A /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1AA05E185BA3EC0007AE5A /* StartViewController.m */; };
 		AE1AA062185C879A0007AE5A /* APMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1AA061185C879A0007AE5A /* APMusicPlayer.m */; };
+		AE1AA0DC185CDA140007AE5A /* ClassicAlbums in Resources */ = {isa = PBXBuildFile; fileRef = AE1AA0DB185CDA140007AE5A /* ClassicAlbums */; };
 		AE5B98D41853527000C7F8D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D31853527000C7F8D1 /* Foundation.framework */; };
 		AE5B98D61853527000C7F8D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D51853527000C7F8D1 /* CoreGraphics.framework */; };
 		AE5B98D81853527000C7F8D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D71853527000C7F8D1 /* UIKit.framework */; };
@@ -49,6 +50,7 @@
 		AE1AA060185C879A0007AE5A /* APMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APMusicPlayer.h; sourceTree = "<group>"; };
 		AE1AA061185C879A0007AE5A /* APMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APMusicPlayer.m; sourceTree = "<group>"; };
 		AE1AA064185CBE300007AE5A /* APMusicPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APMusicPlayerDelegate.h; sourceTree = "<group>"; };
+		AE1AA0DB185CDA140007AE5A /* ClassicAlbums */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ClassicAlbums; sourceTree = "<group>"; };
 		AE5B98D01853527000C7F8D1 /* Album Pairs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Album Pairs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5B98D31853527000C7F8D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE5B98D51853527000C7F8D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -110,6 +112,7 @@
 		AE5B98C71853527000C7F8D1 = {
 			isa = PBXGroup;
 			children = (
+				AE1AA0DB185CDA140007AE5A /* ClassicAlbums */,
 				AEDEDB2A185B937700DD1127 /* Config.plist */,
 				AE5B99101853B53000C7F8D1 /* card-back.png */,
 				AE5B98D91853527000C7F8D1 /* Album Pairs */,
@@ -294,6 +297,7 @@
 				AE5B99111853B53000C7F8D1 /* card-back.png in Resources */,
 				AE5B98EC1853527000C7F8D1 /* Images.xcassets in Resources */,
 				AE5B98DE1853527000C7F8D1 /* InfoPlist.strings in Resources */,
+				AE1AA0DC185CDA140007AE5A /* ClassicAlbums in Resources */,
 				AEDEDB2B185B937700DD1127 /* Config.plist in Resources */,
 				AE5B98E71853527000C7F8D1 /* Main.storyboard in Resources */,
 			);
