@@ -13,13 +13,13 @@
 
 #include "TargetConditionals.h"
 
-#import "ViewController.h"
+#import "GameViewController.h"
 #import "LastFm.h"
 #import "APCard.h"
 #import "APGame.h"
 #import "PairsGameDelegate.h"
 
-@interface ViewController () <PairsGameDelegate>
+@interface GameViewController () <PairsGameDelegate>
 
 @property (strong, nonatomic) UIView *gridView;
 @property (strong, nonatomic) NSMutableArray *songs;
@@ -39,13 +39,11 @@
 @property (strong, nonatomic) UILabel *nowPlayingLabel;
 @property (strong, nonatomic) UIView *playlistView;
 
-@property (nonatomic) APArtworkSource artworkSource;
-
 @property (strong, nonatomic) APGame *game;
 
 @end
 
-@implementation ViewController
+@implementation GameViewController
 
 - (void)viewDidLoad
 {
@@ -91,10 +89,9 @@
     self.game = [[APGame alloc ]init];
     self.game.delegate = self;
 
-    [self loadAlbums];
-    
     [self drawGrid];
-    
+
+    [self loadAlbums];
     
     if (self.statusLabel) {
         [self.statusLabel removeFromSuperview];
@@ -163,9 +160,10 @@
             y++;
         }
         
-        CGRect frame = [ViewController frameForPositionX:x y:y];
-        card.frame = frame;
         
+        CGRect frame = [GameViewController frameForPositionX:x y:y];
+        card.frame = frame;
+
         UITapGestureRecognizer *tapGesture =
         [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cardWasTapped:)];
         
@@ -183,12 +181,8 @@
 - (void)loadAlbums
 {
 
-    self.artworkSource = APArtworkSourceDefault;
-
-    self.artworkSource = APArtworkSourceLastFm;
-
-    #if (!TARGET_IPHONE_SIMULATOR)
-        self.artworkSource = APArtworkSourceLibrary;
+    #if (TARGET_IPHONE_SIMULATOR)
+        self.artworkSource = APArtworkSourceLastFm;
     #endif
 
     if (self.artworkSource == APArtworkSourceLibrary) {
@@ -203,11 +197,14 @@
 
 - (void)loadAlbumsFromDefault:(int)howMany
 {
-    //
+    NSLog(@"loadAlbumsFromLibrary");
 }
 
 - (void)loadAlbumsFromLibrary:(int)howMany
 {
+
+    NSLog(@"loadAlbumsFromLibrary");
+    
     self.songs = [[NSMutableArray alloc] init];
     self.game.cards = [[NSMutableArray alloc] init];
 
@@ -246,7 +243,8 @@
 
 - (void)loadAlbumsFromLastFm:(int)howMany
 {
-    
+    NSLog(@"loadAlbumsFromLastFm");
+
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
     NSDictionary *config = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
 
@@ -422,9 +420,12 @@
 
 + (CGRect) frameForPositionX:(int) x y:(int)y
 {
-
+    
+    
     int xpos = x * (CARD_SIZE + CARD_MARGIN);
     int ypos = y * (CARD_SIZE + CARD_MARGIN);
+
+    NSLog(@"%d %d %d %d", xpos, ypos, CARD_SIZE, CARD_MARGIN);
 
     return CGRectMake(xpos, ypos, CARD_SIZE, CARD_SIZE);
 }
@@ -436,10 +437,10 @@
     [pick2 highlight];
     
     [self displaySong:pick1.title];
-    
-    if (self.songs) {
+
+    if (self.artworkSource == APArtworkSourceLibrary) {
         MPMediaItem *song = [self.songs objectAtIndex:pick1.albumId];
-        //[self queueSong:song];
+        [self queueSong:song];
     }
     
 }

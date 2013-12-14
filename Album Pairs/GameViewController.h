@@ -15,8 +15,9 @@ typedef enum {
 } APArtworkSource;
 
 
-@interface ViewController : UIViewController
+@interface GameViewController : UIViewController
 
+@property (nonatomic) APArtworkSource artworkSource;
 
 - (NSArray*) shuffle:(NSArray*)input;
 + (CGRect) frameForPositionX:(int) x y:(int)y;
