@@ -80,6 +80,15 @@
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         alert.tag = 12;
         
+
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *username = [defaults objectForKey:@"LastFmUsername"];
+
+        if (username) {
+            UITextField *textField = [alert textFieldAtIndex:0];
+            textField.text = username;
+        }
+
         [alert addButtonWithTitle:@"Go"];
         [alert show];
         
