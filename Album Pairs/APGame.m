@@ -108,6 +108,11 @@
     [self.delegate gameDidEndWithResult:NO];
 }
 
+-(void)stopTimer
+{
+    [self.timer invalidate];
+}
+
 -(void)reset
 {
     self.pick1 = nil;

@@ -88,6 +88,12 @@
 
 - (void)newGame
 {
+
+    if (self.game) {
+        // cancel the previous game's timer
+        [self.game stopTimer];
+    }
+
     self.game = [[APGame alloc ]init];
     self.game.delegate = self;
 

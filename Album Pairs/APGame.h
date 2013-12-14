@@ -18,6 +18,7 @@ static const int TIME_LIMIT= 60;
 @property (nonatomic) id<PairsGameDelegate> delegate;
 
 - (void)startTimer;
+- (void)stopTimer;
 - (BOOL)addCardFromImage:(UIImage*)image withIndex:(int)index title:(NSString*)title;
 - (BOOL)pickCard:(APCard*)card;
 
