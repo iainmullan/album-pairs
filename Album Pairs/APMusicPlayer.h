@@ -13,7 +13,11 @@
 
 -(void)queueSong:(MPMediaItem *)song;
 -(void)skip;
+-(void)back;
 -(void)stop;
 -(void)playOrPause;
+-(void)skipToTrack:(NSInteger)index;
+
+-(void)clear;
 
 @end

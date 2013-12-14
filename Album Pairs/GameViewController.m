@@ -20,7 +20,7 @@
 #import "APMusicPlayer.h"
 #import "PairsGameDelegate.h"
 
-@interface GameViewController () <PairsGameDelegate, UITableViewDataSource>
+@interface GameViewController () <PairsGameDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UIView *gridView;
 @property (strong, nonatomic) NSMutableArray *foundCards;
@@ -36,9 +36,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 
-@property (strong, nonatomic) IBOutlet UIButton *skipButton;
 @property (strong, nonatomic) IBOutlet UIButton *playPauseButton;
-@property (strong, nonatomic) UILabel *nowPlayingLabel;
 @property (strong, nonatomic) IBOutlet UITableView *playlistView;
 
 @property (strong, nonatomic) APGame *game;
@@ -52,6 +50,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    self.player = [[APMusicPlayer alloc] init];
+
+    
     self.restartGameButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self.restartGameButton setTitle:@"New Game" forState:UIControlStateNormal];
     self.restartGameButton.frame = CGRectMake(910, 50, 100, 30);
@@ -64,12 +65,6 @@
     [self.restartGameButton addGestureRecognizer:tapGesture];
 
     [self.view addSubview:self.restartGameButton];
-
-//    self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(710, 90, 300, 60)];
-//    self.timerLabel.font=[UIFont boldSystemFontOfSize:60];
-//    self.timerLabel.textAlignment = NSTextAlignmentRight;
-//    self.timerLabel.textColor =[UIColor whiteColor];
-//    [self.view addSubview:self.timerLabel];
 
     [self.view setBackgroundColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0]];
     [self newGame];
@@ -98,6 +93,7 @@
     self.game.delegate = self;
 
     self.foundCards = [[NSMutableArray alloc] init];
+    [self.playlistView reloadData];
 
     [self drawGrid];
 
@@ -112,29 +108,8 @@
     }
     
     /* PLAYER INTERFACE */
-//    self.playlistView = [[UIView alloc] initWithFrame:CGRectMake(710, 160, 300, 450)];
-//    [self.playlistView setBackgroundColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:0.9]];
-//    [self.view addSubview:self.playlistView];
-
     [self.playlistView setDataSource:self];
-
-    UIView *playerView = [[UIView alloc] initWithFrame:CGRectMake(30, 718, 964, 30)];
-    
-    self.nowPlayingLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 764, 30)];
-    self.nowPlayingLabel.textAlignment = NSTextAlignmentCenter;
-    [playerView addSubview:self.nowPlayingLabel];
-    
-    self.skipButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
-    [self.skipButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.skipButton.contentHorizontalAlignment = NSTextAlignmentLeft;
-    [self.skipButton setTitle:@"Skip" forState:UIControlStateNormal];
-    UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipButtonWasTapped:)];
-    self.skipButton.userInteractionEnabled = YES;
-    [self.skipButton addGestureRecognizer:tapGesture2];
-    
-    [playerView addSubview:self.skipButton];
-
-    [self.view addSubview:playerView];
+    [self.playlistView setDelegate:self];
 }
 
 - (NSArray*)shuffle:(NSArray*)input
@@ -214,6 +189,9 @@
 
 - (void)loadAlbumsFromLibrary:(int)howMany
 {
+    if (self.player) {
+        [self.player clear];
+    }
 
     NSLog(@"loadAlbumsFromLibrary");
 
@@ -330,73 +308,8 @@
 
 }
 
-
-
--(void)initPlayer
-{
-    self.player = [[APMusicPlayer alloc] init];
-}
-
-
-//
-//- (void) updateQueueWithCollection: (MPMediaItemCollection *) collection {
-//    
-//    // Add 'collection' to the music player's playback queue, but only if
-//    //    the user chose at least one song to play.
-//    if (collection) {
-//        
-//        // If there's no playback queue yet...
-//        if (self.playlist == nil) {
-//            self.playlist = collection;
-//            [self.player setQueueWithItemCollection: self.playlist];
-//            [self.player play];
-//            
-//            // Obtain the music player's state so it can be restored after
-//            //    updating the playback queue.
-//        } else {
-//            BOOL wasPlaying = NO;
-//            if (self.player.playbackState == MPMusicPlaybackStatePlaying) {
-//                wasPlaying = YES;
-//            }
-//            
-//            // Save the now-playing item and its current playback time.
-//            MPMediaItem *nowPlayingItem        = self.player.nowPlayingItem;
-//            NSTimeInterval currentPlaybackTime = self.player.currentPlaybackTime;
-//            
-//            // Combine the previously-existing media item collection with
-//            //    the new one
-//            NSMutableArray *combinedMediaItems = [[self.playlist items] mutableCopy];
-//
-//            NSArray *newMediaItems = [collection items];
-//            [combinedMediaItems addObjectsFromArray: newMediaItems];
-//            
-//            self.playlist =
-//             [MPMediaItemCollection collectionWithItems:
-//              (NSArray *) combinedMediaItems];
-//            
-//            [self.player setQueueWithItemCollection: self.playlist];
-//            
-//            // Restore the now-playing item and its current playback time.
-//            self.player.nowPlayingItem      = nowPlayingItem;
-//            self.player.currentPlaybackTime = currentPlaybackTime;
-//            
-//            if (wasPlaying) {
-//                [self.player play];
-//            }
-//        }
-//    }
-//}
-
-
-
 -(void)queueSong:(MPMediaItem*)song
 {
-    if (!self.player) {
-        NSLog(@"about to init player");
-        [self initPlayer];
-    }
-    
-    NSLog(@"about to send song to player");
     [self.player queueSong:song];
 }
 
@@ -411,9 +324,17 @@
     [self.playlistView addSubview:item];
 }
 
-- (void) skipButtonWasTapped:(UITapGestureRecognizer*)recognizer
-{
-    [self.player skip];
+- (IBAction)playerButtonWasTapped:(id)sender {
+    UIButton *button = (UIButton*) sender;
+    
+    if (button.tag == 0) {
+        [self.player playOrPause];
+    } else if (button.tag == 1) {
+        [self.player skip];
+    } else if (button.tag == 2) {
+        [self.player back];
+    }
+
 }
 
 - (void) drawGrid
@@ -450,7 +371,6 @@
 
     if (self.artworkSource == APArtworkSourceLibrary) {
         MPMediaItem *song = [self.songs objectAtIndex:pick1.albumId];
-        NSLog(@"about to queue song");
         [self queueSong:song];
     }
     
@@ -474,10 +394,10 @@
     } else {
         [self.statusLabel setText:@"GAME OVER"];
         [self.statusLabel setTextColor:[UIColor redColor]];
+        [self.player stop];
     }
 
     [self.view addSubview:self.statusLabel];
-    [self.player stop];
 }
 
 
@@ -486,13 +406,13 @@
 {
     int m = (int) seconds / 60;
     seconds = seconds - (m*60);
-    
+
     NSString *text = [NSString stringWithFormat:@"%d:%d", m,seconds];
-    
+
     if (seconds < 10) {
         text = [NSString stringWithFormat:@"%d:0%d", m,seconds];
     }
-    
+
     self.timerLabel.text = text;
 }
 
@@ -513,6 +433,11 @@
     [cell.imageView setImage:card.front.image];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.player skipToTrack:indexPath.row];
 }
 
 @end
