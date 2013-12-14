@@ -48,6 +48,7 @@
 		AE1AA05E185BA3EC0007AE5A /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		AE1AA060185C879A0007AE5A /* APMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APMusicPlayer.h; sourceTree = "<group>"; };
 		AE1AA061185C879A0007AE5A /* APMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APMusicPlayer.m; sourceTree = "<group>"; };
+		AE1AA064185CBE300007AE5A /* APMusicPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APMusicPlayerDelegate.h; sourceTree = "<group>"; };
 		AE5B98D01853527000C7F8D1 /* Album Pairs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Album Pairs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5B98D31853527000C7F8D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE5B98D51853527000C7F8D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -154,6 +155,7 @@
 				AE5B98E91853527000C7F8D1 /* GameViewController.m */,
 				AE1AA060185C879A0007AE5A /* APMusicPlayer.h */,
 				AE1AA061185C879A0007AE5A /* APMusicPlayer.m */,
+				AE1AA064185CBE300007AE5A /* APMusicPlayerDelegate.h */,
 				AE1AA05D185BA3EC0007AE5A /* StartViewController.h */,
 				AE1AA05E185BA3EC0007AE5A /* StartViewController.m */,
 				AEE3F27F185666AD005B28AA /* APGame.h */,

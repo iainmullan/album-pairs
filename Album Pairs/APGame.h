@@ -11,7 +11,7 @@
 #import "PairsGameDelegate.h"
 
 static const int WIDTH = 6;
-static const int TIME_LIMIT= 60;
+static const int TIME_LIMIT= 180;
 
 @interface APGame : NSObject
 

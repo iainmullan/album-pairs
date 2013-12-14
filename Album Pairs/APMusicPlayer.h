@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "APMusicPlayerDelegate.h"
 
 @interface APMusicPlayer : NSObject
+
+@property (nonatomic) id<APMusicPlayerDelegate> delegate;
 
 -(void)queueSong:(MPMediaItem *)song;
 -(void)skip;
@@ -17,7 +20,9 @@
 -(void)stop;
 -(void)playOrPause;
 -(void)skipToTrack:(NSInteger)index;
+-(void)seekTo:(float)position;
 
--(void)clear;
+-(void)clearPlayer;
+-(void)initPlayer;
 
 @end

@@ -13,6 +13,7 @@
 @property (strong, nonatomic) MPMusicPlayerController *player;
 @property (strong, nonatomic) NSMutableArray *playlist;
 @property (nonatomic) NSInteger currentItem;
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
@@ -21,8 +22,7 @@
 -(APMusicPlayer*)init
 {
     self.player = [MPMusicPlayerController applicationMusicPlayer];
-    [self clear];
-    [self initPlayer];
+    [self clearPlayer];
     return self;
 }
 
@@ -43,10 +43,8 @@
      name:        MPMusicPlayerControllerPlaybackStateDidChangeNotification
      object:      self.player];
     
-    
     [self.player beginGeneratingPlaybackNotifications];
 }
-
 
 -(void)handle_PlaybackStateChanged:(NSNotification*)notification
 {
@@ -54,9 +52,27 @@
     NSLog(@"playbackstate changed");
 
     if (self.player.playbackState == MPMusicPlaybackStateStopped) {
+        NSLog(@"playback has stopped");
         [self skip];
+    } else if (self.player.playbackState == MPMusicPlaybackStatePlaying) {
+        NSLog(@"starting timer");
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+    } else {
+        [self.timer invalidate];
     }
 
+}
+
+-(void)tick
+{
+    
+    NSNumber *duration = [self.player.nowPlayingItem valueForProperty:MPMediaItemPropertyPlaybackDuration];
+
+    float i = self.player.currentPlaybackTime;
+
+    float position = i / [duration floatValue];
+
+    [self.delegate playbackPositionDidChange:position];
 }
 
 -(void)handle_NowPlayingItemChanged:(NSNotification*)notification
@@ -76,12 +92,25 @@
 
 }
 
+-(void)seekTo:(float)position
+{
+    
+    NSNumber *duration = [self.player.nowPlayingItem valueForProperty:MPMediaItemPropertyPlaybackDuration];
+    
+    int targetTime = [duration floatValue] * position;
+//    NSLog(@" seekTo: %i", targetTime);
+    
+    [self.player setCurrentPlaybackTime:targetTime];
+}
+
 -(void)skipToTrack:(NSInteger)index
 {
     
     if (index >= self.playlist.count || index < 0) {
         return;
     }
+    
+//    NSLog(@"skipToTrack %i", index);
 
     self.currentItem = index;
     MPMediaItem *nextSong = (MPMediaItem *)[self.playlist objectAtIndex:self.currentItem];
@@ -90,10 +119,10 @@
 
 -(void)playSong:(MPMediaItem*)song
 {
+//    NSLog(@"playSong %@", song);
+
     [self.player pause];
-
     [self.player setQueueWithItemCollection:[MPMediaItemCollection collectionWithItems:[NSArray arrayWithObject:song]]];
-
     self.player.nowPlayingItem = song;
     [self.player play];
 }
@@ -123,7 +152,7 @@
 
 }
 
--(void)clear
+-(void)clearPlayer
 {
     self.currentItem = -1;
     self.playlist = [[NSMutableArray alloc] init];

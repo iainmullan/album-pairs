@@ -15,10 +15,11 @@
 #import "LastFm.h"
 #import "APCard.h"
 #import "APGame.h"
+#import "APMusicPlayerDelegate.h"
 #import "APMusicPlayer.h"
 #import "PairsGameDelegate.h"
 
-@interface GameViewController () <PairsGameDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface GameViewController () <PairsGameDelegate, UITableViewDataSource, UITableViewDelegate, APMusicPlayerDelegate>
 
 @property (strong, nonatomic) UIView *gridView;
 @property (strong, nonatomic) NSMutableArray *foundCards;
@@ -36,6 +37,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *playPauseButton;
 @property (strong, nonatomic) IBOutlet UITableView *playlistView;
 @property (strong, nonatomic) IBOutlet UIView *playerControls;
+@property (weak, nonatomic) IBOutlet UISlider *playbackSlider;
 
 @property (strong, nonatomic) APGame *game;
 
@@ -49,6 +51,7 @@
     
     if (self.artworkSource == APArtworkSourceLibrary) {
         self.player = [[APMusicPlayer alloc] init];
+        self.player.delegate = self;
     }
 
     /* PLAYER INTERFACE */
@@ -65,7 +68,17 @@
 }
 
 - (IBAction)restartGameButtonWasTapped:(id)sender {
+
+    if (self.player) {
+        [self.player clearPlayer];
+    }
+
     [self newGame];
+}
+
+- (IBAction)sliderWasDragged:(id)sender {
+    UISlider *slider = (UISlider*)sender;
+    [self.player seekTo:slider.value];
 }
 
 - (void)newGame
@@ -74,6 +87,10 @@
     if (self.game) {
         // cancel the previous game's timer
         [self.game stopTimer];
+    }
+
+    if (self.player) {
+        [self.player initPlayer];
     }
 
     self.game = [[APGame alloc ]init];
@@ -175,10 +192,6 @@
 - (void)loadAlbumsFromLibrary:(int)howMany
 {
 
-    if (self.player) {
-        [self.player clear];
-    }
-
     NSLog(@"loadAlbumsFromLibrary");
 
     self.songs = [[NSMutableArray alloc] init];
@@ -191,6 +204,8 @@
 
     int i = 0;
     for(NSDictionary *album in albums) {
+
+//        [self queueSong:(MPMediaItem*)album];
 
         MPMediaItemArtwork *artwork = [album valueForKey:MPMediaItemPropertyArtwork];
         UIImage *artworkImage = [artwork imageWithSize: CGSizeMake (CARD_SIZE, CARD_SIZE)];
@@ -429,6 +444,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.player skipToTrack:indexPath.row];
+}
+
+-(void)playbackPositionDidChange:(float)position
+{
+    // dont update if the user is currently interacting
+    if (![self.playbackSlider isTouchInside]) {
+        self.playbackSlider.value = position;
+    }
 }
 
 @end
