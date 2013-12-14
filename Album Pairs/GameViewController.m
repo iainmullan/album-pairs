@@ -72,8 +72,8 @@
     if (self.player) {
         [self.player clearPlayer];
     }
-
-    [self newGame];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)sliderWasDragged:(id)sender {
