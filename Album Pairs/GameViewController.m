@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #include <AudioToolbox/AudioToolbox.h>
 
-#import <MediaPlayer/MediaPlayer.h>
-
 #include "TargetConditionals.h"
 
 #import "GameViewController.h"
@@ -32,12 +30,12 @@
 @property (strong, nonatomic) APCard *pick1;
 @property (strong, nonatomic) APCard *pick2;
 
-@property (strong, nonatomic) IBOutlet UIButton *restartGameButton;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *playPauseButton;
 @property (strong, nonatomic) IBOutlet UITableView *playlistView;
+@property (strong, nonatomic) IBOutlet UIView *playerControls;
 
 @property (strong, nonatomic) APGame *game;
 
@@ -48,25 +46,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
-    self.player = [[APMusicPlayer alloc] init];
+    if (self.artworkSource == APArtworkSourceLibrary) {
+        self.player = [[APMusicPlayer alloc] init];
+    }
 
-    
-    self.restartGameButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.restartGameButton setTitle:@"New Game" forState:UIControlStateNormal];
-    self.restartGameButton.frame = CGRectMake(910, 50, 100, 30);
-    [self.restartGameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.restartGameButton.layer.borderWidth=1.0f;
-    self.restartGameButton.layer.borderColor=[[UIColor whiteColor] CGColor];
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(restartGameButtonWasTapped:)];
-    self.restartGameButton.userInteractionEnabled = YES;
-    [self.restartGameButton addGestureRecognizer:tapGesture];
+    /* PLAYER INTERFACE */
+    [self.playlistView setDataSource:self];
+    [self.playlistView setDelegate:self];
 
-    [self.view addSubview:self.restartGameButton];
-
-    [self.view setBackgroundColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0]];
     [self newGame];
 }
 
@@ -76,8 +64,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) restartGameButtonWasTapped:(UITapGestureRecognizer*)recognizer
-{
+- (IBAction)restartGameButtonWasTapped:(id)sender {
     [self newGame];
 }
 
@@ -107,9 +94,6 @@
         self.statusLabel.font=[UIFont boldSystemFontOfSize:60];
     }
     
-    /* PLAYER INTERFACE */
-    [self.playlistView setDataSource:self];
-    [self.playlistView setDelegate:self];
 }
 
 - (NSArray*)shuffle:(NSArray*)input
@@ -131,11 +115,12 @@
 
 -(void)deal:(NSArray*)cards
 {
+
     cards = (NSMutableArray*) [self shuffle:cards];
     cards = (NSMutableArray*) [self shuffle:cards];
     cards = (NSMutableArray*) [self shuffle:cards];
     cards = (NSMutableArray*) [self shuffle:cards];
-    
+
     int x = 0;
     int y = 0;
     
@@ -146,7 +131,6 @@
             x = 0;
             y++;
         }
-        
         
         CGRect frame = [GameViewController frameForPositionX:x y:y];
         card.frame = frame;
@@ -174,6 +158,7 @@
 
     if (self.artworkSource == APArtworkSourceLibrary) {
         [self loadAlbumsFromLibrary:self.game.pairCount];
+        self.playerControls.hidden = NO;
     } else if (self.artworkSource == APArtworkSourceLastFm) {
         [self loadAlbumsFromLastFm:self.game.pairCount];
     } else {
@@ -189,6 +174,7 @@
 
 - (void)loadAlbumsFromLibrary:(int)howMany
 {
+
     if (self.player) {
         [self.player clear];
     }
@@ -236,9 +222,14 @@
 
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
     NSDictionary *config = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-
     [LastFm sharedInstance].apiKey = [config objectForKey:@"LastFmApiKey"];
-    [LastFm sharedInstance].username = [config objectForKey:@"LastFmUsername"];
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults objectForKey:@"LastFmUsername"];
+    if (!username) {
+        username = [config objectForKey:@"LastFmUsername"];
+    }
+    [LastFm sharedInstance].username = username;
 
     [[LastFm sharedInstance] getTopAlbumsForUserOrNil:nil period:kLastFmPeriodOverall limit:50 successHandler:^(NSArray *result) {
         

@@ -11,6 +11,8 @@
 
 @interface StartViewController ()
 
+@property APArtworkSource gameType;
+
 @end
 
 @implementation StartViewController
@@ -39,27 +41,73 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"NewGameSegue"]) {
-
         GameViewController *gameViewController = segue.destinationViewController;
-
-        UIButton *button = (UIButton *) sender;
-        NSString *text = button.titleLabel.text;
-
-        if ([text isEqualToString:@"My Music Library"]) {
-            gameViewController.artworkSource = APArtworkSourceLibrary;
-        } else if ([text isEqualToString:@"My Last FM Library"]) {
-            gameViewController.artworkSource = APArtworkSourceLastFm;
-        } else if ([text isEqualToString:@"Classic Albums"]) {
-            gameViewController.artworkSource = APArtworkSourceDefault;
-        }
-        
+        gameViewController.artworkSource = self.gameType;
     }
 
 }
 
+-(void)prepareGameWithSource:(APArtworkSource)source
+{
+    
+    // if last fm - check username exists
+    
+    
+    // if library - check enough artwork in library
+    
+    
+    [self launchGame:source];
+}
+
+-(void)launchGame:(APArtworkSource)source
+{
+    self.gameType = source;
+    [self performSegueWithIdentifier:@"NewGameSegue" sender:nil];
+}
+
 -(IBAction)gameWasSelected:(id)sender
 {
-    [self performSegueWithIdentifier:@"NewGameSegue" sender:sender];
+    
+    UIButton *button = (UIButton *) sender;
+    NSString *text = button.titleLabel.text;
+    
+    if ([text isEqualToString:@"My Last FM Library"]) {
+        
+        self.gameType = APArtworkSourceLastFm;
+
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Last FM" message:@"Please enter your username:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        alert.tag = 12;
+        
+        [alert addButtonWithTitle:@"Go"];
+        [alert show];
+        
+    } else if ([text isEqualToString:@"My Music Library"]) {
+        [self launchGame:APArtworkSourceLibrary];
+    } else if ([text isEqualToString:@"Classic Albums"]) {
+        [self launchGame:APArtworkSourceDefault];
+    }
+
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+
+    if (alertView.tag == 12) {
+        if (buttonIndex == 1) {
+            UITextField *textfield = [alertView textFieldAtIndex:0];
+            NSLog(@"username: %@", textfield.text);
+            
+            NSString *username = textfield.text;
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:username forKey:@"LastFmUsername"];
+            
+            [self prepareGameWithSource:APArtworkSourceLastFm];
+        }
+    }
+}
+
 
 @end
