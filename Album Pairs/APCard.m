@@ -30,7 +30,7 @@
     self.front.frame = frame;
 
     self.back = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"card-back.png"]];
-    self.back.frame = frame;
+    self.back.frame = frame;    
 }
 
 - (id)initWithImage:(UIImage*)image albumId:(int)albumId title:(NSString*)title
@@ -41,7 +41,7 @@
 
     [self setArtwork:image];
 
-    UIColor *grey = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0f];
+    UIColor *grey = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0f];
     self.layer.borderColor = grey.CGColor;
     self.layer.borderWidth = 3.0;
 

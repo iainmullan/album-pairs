@@ -8,6 +8,12 @@
 
 #import "PairsCard.h"
 
+static const float FLIP_SPEED = 0.6;
+
+@interface PairsCard ()
+
+@end
+
 @implementation PairsCard
 
 - (id)initWithFrame:(CGRect)frame
@@ -22,33 +28,46 @@
 
 - (void)show
 {
-    self.layer.opacity = 1.0;
     self.shown = true;
+
+    self.layer.opacity = 1.0;
     
     [UIView transitionWithView:self
-                      duration:0.6
+                      duration:FLIP_SPEED
                        options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{ [self.back removeFromSuperview]; [self addSubview:self.front]; }
-                    completion:NULL];
+                    animations:^{
+                        [self.back removeFromSuperview];
+                        [self addSubview:self.front];
+                    }
+                    completion:^(BOOL finished){
+                    }];
     
+}
+- (void)doHighlight
+{
+    self.front.layer.opacity = 0.5;
+    
+    UIImageView *tick = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tick.png"]];
+    tick.frame = CGRectMake(30, 30, 40, 40);
+    
+    [self insertSubview:tick
+           aboveSubview:self.front];
+   
 }
 
 - (void)highlight
 {
-    self.shown = true;
-    
-    UIColor *green = [UIColor colorWithRed:0.2 green:1.0 blue:0.2 alpha:1.0f];
-    self.layer.borderColor = green.CGColor;
+    [NSTimer scheduledTimerWithTimeInterval:FLIP_SPEED target:self selector:@selector(doHighlight) userInfo:Nil repeats:NO];
+
 }
 
 - (void)hide
 {
-    self.layer.opacity = 0.3;
+
     self.shown = false;
-    //    return;
     
     [UIView transitionWithView:self
-                      duration:0.6
+                      duration:FLIP_SPEED
                        options:UIViewAnimationOptionTransitionFlipFromLeft
                     animations:^{ [self.front removeFromSuperview]; [self addSubview:self.back]; }
                     completion:NULL];
