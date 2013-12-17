@@ -83,7 +83,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Last FM" message:@"Please enter your username:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        alert.tag = 12;
+        alert.tag = 1;
         
 
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -108,7 +108,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 
-    if (alertView.tag == 12) {
+    if (alertView.tag == 1) {
         if (buttonIndex == 1) {
             UITextField *textfield = [alertView textFieldAtIndex:0];
             NSString *username = textfield.text;

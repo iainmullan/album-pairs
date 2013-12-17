@@ -201,19 +201,25 @@
 
 - (void)loadAlbumsFromDefault:(int)howMany
 {
-    NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
-    NSString * documentsPath = [resourcePath stringByAppendingPathComponent:@"ClassicAlbums"];
 
-    NSArray *filesList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentsPath error:nil];
+    NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
+    NSString * documentsPath = [resourcePath stringByAppendingPathComponent:@"names.txt"];
+    
+    NSArray *filesList = [[NSString stringWithContentsOfFile:documentsPath
+                                       encoding:NSUTF8StringEncoding
+                                          error:nil]
+             componentsSeparatedByString:@"\n"];
+    
+    filesList = [self shuffle:filesList];
     
     int i = 0;
     for(NSString* f in filesList) {
 
-        NSString *filePath = [NSString stringWithFormat:@"ClassicAlbums/%@", f];
-        
+        NSString *filePath = [NSString stringWithFormat:@"ClassicAlbums/%@.jpg", [f stringByReplacingOccurrencesOfString:@" " withString:@"_"]];
         UIImage *artworkImage = [UIImage imageNamed:filePath];
+
         NSString *title = f;
-        
+
         if ([self.game addCardFromImage:artworkImage withIndex:i title:title]) {
             i++;
         }
@@ -221,9 +227,8 @@
         if (i == howMany) {
             break;
         }
-
     }
-    
+
     [self deal:self.game.cards];
 }
 
