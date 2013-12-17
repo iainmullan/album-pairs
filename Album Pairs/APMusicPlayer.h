@@ -24,5 +24,6 @@
 
 -(void)clearPlayer;
 -(void)initPlayer;
+-(BOOL)isPlaying;
 
 @end

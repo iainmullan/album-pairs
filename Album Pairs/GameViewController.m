@@ -383,6 +383,13 @@
     
     if (button.tag == 0) {
         [self.player playOrPause];
+
+        if ([self.player isPlaying]) {
+            [button setTitle:@"Pause" forState:UIControlStateNormal];
+        } else {
+            [button setTitle:@"Play" forState:UIControlStateNormal];
+        }
+
     } else if (button.tag == 1) {
         [self.player skip];
     } else if (button.tag == 2) {

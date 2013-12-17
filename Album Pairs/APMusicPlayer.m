@@ -58,6 +58,10 @@
     }
 
 }
+-(BOOL)isPlaying
+{
+    return (self.player.playbackState == MPMusicPlaybackStatePlaying);
+}
 
 -(void)tick
 {
