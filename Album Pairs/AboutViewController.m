@@ -7,6 +7,8 @@
 //
 
 #import "AboutViewController.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface AboutViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *contentView;
@@ -47,6 +49,13 @@
 {
     
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+
+        [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"External Link"     // Event category (required)
+                                                                   action:@"Click"  // Event action (required)
+                                                                    label:[[request URL] absoluteString]        // Event label
+                                                                    value:nil] build]];    // Event value
+
+        
         [[UIApplication sharedApplication] openURL:[request URL]];
         return NO;
     }
