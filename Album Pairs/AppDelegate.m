@@ -21,9 +21,9 @@
 
     [Crashlytics startWithAPIKey: [config objectForKey:@"CrashlyticsApiKey"]];
 
-    [GAI sharedInstance].dispatchInterval = 20;
     // Initialize tracker.
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[config objectForKey:@"GoogleAnalyticsPropertyID"]];
+    [GAI sharedInstance].dispatchInterval = 20;
+    [[GAI sharedInstance] trackerWithTrackingId:[config objectForKey:@"GoogleAnalyticsPropertyID"]];
 
     return YES;
 }
