@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "APGame.h"
+#import "GAITrackedViewController.h"
 
-@interface GameViewController : UIViewController
+@interface GameViewController : GAITrackedViewController
 
 @property (nonatomic) APArtworkSource artworkSource;
 

@@ -52,6 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.screenName = @"Game Screen";
     
     self.tracker = [[GAI sharedInstance] defaultTracker];
 

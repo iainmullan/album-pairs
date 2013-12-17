@@ -33,6 +33,8 @@
     NSString *htmlText = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
 
     [self.contentView loadHTMLString:htmlText baseURL:nil];
+
+    self.screenName = @"About Screen";
 }
 
 - (void)didReceiveMemoryWarning
