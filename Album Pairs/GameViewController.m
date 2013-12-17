@@ -395,7 +395,14 @@
     } else if (button.tag == 2) {
         [self.player back];
     }
+    
 
+    NSString *buttonName = button.titleLabel.text;
+
+    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Player"     // Event category (required)
+                                                               action:@"Button Pressed"  // Event action (required)
+                                                                label:buttonName       // Event label
+                                                                value:nil] build]];    // Event value
 }
 
 - (void) drawGrid
