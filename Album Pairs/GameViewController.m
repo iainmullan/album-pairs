@@ -21,6 +21,8 @@
 #import "APMusicPlayer.h"
 #import "PairsGameDelegate.h"
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 @interface GameViewController () <PairsGameDelegate, UITableViewDataSource, UITableViewDelegate, APMusicPlayerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *gridView;
@@ -118,14 +120,7 @@
 
     [self loadAlbums];
     
-    if (self.statusLabel) {
-        [self.statusLabel removeFromSuperview];
-    } else {
-        self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
-        [self.statusLabel setTextAlignment:NSTextAlignmentCenter];
-        self.statusLabel.font=[UIFont boldSystemFontOfSize:60];
-    }
-    
+    [self.statusLabel setTextColor:UIColorFromRGB(0x49b85b)];
 }
 
 - (NSArray*)shuffle:(NSArray*)input
@@ -382,13 +377,14 @@
     UIButton *button = (UIButton*) sender;
     
     if (button.tag == 0) {
-        [self.player playOrPause];
 
         if ([self.player isPlaying]) {
-            [button setTitle:@"Pause" forState:UIControlStateNormal];
-        } else {
             [button setTitle:@"Play" forState:UIControlStateNormal];
+        } else {
+            [button setTitle:@"Pause" forState:UIControlStateNormal];
         }
+
+        [self.player playOrPause];
 
     } else if (button.tag == 1) {
         [self.player skip];
@@ -407,6 +403,8 @@
 
 - (void) drawGrid
 {
+    self.statusLabel.hidden = YES;
+
     // remove all current cards
     [[self.gridView subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -452,11 +450,11 @@
     
     if (result) {
         [self.statusLabel setText:@"YOU WIN!"];
-        [self.statusLabel setTextColor:[UIColor greenColor]];
+        [self.statusLabel setTextColor:UIColorFromRGB(0x49b85b)];
         resultString = @"WIN";
     } else {
         [self.statusLabel setText:@"GAME OVER"];
-        [self.statusLabel setTextColor:[UIColor redColor]];
+        [self.statusLabel setTextColor:UIColorFromRGB(0xd22727)];
         [self.player stop];
         resultString = @"LOSE";
     }
@@ -466,7 +464,7 @@
                                                                 label:resultString       // Event label
                                                                 value:nil] build]];    // Event value
 
-    [self.view addSubview:self.statusLabel];
+    self.statusLabel.hidden = NO;
 }
 
 
@@ -506,6 +504,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
+    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Player"     // Event category (required)
+                                                               action:@"Track Selected"  // Event action (required)
+                                                                label:[NSString stringWithFormat:@"%d", indexPath.row+1]       // Event label
+                                                                value:nil] build]];    // Event value
+
     [self.player skipToTrack:indexPath.row];
 }
 

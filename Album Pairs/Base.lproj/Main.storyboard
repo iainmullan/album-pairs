@@ -219,6 +219,14 @@
                                 <rect key="frame" x="30" y="50" width="650" height="650"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="STATUS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qm3-BC-B4d">
+                                <rect key="frame" x="103" y="289" width="505" height="171"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -232,6 +240,7 @@
                         <outlet property="playbackSlider" destination="icj-iC-syL" id="8jx-AD-221"/>
                         <outlet property="playerControls" destination="Z63-Nk-QUF" id="ade-44-LUb"/>
                         <outlet property="playlistView" destination="Jt8-IL-m7b" id="WIK-wk-U4b"/>
+                        <outlet property="statusLabel" destination="qm3-BC-B4d" id="FWd-2K-8oM"/>
                         <outlet property="timerLabel" destination="Dr8-df-1uA" id="uRk-Uz-fE6"/>
                     </connections>
                 </viewController>
