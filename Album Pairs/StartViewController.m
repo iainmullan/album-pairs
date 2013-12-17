@@ -8,6 +8,7 @@
 
 #import "StartViewController.h"
 #import "GameViewController.h"
+#import "APGame.h"
 
 @interface StartViewController ()
 

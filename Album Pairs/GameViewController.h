@@ -7,13 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef enum {
-    APArtworkSourceDefault,
-    APArtworkSourceLibrary,
-    APArtworkSourceLastFm,
-} APArtworkSource;
-
+#import "APGame.h"
 
 @interface GameViewController : UIViewController
 

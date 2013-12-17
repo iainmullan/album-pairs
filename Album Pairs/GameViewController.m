@@ -13,6 +13,8 @@
 
 #import "GameViewController.h"
 #import "LastFm.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 #import "APCard.h"
 #import "APGame.h"
 #import "APMusicPlayerDelegate.h"
@@ -41,6 +43,8 @@
 
 @property (strong, nonatomic) APGame *game;
 
+@property (strong, nonatomic) id<GAITracker> tracker;
+
 @end
 
 @implementation GameViewController
@@ -48,6 +52,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.tracker = [[GAI sharedInstance] defaultTracker];
+
     
     if (self.artworkSource == APArtworkSourceLibrary) {
         self.player = [[APMusicPlayer alloc] init];
@@ -83,6 +90,14 @@
 
 - (void)newGame
 {
+
+    NSString *gameType = [APGame gameTypeToString:self.artworkSource];
+    
+    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"New Game"     // Event category (required)
+                                                          action:@"Game Type"  // Event action (required)
+                                                           label:gameType       // Event label
+                                                           value:nil] build]];    // Event value
+    
 
     if (self.game) {
         // cancel the previous game's timer

@@ -10,7 +10,12 @@
 		ADDD83322614433EBA99A9D3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D11313F6B04344BC61F67A /* libPods.a */; };
 		AE1AA05F185BA3EC0007AE5A /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1AA05E185BA3EC0007AE5A /* StartViewController.m */; };
 		AE1AA062185C879A0007AE5A /* APMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1AA061185C879A0007AE5A /* APMusicPlayer.m */; };
-		AE1AA0DC185CDA140007AE5A /* ClassicAlbums in Resources */ = {isa = PBXBuildFile; fileRef = AE1AA0DB185CDA140007AE5A /* ClassicAlbums */; };
+		AE23259D185F785A002D308D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE23259C185F785A002D308D /* Crashlytics.framework */; };
+		AE23267A185F8960002D308D /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = AE232679185F8960002D308D /* tick.png */; };
+		AE23267F185F95E2002D308D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23267D185F95E2002D308D /* background.png */; };
+		AE232680185F95E2002D308D /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23267E185F95E2002D308D /* background@2x.png */; };
+		AE3291F5186093FE00C2F2FF /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = AE3291F4186093FE00C2F2FF /* about.html */; };
+		AE3291F81860947300C2F2FF /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3291F71860947300C2F2FF /* AboutViewController.m */; };
 		AE5B98D41853527000C7F8D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D31853527000C7F8D1 /* Foundation.framework */; };
 		AE5B98D61853527000C7F8D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D51853527000C7F8D1 /* CoreGraphics.framework */; };
 		AE5B98D81853527000C7F8D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D71853527000C7F8D1 /* UIKit.framework */; };
@@ -29,6 +34,13 @@
 		AE5B99111853B53000C7F8D1 /* card-back.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5B99101853B53000C7F8D1 /* card-back.png */; };
 		AE5B99131854EA3900C7F8D1 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B99121854EA3900C7F8D1 /* GameKit.framework */; };
 		AE8382AA1857281000E06C10 /* PairsCard.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8382A91857281000E06C10 /* PairsCard.m */; };
+		AE8C97211860B84100B4A207 /* names.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE8C97201860B84100B4A207 /* names.txt */; };
+		AE8C97231860BAB600B4A207 /* ClassicAlbums in Resources */ = {isa = PBXBuildFile; fileRef = AE8C97221860BAB600B4A207 /* ClassicAlbums */; };
+		AE8C97FA1860C6BF00B4A207 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE23266B185F80F9002D308D /* CoreData.framework */; };
+		AE8C97FB1860C6C700B4A207 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE23266D185F8101002D308D /* SystemConfiguration.framework */; };
+		AE8C97FC1860C6DA00B4A207 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AE23266F185F810C002D308D /* libz.dylib */; };
+		AE8C982D1860CB2700B4A207 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C982B1860CAC200B4A207 /* libGoogleAnalyticsServices.a */; };
+		AE8C982F1860CB5000B4A207 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C982E1860CB5000B4A207 /* AdSupport.framework */; };
 		AEDEDB2B185B937700DD1127 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEDEDB2A185B937700DD1127 /* Config.plist */; };
 		AEE3F281185666AD005B28AA /* APGame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE3F280185666AD005B28AA /* APGame.m */; };
 /* End PBXBuildFile section */
@@ -50,7 +62,16 @@
 		AE1AA060185C879A0007AE5A /* APMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APMusicPlayer.h; sourceTree = "<group>"; };
 		AE1AA061185C879A0007AE5A /* APMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APMusicPlayer.m; sourceTree = "<group>"; };
 		AE1AA064185CBE300007AE5A /* APMusicPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APMusicPlayerDelegate.h; sourceTree = "<group>"; };
-		AE1AA0DB185CDA140007AE5A /* ClassicAlbums */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ClassicAlbums; sourceTree = "<group>"; };
+		AE23259C185F785A002D308D /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		AE23266B185F80F9002D308D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		AE23266D185F8101002D308D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AE23266F185F810C002D308D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		AE232679185F8960002D308D /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tick.png; path = "Album Pairs/Resources/tick.png"; sourceTree = "<group>"; };
+		AE23267D185F95E2002D308D /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = ../../../Dropbox/design/app/album_pairs/background.png; sourceTree = "<group>"; };
+		AE23267E185F95E2002D308D /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background@2x.png"; path = "../../../Dropbox/design/app/album_pairs/background@2x.png"; sourceTree = "<group>"; };
+		AE3291F4186093FE00C2F2FF /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
+		AE3291F61860947300C2F2FF /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		AE3291F71860947300C2F2FF /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		AE5B98D01853527000C7F8D1 /* Album Pairs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Album Pairs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5B98D31853527000C7F8D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE5B98D51853527000C7F8D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -76,6 +97,16 @@
 		AE5B99121854EA3900C7F8D1 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		AE8382A81857281000E06C10 /* PairsCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PairsCard.h; sourceTree = "<group>"; };
 		AE8382A91857281000E06C10 /* PairsCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PairsCard.m; sourceTree = "<group>"; };
+		AE8C97201860B84100B4A207 /* names.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = names.txt; sourceTree = "<group>"; };
+		AE8C97221860BAB600B4A207 /* ClassicAlbums */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ClassicAlbums; sourceTree = "<group>"; };
+		AE8C98251860CA5000B4A207 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = GoogleAnalyticsServices/GoogleAnalytics/Library/GAI.h; sourceTree = "<group>"; };
+		AE8C98261860CA5000B4A207 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = GoogleAnalyticsServices/GoogleAnalytics/Library/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		AE8C98271860CA5000B4A207 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIFields.h; path = GoogleAnalyticsServices/GoogleAnalytics/Library/GAIFields.h; sourceTree = "<group>"; };
+		AE8C98281860CA5000B4A207 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = GoogleAnalyticsServices/GoogleAnalytics/Library/GAILogger.h; sourceTree = "<group>"; };
+		AE8C98291860CA5000B4A207 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = GoogleAnalyticsServices/GoogleAnalytics/Library/GAITrackedViewController.h; sourceTree = "<group>"; };
+		AE8C982A1860CA5000B4A207 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = GoogleAnalyticsServices/GoogleAnalytics/Library/GAITracker.h; sourceTree = "<group>"; };
+		AE8C982B1860CAC200B4A207 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = GoogleAnalyticsServices/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		AE8C982E1860CB5000B4A207 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		AEDEDB2A185B937700DD1127 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		AEE3F27F185666AD005B28AA /* APGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APGame.h; sourceTree = "<group>"; };
 		AEE3F280185666AD005B28AA /* APGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APGame.m; sourceTree = "<group>"; };
@@ -88,10 +119,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE8C982F1860CB5000B4A207 /* AdSupport.framework in Frameworks */,
+				AE8C97FC1860C6DA00B4A207 /* libz.dylib in Frameworks */,
+				AE8C97FB1860C6C700B4A207 /* SystemConfiguration.framework in Frameworks */,
+				AE8C97FA1860C6BF00B4A207 /* CoreData.framework in Frameworks */,
 				AE5B98D61853527000C7F8D1 /* CoreGraphics.framework in Frameworks */,
+				AE8C982D1860CB2700B4A207 /* libGoogleAnalyticsServices.a in Frameworks */,
 				AE5B98D81853527000C7F8D1 /* UIKit.framework in Frameworks */,
 				AE5B98D41853527000C7F8D1 /* Foundation.framework in Frameworks */,
 				ADDD83322614433EBA99A9D3 /* libPods.a in Frameworks */,
+				AE23259D185F785A002D308D /* Crashlytics.framework in Frameworks */,
 				AE5B99131854EA3900C7F8D1 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,7 +149,18 @@
 		AE5B98C71853527000C7F8D1 = {
 			isa = PBXGroup;
 			children = (
-				AE1AA0DB185CDA140007AE5A /* ClassicAlbums */,
+				AE8C98251860CA5000B4A207 /* GAI.h */,
+				AE8C98261860CA5000B4A207 /* GAIDictionaryBuilder.h */,
+				AE8C98271860CA5000B4A207 /* GAIFields.h */,
+				AE8C98281860CA5000B4A207 /* GAILogger.h */,
+				AE8C98291860CA5000B4A207 /* GAITrackedViewController.h */,
+				AE8C982A1860CA5000B4A207 /* GAITracker.h */,
+				AE8C97221860BAB600B4A207 /* ClassicAlbums */,
+				AE8C97201860B84100B4A207 /* names.txt */,
+				AE3291F4186093FE00C2F2FF /* about.html */,
+				AE23267D185F95E2002D308D /* background.png */,
+				AE23267E185F95E2002D308D /* background@2x.png */,
+				AE232679185F8960002D308D /* tick.png */,
 				AEDEDB2A185B937700DD1127 /* Config.plist */,
 				AE5B99101853B53000C7F8D1 /* card-back.png */,
 				AE5B98D91853527000C7F8D1 /* Album Pairs */,
@@ -135,6 +183,12 @@
 		AE5B98D21853527000C7F8D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE8C982E1860CB5000B4A207 /* AdSupport.framework */,
+				AE8C982B1860CAC200B4A207 /* libGoogleAnalyticsServices.a */,
+				AE23266F185F810C002D308D /* libz.dylib */,
+				AE23266D185F8101002D308D /* SystemConfiguration.framework */,
+				AE23266B185F80F9002D308D /* CoreData.framework */,
+				AE23259C185F785A002D308D /* Crashlytics.framework */,
 				AE5B99121854EA3900C7F8D1 /* GameKit.framework */,
 				AE5B98D31853527000C7F8D1 /* Foundation.framework */,
 				AE5B98D51853527000C7F8D1 /* CoreGraphics.framework */,
@@ -154,6 +208,8 @@
 				AE5B98E21853527000C7F8D1 /* AppDelegate.h */,
 				AE5B98E31853527000C7F8D1 /* AppDelegate.m */,
 				AE5B98E51853527000C7F8D1 /* Main.storyboard */,
+				AE3291F61860947300C2F2FF /* AboutViewController.h */,
+				AE3291F71860947300C2F2FF /* AboutViewController.m */,
 				AE5B98E81853527000C7F8D1 /* GameViewController.h */,
 				AE5B98E91853527000C7F8D1 /* GameViewController.m */,
 				AE1AA060185C879A0007AE5A /* APMusicPlayer.h */,
@@ -220,6 +276,7 @@
 				AE5B98CD1853527000C7F8D1 /* Frameworks */,
 				AE5B98CE1853527000C7F8D1 /* Resources */,
 				507F22F5A4E649A69C8C51DC /* Copy Pods Resources */,
+				AE23259B185F781F002D308D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -295,11 +352,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE5B99111853B53000C7F8D1 /* card-back.png in Resources */,
+				AE232680185F95E2002D308D /* background@2x.png in Resources */,
+				AE23267F185F95E2002D308D /* background.png in Resources */,
 				AE5B98EC1853527000C7F8D1 /* Images.xcassets in Resources */,
 				AE5B98DE1853527000C7F8D1 /* InfoPlist.strings in Resources */,
-				AE1AA0DC185CDA140007AE5A /* ClassicAlbums in Resources */,
+				AE23267A185F8960002D308D /* tick.png in Resources */,
+				AE3291F5186093FE00C2F2FF /* about.html in Resources */,
+				AE8C97211860B84100B4A207 /* names.txt in Resources */,
 				AEDEDB2B185B937700DD1127 /* Config.plist in Resources */,
 				AE5B98E71853527000C7F8D1 /* Main.storyboard in Resources */,
+				AE8C97231860BAB600B4A207 /* ClassicAlbums in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +406,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		AE23259B185F781F002D308D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 77e24acb19491869180e64453bd7514475e79c61\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -351,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE3291F81860947300C2F2FF /* AboutViewController.m in Sources */,
 				AE5B98EA1853527000C7F8D1 /* GameViewController.m in Sources */,
 				AE1AA062185C879A0007AE5A /* APMusicPlayer.m in Sources */,
 				AE8382AA1857281000E06C10 /* PairsCard.m in Sources */,
@@ -490,10 +566,18 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/iain/code/ios/album-pairs",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Album Pairs/Album Pairs-Prefix.pch";
 				INFOPLIST_FILE = "Album Pairs/Album Pairs-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/iain/code/ios/album-pairs/GoogleAnalyticsServices",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -509,10 +593,18 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/iain/code/ios/album-pairs",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Album Pairs/Album Pairs-Prefix.pch";
 				INFOPLIST_FILE = "Album Pairs/Album Pairs-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/iain/code/ios/album-pairs/GoogleAnalyticsServices",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;

@@ -10,12 +10,20 @@
 #import "APCard.h"
 #import "PairsGameDelegate.h"
 
+typedef enum {
+    APArtworkSourceDefault,
+    APArtworkSourceLibrary,
+    APArtworkSourceLastFm,
+} APArtworkSource;
+
 static const int WIDTH = 6;
 static const int TIME_LIMIT= 180;
 
 @interface APGame : NSObject
 
 @property (nonatomic) id<PairsGameDelegate> delegate;
+
++ (NSString*)gameTypeToString:(APArtworkSource)gameType;
 
 - (void)startTimer;
 - (void)stopTimer;

@@ -152,4 +152,25 @@
     return imageHash;
 }
 
+
++ (NSString*)gameTypeToString:(APArtworkSource)gameType {
+    NSString *result = nil;
+    
+    switch(gameType) {
+        case APArtworkSourceDefault:
+            result = @"Classic";
+            break;
+        case APArtworkSourceLastFm:
+            result = @"LastFm";
+            break;
+        case APArtworkSourceLibrary:
+            result = @"Library";
+            break;
+        default:
+            [NSException raise:NSGenericException format:@"Unexpected gameType"];
+    }
+    
+    return result;
+}
+
 @end
