@@ -17,7 +17,7 @@ typedef enum {
 } APArtworkSource;
 
 static const int WIDTH = 6;
-static const int TIME_LIMIT= 180;
+static const int TIME_LIMIT= 90;
 
 @interface APGame : NSObject
 
