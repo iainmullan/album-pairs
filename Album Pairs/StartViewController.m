@@ -9,10 +9,15 @@
 #import "StartViewController.h"
 #import "GameViewController.h"
 #import "APGame.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface StartViewController ()
 
 @property APArtworkSource gameType;
+@property (strong, nonatomic) id<GAITracker> tracker;
+
+@property int gameCount;
 
 @end
 
@@ -23,6 +28,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        self.gameCount = 0;
     }
     return self;
 }
@@ -32,6 +39,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.screenName = @"Start Screen";
+    self.tracker = [[GAI sharedInstance] defaultTracker];
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
 }
@@ -66,6 +74,13 @@
 -(void)launchGame:(APArtworkSource)source
 {
     self.gameType = source;
+    self.gameCount++;
+
+    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Game"     // Event category (required)
+                                                               action:@"Game Type"  // Event action (required)
+                                                                label:[APGame gameTypeToString:self.gameType]       // Event label
+                                                                value:nil] build]];    // Event value
+    
     [self performSegueWithIdentifier:@"NewGameSegue" sender:nil];
 }
 

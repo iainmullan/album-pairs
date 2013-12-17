@@ -433,15 +433,24 @@
 // game over
 -(void)gameDidEndWithResult:(BOOL)result
 {
+
+    NSString *resultString = nil;
     
     if (result) {
         [self.statusLabel setText:@"YOU WIN!"];
         [self.statusLabel setTextColor:[UIColor greenColor]];
+        resultString = @"WIN";
     } else {
         [self.statusLabel setText:@"GAME OVER"];
         [self.statusLabel setTextColor:[UIColor redColor]];
         [self.player stop];
+        resultString = @"LOSE";
     }
+
+    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Game"     // Event category (required)
+                                                               action:@"Game Over"  // Event action (required)
+                                                                label:resultString       // Event label
+                                                                value:nil] build]];    // Event value
 
     [self.view addSubview:self.statusLabel];
 }
