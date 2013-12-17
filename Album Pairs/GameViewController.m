@@ -21,7 +21,7 @@
 #import "APMusicPlayer.h"
 #import "PairsGameDelegate.h"
 
-@interface GameViewController () <PairsGameDelegate, UITableViewDataSource, UITableViewDelegate, APMusicPlayerDelegate>
+@interface GameViewController () <PairsGameDelegate, UITableViewDataSource, UITableViewDelegate, APMusicPlayerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIView *gridView;
 @property (strong, nonatomic) NSMutableArray *foundCards;
@@ -55,7 +55,6 @@
     self.screenName = @"Game Screen";
     
     self.tracker = [[GAI sharedInstance] defaultTracker];
-
     
     if (self.artworkSource == APArtworkSourceLibrary) {
         self.player = [[APMusicPlayer alloc] init];
@@ -185,22 +184,22 @@
 - (void)loadAlbums
 {
 
-//    #if (TARGET_IPHONE_SIMULATOR)
-//        self.artworkSource = APArtworkSourceLastFm;
-//    #endif
-
+    BOOL success = NO;
+    
+    self.playerControls.hidden = YES;
+    
     if (self.artworkSource == APArtworkSourceLibrary) {
-        [self loadAlbumsFromLibrary:self.game.pairCount];
+        success = [self loadAlbumsFromLibrary:self.game.pairCount];
         self.playerControls.hidden = NO;
     } else if (self.artworkSource == APArtworkSourceLastFm) {
         [self loadAlbumsFromLastFm:self.game.pairCount];
     } else {
-        [self loadAlbumsFromDefault:self.game.pairCount];
+        success = [self loadAlbumsFromDefault:self.game.pairCount];
     }
 
 }
 
-- (void)loadAlbumsFromDefault:(int)howMany
+- (BOOL)loadAlbumsFromDefault:(int)howMany
 {
 
     NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
@@ -231,9 +230,11 @@
     }
 
     [self deal:self.game.cards];
+    
+    return YES;
 }
 
-- (void)loadAlbumsFromLibrary:(int)howMany
+- (BOOL)loadAlbumsFromLibrary:(int)howMany
 {
 
     self.songs = [[NSMutableArray alloc] init];
@@ -246,8 +247,6 @@
 
     int i = 0;
     for(NSDictionary *album in albums) {
-
-//        [self queueSong:(MPMediaItem*)album];
 
         MPMediaItemArtwork *artwork = [album valueForKey:MPMediaItemPropertyArtwork];
         UIImage *artworkImage = [artwork imageWithSize: CGSizeMake (CARD_SIZE, CARD_SIZE)];
@@ -266,10 +265,16 @@
         if (i == howMany) {
             break;
         }
-        
+
+    }
+    
+    if (i < howMany) {
+        [self gameErrorWithMessage:@"Sorry, there isn't enough artwork in your Library. Try the Classic Albums mode!"];
+        return NO;
     }
 
     [self deal:self.game.cards];
+    return YES;
 }
 
 
@@ -312,7 +317,10 @@
         [self deal:self.game.cards];
 
     } failureHandler:^(NSError *error) {
-        NSLog(@"error: %@", error);
+
+        [self gameErrorWithMessage:@"Sorry, there was a problem connecting to your Last FM account. Try the Classic Albums mode!"];
+
+        NSLog(@"LastFM error: %@", error);
     }];
 
 }
@@ -502,5 +510,23 @@
         self.playbackSlider.value = position;
     }
 }
+
+-(void)gameErrorWithMessage:(NSString*)message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    alert.tag = 2;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if (alertView.tag == 2) {
+        if (buttonIndex == 0) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }
+}
+
 
 @end
