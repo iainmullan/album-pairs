@@ -215,6 +215,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.1396484375" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qsH-IR-Whz">
+                                <rect key="frame" x="30" y="50" width="650" height="650"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -223,6 +227,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="gridView" destination="qsH-IR-Whz" id="f7E-gf-wVv"/>
                         <outlet property="playPauseButton" destination="BFm-CU-H2m" id="XdQ-7v-bkv"/>
                         <outlet property="playbackSlider" destination="icj-iC-syL" id="8jx-AD-221"/>
                         <outlet property="playerControls" destination="Z63-Nk-QUF" id="ade-44-LUb"/>
@@ -233,6 +238,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="420" y="-2365"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="qcj-rB-sDt">
+            <objects>
+                <viewController id="Bcz-VX-w16" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iIr-Nr-IhR"/>
+                        <viewControllerLayoutGuide type="bottom" id="I2S-dH-hO7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W21-eW-TW5">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ab3-QU-ECv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -23,7 +23,7 @@
 
 @interface GameViewController () <PairsGameDelegate, UITableViewDataSource, UITableViewDelegate, APMusicPlayerDelegate, UIAlertViewDelegate>
 
-@property (strong, nonatomic) UIView *gridView;
+@property (strong, nonatomic) IBOutlet UIView *gridView;
 @property (strong, nonatomic) NSMutableArray *foundCards;
 @property (strong, nonatomic) NSMutableArray *songs;
 @property (strong, nonatomic) MPMediaItemCollection *playlist;
@@ -407,17 +407,9 @@
 
 - (void) drawGrid
 {
-
-    if (self.gridView) {
-        [self.gridView removeFromSuperview];
-    }
-    
-    int gridArea = (CARD_SIZE * WIDTH) + (CARD_MARGIN * WIDTH-1);
-    CGRect gridFrame = CGRectMake(30, 50, gridArea, gridArea);
-
-    self.gridView = [[UIView alloc] initWithFrame:gridFrame];
-    
-    [self.view addSubview:self.gridView];
+    // remove all current cards
+    [[self.gridView subviews]
+     makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
 + (CGRect) frameForPositionX:(int) x y:(int)y
