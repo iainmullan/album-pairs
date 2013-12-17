@@ -15,6 +15,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
+    NSDictionary *config = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+
+    [Crashlytics startWithAPIKey: [config objectForKey:@"CrashlyticsApiKey"]];
+
     return YES;
 }
 							

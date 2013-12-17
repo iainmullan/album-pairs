@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>GoogleAnalyticsPropertyID</key>
+	<string>UA-323014-35</string>
+	<key>CrashlyticsApiKey</key>
+	<string>77e24acb19491869180e64453bd7514475e79c61</string>
 	<key>LastFmUsername</key>
 	<string>ebotunes</string>
 	<key>LastFmApiKey</key>
