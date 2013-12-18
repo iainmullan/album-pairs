@@ -179,22 +179,20 @@
 - (void)loadAlbums
 {
 
-    BOOL success = NO;
-    
     self.playerControls.hidden = YES;
     
     if (self.artworkSource == APArtworkSourceLibrary) {
-        success = [self loadAlbumsFromLibrary:self.game.pairCount];
+        [self loadAlbumsFromLibrary:self.game.pairCount];
         self.playerControls.hidden = NO;
     } else if (self.artworkSource == APArtworkSourceLastFm) {
         [self loadAlbumsFromLastFm:self.game.pairCount];
     } else {
-        success = [self loadAlbumsFromDefault:self.game.pairCount];
+        [self loadAlbumsFromDefault:self.game.pairCount];
     }
 
 }
 
-- (BOOL)loadAlbumsFromDefault:(int)howMany
+- (void)loadAlbumsFromDefault:(int)howMany
 {
 
     NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
@@ -226,10 +224,9 @@
 
     [self deal:self.game.cards];
     
-    return YES;
 }
 
-- (BOOL)loadAlbumsFromLibrary:(int)howMany
+- (void)loadAlbumsFromLibrary:(int)howMany
 {
 
     self.songs = [[NSMutableArray alloc] init];
@@ -265,11 +262,10 @@
     
     if (i < howMany) {
         [self gameErrorWithMessage:@"Sorry, there isn't enough artwork in your Library. Try the Classic Albums mode!"];
-        return NO;
+    } else {
+        [self deal:self.game.cards];
     }
 
-    [self deal:self.game.cards];
-    return YES;
 }
 
 

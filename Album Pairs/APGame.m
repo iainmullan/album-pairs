@@ -14,6 +14,7 @@
 
 -(APGame*)init
 {
+    self = [super init];
     
     self.isGameOver = false;
     self.cards = [[NSMutableArray alloc] init];
