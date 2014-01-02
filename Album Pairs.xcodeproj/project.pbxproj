@@ -40,7 +40,7 @@
 		AE8C982F1860CB5000B4A207 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C982E1860CB5000B4A207 /* AdSupport.framework */; };
 		AE8C986C1861022D00B4A207 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AE23266F185F810C002D308D /* libz.dylib */; };
 		AE8C986D1861026900B4A207 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C9863186101E600B4A207 /* libGoogleAnalyticsServices.a */; };
-		AE8C986F1861027B00B4A207 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C986E1861027B00B4A207 /* libPods.a */; };
+		AE9B86761875ED2800474E33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9B86751875ED2800474E33 /* libPods.a */; };
 		AEDEDB2B185B937700DD1127 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEDEDB2A185B937700DD1127 /* Config.plist */; };
 		AEE3F281185666AD005B28AA /* APGame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE3F280185666AD005B28AA /* APGame.m */; };
 /* End PBXBuildFile section */
@@ -118,7 +118,9 @@
 		AE8C9862186101E600B4A207 /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
 		AE8C9863186101E600B4A207 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		AE8C9864186101E600B4A207 /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
-		AE8C986E1861027B00B4A207 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		AE9B86711875ED0100474E33 /* libPods-LastFm.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "libPods-LastFm.a"; path = "Pods/build/Debug-iphoneos/libPods-LastFm.a"; sourceTree = "<group>"; };
+		AE9B86731875ED0E00474E33 /* libPods-KissXML.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "libPods-KissXML.a"; path = "Pods/build/Debug-iphoneos/libPods-KissXML.a"; sourceTree = "<group>"; };
+		AE9B86751875ED2800474E33 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AEDEDB2A185B937700DD1127 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		AEE3F27F185666AD005B28AA /* APGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APGame.h; sourceTree = "<group>"; };
 		AEE3F280185666AD005B28AA /* APGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APGame.m; sourceTree = "<group>"; };
@@ -131,7 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE8C986F1861027B00B4A207 /* libPods.a in Frameworks */,
+				AE9B86761875ED2800474E33 /* libPods.a in Frameworks */,
 				AE8C986C1861022D00B4A207 /* libz.dylib in Frameworks */,
 				AE8C986D1861026900B4A207 /* libGoogleAnalyticsServices.a in Frameworks */,
 				AE8C982F1860CB5000B4A207 /* AdSupport.framework in Frameworks */,
@@ -190,7 +192,9 @@
 		AE5B98D21853527000C7F8D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AE8C986E1861027B00B4A207 /* libPods.a */,
+				AE9B86751875ED2800474E33 /* libPods.a */,
+				AE9B86731875ED0E00474E33 /* libPods-KissXML.a */,
+				AE9B86711875ED0100474E33 /* libPods-LastFm.a */,
 				AE8C982E1860CB5000B4A207 /* AdSupport.framework */,
 				AE23266F185F810C002D308D /* libz.dylib */,
 				AE23266D185F8101002D308D /* SystemConfiguration.framework */,
