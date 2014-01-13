@@ -286,6 +286,11 @@
         
         NSArray *albums = [self shuffle:result];
         
+        if ([albums count] < howMany) {
+            [self gameErrorWithMessage:@"Sorry, there isn't enough artwork in your Last FM Library. Try the Classic Albums mode!"];
+            return;
+        }
+        
         NSRange theRange;
         theRange.location = 0;
         theRange.length = howMany;
