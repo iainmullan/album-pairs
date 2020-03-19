@@ -36,7 +36,7 @@
 
     [self.contentView loadHTMLString:htmlText baseURL:nil];
 
-    self.screenName = @"About Screen";
+//    self.screenName = @"About Screen";
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,10 +50,10 @@
     
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
 
-        [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"External Link"     // Event category (required)
-                                                                   action:@"Click"  // Event action (required)
-                                                                    label:[[request URL] absoluteString]        // Event label
-                                                                    value:nil] build]];    // Event value
+//        [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"External Link"     // Event category (required)
+//                                                                   action:@"Click"  // Event action (required)
+//                                                                    label:[[request URL] absoluteString]        // Event label
+//                                                                    value:nil] build]];    // Event value
 
         
         [[UIApplication sharedApplication] openURL:[request URL]];

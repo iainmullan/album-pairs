@@ -13,8 +13,6 @@
 
 #import "GameViewController.h"
 #import "LastFm.h"
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
 #import "APCard.h"
 #import "APGame.h"
 #import "APMusicPlayerDelegate.h"
@@ -45,7 +43,7 @@
 
 @property (strong, nonatomic) APGame *game;
 
-@property (strong, nonatomic) id<GAITracker> tracker;
+//@property (strong, nonatomic) id<GAITracker> tracker;
 
 @end
 
@@ -54,9 +52,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.screenName = @"Game Screen";
+//    self.screenName = @"Game Screen";
     
-    self.tracker = [[GAI sharedInstance] defaultTracker];
+//    self.tracker = [[GAI sharedInstance] defaultTracker];
     
     if (self.artworkSource == APArtworkSourceLibrary) {
         self.player = [[APMusicPlayer alloc] init];
@@ -95,10 +93,10 @@
 
     NSString *gameType = [APGame gameTypeToString:self.artworkSource];
     
-    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"New Game"     // Event category (required)
-                                                          action:@"Game Type"  // Event action (required)
-                                                           label:gameType       // Event label
-                                                           value:nil] build]];    // Event value
+//    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"New Game"     // Event category (required)
+//                                                          action:@"Game Type"  // Event action (required)
+//                                                           label:gameType       // Event label
+//                                                           value:nil] build]];    // Event value
     
 
     if (self.game) {
@@ -397,10 +395,10 @@
 
     NSString *buttonName = button.titleLabel.text;
 
-    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Player"     // Event category (required)
-                                                               action:@"Button Pressed"  // Event action (required)
-                                                                label:buttonName       // Event label
-                                                                value:nil] build]];    // Event value
+//    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Player"     // Event category (required)
+//                                                               action:@"Button Pressed"  // Event action (required)
+//                                                                label:buttonName       // Event label
+//                                                                value:nil] build]];    // Event value
 }
 
 - (void) drawGrid
@@ -461,10 +459,10 @@
         resultString = @"LOSE";
     }
 
-    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Game"     // Event category (required)
-                                                               action:@"Game Over"  // Event action (required)
-                                                                label:resultString       // Event label
-                                                                value:nil] build]];    // Event value
+//    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Game"     // Event category (required)
+//                                                               action:@"Game Over"  // Event action (required)
+//                                                                label:resultString       // Event label
+//                                                                value:nil] build]];    // Event value
 
     self.statusLabel.hidden = NO;
 }
@@ -507,10 +505,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Player"     // Event category (required)
-                                                               action:@"Track Selected"  // Event action (required)
-                                                                label:[NSString stringWithFormat:@"%d", indexPath.row+1]       // Event label
-                                                                value:nil] build]];    // Event value
+//    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Player"     // Event category (required)
+//                                                               action:@"Track Selected"  // Event action (required)
+//                                                                label:[NSString stringWithFormat:@"%d", indexPath.row+1]       // Event label
+//                                                                value:nil] build]];    // Event value
 
     [self.player skipToTrack:indexPath.row];
 }

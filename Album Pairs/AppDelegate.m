@@ -7,8 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "GAI.h"
-#import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate
 
@@ -16,14 +14,8 @@
 {
     // Override point for customization after application launch.
     
-    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
-    NSDictionary *config = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-
-    [Crashlytics startWithAPIKey: [config objectForKey:@"CrashlyticsApiKey"]];
-
-    // Initialize tracker.
-    [GAI sharedInstance].dispatchInterval = 20;
-    [[GAI sharedInstance] trackerWithTrackingId:[config objectForKey:@"GoogleAnalyticsPropertyID"]];
+//    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
+//    NSDictionary *config = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
 
     return YES;
 }

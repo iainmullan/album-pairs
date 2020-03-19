@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8BFC7E9AE0E565EB51DE6C75 /* Pods_Album_Pairs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 856522C264A154D4574AE422 /* Pods_Album_Pairs.framework */; };
 		AE1AA05F185BA3EC0007AE5A /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1AA05E185BA3EC0007AE5A /* StartViewController.m */; };
 		AE1AA062185C879A0007AE5A /* APMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1AA061185C879A0007AE5A /* APMusicPlayer.m */; };
-		AE23259D185F785A002D308D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE23259C185F785A002D308D /* Crashlytics.framework */; };
+		AE1AECE51AFA204F00C33A3C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE23259C185F785A002D308D /* Crashlytics.framework */; };
 		AE23267A185F8960002D308D /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = AE232679185F8960002D308D /* tick.png */; };
-		AE23267F185F95E2002D308D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23267D185F95E2002D308D /* background.png */; };
-		AE232680185F95E2002D308D /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23267E185F95E2002D308D /* background@2x.png */; };
+		AE2A70E42421539800C948C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE2A70E32421539800C948C2 /* Assets.xcassets */; };
 		AE3291F5186093FE00C2F2FF /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = AE3291F4186093FE00C2F2FF /* about.html */; };
 		AE3291F81860947300C2F2FF /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3291F71860947300C2F2FF /* AboutViewController.m */; };
 		AE5B98D41853527000C7F8D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5B98D31853527000C7F8D1 /* Foundation.framework */; };
@@ -39,7 +39,8 @@
 		AE8C97FB1860C6C700B4A207 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE23266D185F8101002D308D /* SystemConfiguration.framework */; };
 		AE8C982F1860CB5000B4A207 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C982E1860CB5000B4A207 /* AdSupport.framework */; };
 		AE8C986C1861022D00B4A207 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AE23266F185F810C002D308D /* libz.dylib */; };
-		AE8C986D1861026900B4A207 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C9863186101E600B4A207 /* libGoogleAnalyticsServices.a */; };
+		AE953FA6242149B80055E1D5 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = AE953FA4242149B80055E1D5 /* background.png */; };
+		AE953FA7242149B80055E1D5 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE953FA5242149B80055E1D5 /* background@2x.png */; };
 		AEC90A29188560B900A48F97 /* player_buttons in Resources */ = {isa = PBXBuildFile; fileRef = AEC90A28188560B900A48F97 /* player_buttons */; };
 		AEDEDB2B185B937700DD1127 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEDEDB2A185B937700DD1127 /* Config.plist */; };
 		AEE3F281185666AD005B28AA /* APGame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE3F280185666AD005B28AA /* APGame.m */; };
@@ -56,7 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		18D11313F6B04344BC61F67A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		01B9B33182A63E1928BEC3E9 /* Pods-Album Pairs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Album Pairs.release.xcconfig"; path = "Pods/Target Support Files/Pods-Album Pairs/Pods-Album Pairs.release.xcconfig"; sourceTree = "<group>"; };
+		856522C264A154D4574AE422 /* Pods_Album_Pairs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Album_Pairs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE1AA05D185BA3EC0007AE5A /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		AE1AA05E185BA3EC0007AE5A /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		AE1AA060185C879A0007AE5A /* APMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APMusicPlayer.h; sourceTree = "<group>"; };
@@ -67,8 +69,7 @@
 		AE23266D185F8101002D308D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AE23266F185F810C002D308D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		AE232679185F8960002D308D /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tick.png; path = "Album Pairs/Resources/tick.png"; sourceTree = "<group>"; };
-		AE23267D185F95E2002D308D /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = ../../../Dropbox/design/app/album_pairs/background.png; sourceTree = "<group>"; };
-		AE23267E185F95E2002D308D /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background@2x.png"; path = "../../../Dropbox/design/app/album_pairs/background@2x.png"; sourceTree = "<group>"; };
+		AE2A70E32421539800C948C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE3291F4186093FE00C2F2FF /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
 		AE3291F61860947300C2F2FF /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		AE3291F71860947300C2F2FF /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
@@ -118,12 +119,14 @@
 		AE8C9862186101E600B4A207 /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
 		AE8C9863186101E600B4A207 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		AE8C9864186101E600B4A207 /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
+		AE953FA4242149B80055E1D5 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		AE953FA5242149B80055E1D5 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		AEC90A28188560B900A48F97 /* player_buttons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = player_buttons; sourceTree = "<group>"; };
 		AEDEDB2A185B937700DD1127 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		AEE3F27F185666AD005B28AA /* APGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APGame.h; sourceTree = "<group>"; };
 		AEE3F280185666AD005B28AA /* APGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APGame.m; sourceTree = "<group>"; };
 		AEE3F28218566EFD005B28AA /* PairsGameDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PairsGameDelegate.h; sourceTree = "<group>"; };
-		BB3AE41C54ED46F1A96510EF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		BCB10865B76261A00A70C9D9 /* Pods-Album Pairs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Album Pairs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Album Pairs/Pods-Album Pairs.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,15 +135,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE8C986C1861022D00B4A207 /* libz.dylib in Frameworks */,
-				AE8C986D1861026900B4A207 /* libGoogleAnalyticsServices.a in Frameworks */,
 				AE8C982F1860CB5000B4A207 /* AdSupport.framework in Frameworks */,
 				AE8C97FB1860C6C700B4A207 /* SystemConfiguration.framework in Frameworks */,
+				AE1AECE51AFA204F00C33A3C /* Crashlytics.framework in Frameworks */,
 				AE8C97FA1860C6BF00B4A207 /* CoreData.framework in Frameworks */,
 				AE5B98D61853527000C7F8D1 /* CoreGraphics.framework in Frameworks */,
 				AE5B98D81853527000C7F8D1 /* UIKit.framework in Frameworks */,
 				AE5B98D41853527000C7F8D1 /* Foundation.framework in Frameworks */,
-				AE23259D185F785A002D308D /* Crashlytics.framework in Frameworks */,
 				AE5B99131854EA3900C7F8D1 /* GameKit.framework in Frameworks */,
+				8BFC7E9AE0E565EB51DE6C75 /* Pods_Album_Pairs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,13 +163,14 @@
 		AE5B98C71853527000C7F8D1 = {
 			isa = PBXGroup;
 			children = (
+				AE2A70E32421539800C948C2 /* Assets.xcassets */,
 				AEC90A28188560B900A48F97 /* player_buttons */,
 				AE8C984E186101E600B4A207 /* GoogleAnalyticsServices */,
 				AE8C97221860BAB600B4A207 /* ClassicAlbums */,
 				AE8C97201860B84100B4A207 /* names.txt */,
 				AE3291F4186093FE00C2F2FF /* about.html */,
-				AE23267D185F95E2002D308D /* background.png */,
-				AE23267E185F95E2002D308D /* background@2x.png */,
+				AE953FA4242149B80055E1D5 /* background.png */,
+				AE953FA5242149B80055E1D5 /* background@2x.png */,
 				AE232679185F8960002D308D /* tick.png */,
 				AEDEDB2A185B937700DD1127 /* Config.plist */,
 				AE5B99101853B53000C7F8D1 /* card-back.png */,
@@ -174,7 +178,7 @@
 				AE5B98F81853527000C7F8D1 /* Album PairsTests */,
 				AE5B98D21853527000C7F8D1 /* Frameworks */,
 				AE5B98D11853527000C7F8D1 /* Products */,
-				BB3AE41C54ED46F1A96510EF /* Pods.xcconfig */,
+				E16FD186E9726D7602C3579F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,7 +204,7 @@
 				AE5B98D51853527000C7F8D1 /* CoreGraphics.framework */,
 				AE5B98D71853527000C7F8D1 /* UIKit.framework */,
 				AE5B98F21853527000C7F8D1 /* XCTest.framework */,
-				18D11313F6B04344BC61F67A /* libPods.a */,
+				856522C264A154D4574AE422 /* Pods_Album_Pairs.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -327,6 +331,15 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		E16FD186E9726D7602C3579F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BCB10865B76261A00A70C9D9 /* Pods-Album Pairs.debug.xcconfig */,
+				01B9B33182A63E1928BEC3E9 /* Pods-Album Pairs.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -334,12 +347,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE5B99021853527000C7F8D1 /* Build configuration list for PBXNativeTarget "Album Pairs" */;
 			buildPhases = (
-				53CC3323CEF74A4C9B99189F /* Check Pods Manifest.lock */,
+				CDF103E8C761CBA0BA1A3AF8 /* [CP] Check Pods Manifest.lock */,
 				AE5B98CC1853527000C7F8D1 /* Sources */,
 				AE5B98CD1853527000C7F8D1 /* Frameworks */,
 				AE5B98CE1853527000C7F8D1 /* Resources */,
-				507F22F5A4E649A69C8C51DC /* Copy Pods Resources */,
-				AE23259B185F781F002D308D /* ShellScript */,
+				6F39C9810CCFAC3D5236CB21 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -395,6 +407,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -415,16 +428,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE5B99111853B53000C7F8D1 /* card-back.png in Resources */,
-				AE232680185F95E2002D308D /* background@2x.png in Resources */,
-				AE23267F185F95E2002D308D /* background.png in Resources */,
 				AE5B98EC1853527000C7F8D1 /* Images.xcassets in Resources */,
 				AE5B98DE1853527000C7F8D1 /* InfoPlist.strings in Resources */,
 				AEC90A29188560B900A48F97 /* player_buttons in Resources */,
 				AE23267A185F8960002D308D /* tick.png in Resources */,
 				AE3291F5186093FE00C2F2FF /* about.html in Resources */,
+				AE2A70E42421539800C948C2 /* Assets.xcassets in Resources */,
 				AE8C97211860B84100B4A207 /* names.txt in Resources */,
 				AEDEDB2B185B937700DD1127 /* Config.plist in Resources */,
 				AE5B98E71853527000C7F8D1 /* Main.storyboard in Resources */,
+				AE953FA6242149B80055E1D5 /* background.png in Resources */,
+				AE953FA7242149B80055E1D5 /* background@2x.png in Resources */,
 				AE8C97231860BAB600B4A207 /* ClassicAlbums in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,48 +454,51 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		507F22F5A4E649A69C8C51DC /* Copy Pods Resources */ = {
+		6F39C9810CCFAC3D5236CB21 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "Copy Pods Resources";
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Album Pairs/Pods-Album Pairs-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/KissXML/KissXML.framework",
+				"${BUILT_PRODUCTS_DIR}/LastFm/LastFm.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KissXML.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LastFm.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Album Pairs/Pods-Album Pairs-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		53CC3323CEF74A4C9B99189F /* Check Pods Manifest.lock */ = {
+		CDF103E8C761CBA0BA1A3AF8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Album Pairs-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		AE23259B185F781F002D308D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run 77e24acb19491869180e64453bd7514475e79c61\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -581,7 +598,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -615,7 +632,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -624,56 +641,68 @@
 		};
 		AE5B99031853527000C7F8D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB3AE41C54ED46F1A96510EF /* Pods.xcconfig */;
+			baseConfigurationReference = BCB10865B76261A00A70C9D9 /* Pods-Album Pairs.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 356MFXZF77;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/iain/code/ios/album-pairs",
+					"/Users/iain/code/iain/album-pairs/ios",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Album Pairs/Album Pairs-Prefix.pch";
 				INFOPLIST_FILE = "Album Pairs/Album Pairs-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/iain/code/ios/album-pairs/GoogleAnalyticsServices",
-					"/Users/iain/code/ios/album-pairs/GoogleAnalyticsServices/GoogleAnalytics/Library",
+					"/Users/iain/code/iain/album-pairs/ios/GoogleAnalyticsServices",
+					"/Users/iain/code/iain/album-pairs/ios/GoogleAnalyticsServices/GoogleAnalytics/Library",
 				);
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_NAME = "Album Pairs";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		AE5B99041853527000C7F8D1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB3AE41C54ED46F1A96510EF /* Pods.xcconfig */;
+			baseConfigurationReference = 01B9B33182A63E1928BEC3E9 /* Pods-Album Pairs.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 356MFXZF77;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/iain/code/ios/album-pairs",
+					"/Users/iain/code/iain/album-pairs/ios",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Album Pairs/Album Pairs-Prefix.pch";
 				INFOPLIST_FILE = "Album Pairs/Album Pairs-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/iain/code/ios/album-pairs/GoogleAnalyticsServices",
-					"/Users/iain/code/ios/album-pairs/GoogleAnalyticsServices/GoogleAnalytics/Library",
+					"/Users/iain/code/iain/album-pairs/ios/GoogleAnalyticsServices",
+					"/Users/iain/code/iain/album-pairs/ios/GoogleAnalyticsServices/GoogleAnalytics/Library",
 				);
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_NAME = "Album Pairs";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

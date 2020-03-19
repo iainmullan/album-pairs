@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GAITrackedViewController.h"
 
-@interface StartViewController : GAITrackedViewController <UIAlertViewDelegate>
+@interface StartViewController : UIViewController <UIAlertViewDelegate>
 
 @end
