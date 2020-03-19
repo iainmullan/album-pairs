@@ -283,7 +283,7 @@
     }
     [LastFm sharedInstance].username = username;
 
-    [[LastFm sharedInstance] getTopAlbumsForUserOrNil:nil period:kLastFmPeriodOverall limit:50 successHandler:^(NSArray *result) {
+    [[LastFm sharedInstance] getTopAlbumsForUserOrNil:nil period:kLastFmPeriodQuarter limit:36 successHandler:^(NSArray *result) {
         
         NSArray *albums = [self shuffle:result];
         
