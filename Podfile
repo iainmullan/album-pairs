@@ -1,2 +1,8 @@
-platform :ios
-pod 'LastFm'
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
+use_frameworks!
+
+target 'Album Pairs' do
+    pod 'LastFm'
+end
+
