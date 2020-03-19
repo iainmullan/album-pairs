@@ -658,7 +658,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Album Pairs/Album Pairs-Prefix.pch";
 				INFOPLIST_FILE = "Album Pairs/Album Pairs-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/iain/code/iain/album-pairs/ios/GoogleAnalyticsServices",
@@ -692,7 +692,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Album Pairs/Album Pairs-Prefix.pch";
 				INFOPLIST_FILE = "Album Pairs/Album Pairs-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/iain/code/iain/album-pairs/ios/GoogleAnalyticsServices",
