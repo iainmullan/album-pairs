@@ -274,6 +274,7 @@
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
     NSDictionary *config = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     [LastFm sharedInstance].apiKey = [config objectForKey:@"LastFmApiKey"];
+    [LastFm sharedInstance].apiSecret = [config objectForKey:@"LastFmApiSecret"];
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults objectForKey:@"LastFmUsername"];

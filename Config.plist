@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LastFmApiSecret</key>
+	<string>d3940df86fea3c7c65585955bf78ba9b</string>
 	<key>GoogleAnalyticsPropertyID</key>
 	<string>UA-323014-35</string>
 	<key>CrashlyticsApiKey</key>
@@ -9,6 +11,6 @@
 	<key>LastFmUsername</key>
 	<string>ebotunes</string>
 	<key>LastFmApiKey</key>
-	<string>79de4922efbb54e68613e47d36de1b9f</string>
+	<string>62a738a4f7868584277158e4e59ead97</string>
 </dict>
 </plist>
