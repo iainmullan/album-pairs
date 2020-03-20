@@ -163,9 +163,8 @@
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z63-Nk-QUF">
                                         <rect key="frame" x="0.0" y="71" width="315" height="80"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFm-CU-H2m">
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFm-CU-H2m">
                                                 <rect key="frame" x="130" y="3" width="54" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Play">
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -173,9 +172,8 @@
                                                     <action selector="playerButtonWasTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jOX-Bi-qS1"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZF-au-be2">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZF-au-be2">
                                                 <rect key="frame" x="264" y="3" width="31" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Skip">
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -183,17 +181,18 @@
                                                     <action selector="playerButtonWasTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OaQ-il-49B"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCI-kw-Odh">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCI-kw-Odh">
                                                 <rect key="frame" x="20" y="3" width="35" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Back"/>
                                                 <connections>
                                                     <action selector="playerButtonWasTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wrv-r3-Vgb"/>
                                                 </connections>
                                             </button>
-                                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="icj-iC-syL">
-                                                <rect key="frame" x="18" y="41" width="279" height="34"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="icj-iC-syL">
+                                                <rect key="frame" x="18" y="44" width="279" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="cQ8-dT-cJE"/>
+                                                </constraints>
                                                 <connections>
                                                     <action selector="sliderWasDragged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="93r-bf-Pfb"/>
                                                 </connections>
@@ -202,7 +201,16 @@
                                         <color key="backgroundColor" red="0.36866810917854309" green="0.36866810917854309" blue="0.36866810917854309" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" red="0.035782791674137115" green="0.05211687833070755" blue="0.035297274589538574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstItem="NCI-kw-Odh" firstAttribute="leading" secondItem="icj-iC-syL" secondAttribute="leading" id="8W6-sA-Hun"/>
+                                            <constraint firstItem="NCI-kw-Odh" firstAttribute="top" secondItem="BFm-CU-H2m" secondAttribute="top" id="KE7-wj-lv9"/>
+                                            <constraint firstAttribute="bottom" secondItem="icj-iC-syL" secondAttribute="bottom" constant="6" id="MXi-8w-dBc"/>
                                             <constraint firstAttribute="height" constant="80" id="Nzu-8T-eZK"/>
+                                            <constraint firstItem="icj-iC-syL" firstAttribute="leading" secondItem="Z63-Nk-QUF" secondAttribute="leading" constant="20" id="Y31-UL-zcn"/>
+                                            <constraint firstItem="BFm-CU-H2m" firstAttribute="top" secondItem="Z63-Nk-QUF" secondAttribute="top" constant="3" id="Zzj-g0-G6a"/>
+                                            <constraint firstAttribute="trailing" secondItem="icj-iC-syL" secondAttribute="trailing" constant="20" id="bPP-HL-8gU"/>
+                                            <constraint firstItem="FZF-au-be2" firstAttribute="top" secondItem="BFm-CU-H2m" secondAttribute="top" id="cwJ-gE-kpJ"/>
+                                            <constraint firstItem="FZF-au-be2" firstAttribute="trailing" secondItem="icj-iC-syL" secondAttribute="trailing" id="nyc-7V-vEJ"/>
+                                            <constraint firstItem="BFm-CU-H2m" firstAttribute="centerX" secondItem="Z63-Nk-QUF" secondAttribute="centerX" id="w77-l6-OzE"/>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Jt8-IL-m7b">
