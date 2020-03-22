@@ -409,7 +409,6 @@
         [self.player back];
     }
     
-
     NSString *buttonName = button.titleLabel.text;
 
 //    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Player"     // Event category (required)
