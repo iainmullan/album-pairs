@@ -24,6 +24,8 @@
 @interface GameViewController () <PairsGameDelegate, UITableViewDataSource, UITableViewDelegate, APMusicPlayerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *gridView;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+
 @property (strong, nonatomic) NSMutableArray *foundCards;
 @property (strong, nonatomic) NSMutableArray *songs;
 @property (strong, nonatomic) MPMediaItemCollection *playlist;
@@ -34,7 +36,6 @@
 @property (strong, nonatomic) APCard *pick2;
 
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
-@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *playPauseButton;
 @property (strong, nonatomic) IBOutlet UITableView *playlistView;
@@ -130,8 +131,6 @@
     [self drawGrid];
 
     [self loadAlbums];
-    
-    [self.statusLabel setTextColor:UIColorFromRGB(0x49b85b)];
 }
 
 - (NSArray*)shuffle:(NSArray*)input
@@ -159,6 +158,8 @@
     cards = (NSMutableArray*) [self shuffle:cards];
     cards = (NSMutableArray*) [self shuffle:cards];
 
+    self.statusLabel.hidden = YES;
+    
     int x = 0;
     int y = 0;
     
@@ -191,7 +192,11 @@
 {
 
     self.playerControls.hidden = YES;
-    
+
+    self.statusLabel.hidden = NO;
+    [self.statusLabel setText:@"LOADING..."];
+    [self.statusLabel setBackgroundColor:UIColorFromRGB(0x000000)];
+
     if (self.artworkSource == APArtworkSourceLibrary) {
         [self loadAlbumsFromLibrary:self.game.pairCount];
         self.playerControls.hidden = NO;
@@ -278,7 +283,6 @@
     }
 
 }
-
 
 - (void)loadAlbumsFromLastFm:(int)howMany
 {
@@ -460,14 +464,16 @@
 {
 
     NSString *resultString = nil;
-    
+
+    [self.statusLabel setTextColor:UIColorFromRGB(0xFFFFFF)];
+
     if (result) {
         [self.statusLabel setText:@"YOU WIN!"];
-        [self.statusLabel setTextColor:UIColorFromRGB(0x49b85b)];
+        [self.statusLabel setBackgroundColor:UIColorFromRGB(0x49b85b)];
         resultString = @"WIN";
     } else {
         [self.statusLabel setText:@"GAME OVER"];
-        [self.statusLabel setTextColor:UIColorFromRGB(0xd22727)];
+        [self.statusLabel setBackgroundColor:UIColorFromRGB(0xd22727)];
         [self.player stop];
         resultString = @"LOSE";
     }

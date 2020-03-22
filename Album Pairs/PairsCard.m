@@ -25,7 +25,6 @@ static const float FLIP_SPEED = 0.6;
     return self;
 }
 
-
 - (void)show
 {
     self.shown = true;
@@ -43,6 +42,7 @@ static const float FLIP_SPEED = 0.6;
                     }];
     
 }
+
 - (void)doHighlight
 {
 
@@ -83,7 +83,6 @@ static const float FLIP_SPEED = 0.6;
     self.layer.opacity = 0.0;
     self.shown = false;
 }
-
 
 
 /*
