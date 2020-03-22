@@ -45,7 +45,10 @@ static const float FLIP_SPEED = 0.6;
 }
 - (void)doHighlight
 {
-    self.front.layer.opacity = 0.5;
+
+    UIView* overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.size, self.size)];
+    overlay.layer.opacity = 0.5;
+    overlay.backgroundColor = UIColor.whiteColor;
     
     UIImageView *tick = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tick.png"]];
     
@@ -53,9 +56,8 @@ static const float FLIP_SPEED = 0.6;
     int pos = (self.size / 2) - (tickSize / 2);
     tick.frame = CGRectMake(pos, pos, tickSize, tickSize);
     
-    [self insertSubview:tick
-           aboveSubview:self.front];
-   
+    [self insertSubview:overlay aboveSubview:self.front];
+    [self insertSubview:tick aboveSubview:overlay];
 }
 
 - (void)highlight
