@@ -45,6 +45,9 @@
 
 //@property (strong, nonatomic) id<GAITracker> tracker;
 
+@property (nonatomic) int cardSize;
+@property (nonatomic) int cardMargin;
+
 @end
 
 @implementation GameViewController
@@ -64,6 +67,9 @@
     /* PLAYER INTERFACE */
     [self.playlistView setDataSource:self];
     [self.playlistView setDelegate:self];
+
+    self.cardSize = 100;
+    self.cardMargin = 10;
 
     [self newGame];
 }
@@ -110,6 +116,7 @@
 
     self.game = [[APGame alloc ]init];
     self.game.delegate = self;
+    self.game.cardSize = self.cardSize;
 
     self.foundCards = [[NSMutableArray alloc] init];
     [self.playlistView reloadData];
@@ -157,7 +164,7 @@
             y++;
         }
         
-        CGRect frame = [GameViewController frameForPositionX:x y:y];
+        CGRect frame = [self frameForPositionX:x y:y];
         card.frame = frame;
 
         UITapGestureRecognizer *tapGesture =
@@ -239,7 +246,7 @@
     for(NSDictionary *album in albums) {
 
         MPMediaItemArtwork *artwork = [album valueForKey:MPMediaItemPropertyArtwork];
-        UIImage *artworkImage = [artwork imageWithSize: CGSizeMake (CARD_SIZE, CARD_SIZE)];
+        UIImage *artworkImage = [artwork imageWithSize: CGSizeMake (self.cardSize, self.cardSize)];
         NSString *title = [album valueForKey:MPMediaItemPropertyTitle];
 
         if (artworkImage) {
@@ -410,12 +417,12 @@
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
-+ (CGRect) frameForPositionX:(int) x y:(int)y
+- (CGRect) frameForPositionX:(int) x y:(int)y
 {
-    int xpos = x * (CARD_SIZE + CARD_MARGIN);
-    int ypos = y * (CARD_SIZE + CARD_MARGIN);
+    int xpos = x * (self.cardSize + self.cardMargin);
+    int ypos = y * (self.cardSize + self.cardMargin);
 
-    return CGRectMake(xpos, ypos, CARD_SIZE, CARD_SIZE);
+    return CGRectMake(xpos, ypos, self.cardSize, self.cardSize);
 }
 
 -(void)pairWasFoundWithPick1:(APCard*)pick1 pick2:(APCard*)pick2

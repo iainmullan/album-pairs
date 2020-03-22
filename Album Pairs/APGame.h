@@ -40,6 +40,7 @@ static const int TIME_LIMIT= 90;
 @property int correctCount;
 @property int timerCount;
 @property int pairCount;
+@property int cardSize;
 
 @property NSMutableArray *hashes;
 

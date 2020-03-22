@@ -132,8 +132,8 @@
     
     [self.hashes addObject:hash];
     
-    [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index title:title]];
-    [self.cards addObject:[[APCard alloc] initWithImage:image albumId:index title:title]];
+    [self.cards addObject:[[APCard alloc] initWithImage:image size:self.cardSize albumId:index title:title]];
+    [self.cards addObject:[[APCard alloc] initWithImage:image size:self.cardSize albumId:index title:title]];
     
     return true;
 }

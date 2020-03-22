@@ -21,10 +21,10 @@
     return self;
 }
 
--(void)setArtwork:(UIImage*)image
+-(void)setArtwork:(UIImage*)image size:(int)size
 {
     
-    CGRect frame = CGRectMake(0, 0, CARD_SIZE, CARD_SIZE);
+    CGRect frame = CGRectMake(0, 0, size, size);
     
     self.front = [[UIImageView alloc] initWithImage:image];
     self.front.frame = frame;
@@ -33,13 +33,13 @@
     self.back.frame = frame;    
 }
 
-- (id)initWithImage:(UIImage*)image albumId:(int)albumId title:(NSString*)title
+- (id)initWithImage:(UIImage*)image size:(int)size albumId:(int)albumId title:(NSString*)title
 {
     self = [self init];
     self.albumId = albumId;
     self.title = title;
 
-    [self setArtwork:image];
+    [self setArtwork:image size:size];
 
     UIColor *grey = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0f];
     self.layer.borderColor = grey.CGColor;

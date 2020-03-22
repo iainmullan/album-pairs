@@ -10,7 +10,6 @@
 
 @interface PairsCard : UIView
 
-
 - (void)highlight;
 - (void)show;
 - (void)hide;
