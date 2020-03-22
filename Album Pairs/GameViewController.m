@@ -67,9 +67,15 @@
     /* PLAYER INTERFACE */
     [self.playlistView setDataSource:self];
     [self.playlistView setDelegate:self];
+}
 
-    self.cardSize = 100;
+- (void)viewDidAppear:(BOOL)animated
+{
+    int gridSize = 6;
     self.cardMargin = 10;
+
+    double pixelWidth = self.gridView.frame.size.width;
+    self.cardSize = floor((pixelWidth - (gridSize * self.cardMargin)) / gridSize);
 
     [self newGame];
 }
@@ -206,7 +212,7 @@
     NSArray *filesList = [[NSString stringWithContentsOfFile:documentsPath
                                        encoding:NSUTF8StringEncoding
                                           error:nil]
-             componentsSeparatedByString:@"\n"];
+                    componentsSeparatedByString:@"\n"];
     
     filesList = [self shuffle:filesList];
     
