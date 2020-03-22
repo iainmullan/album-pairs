@@ -38,6 +38,7 @@
     self = [self init];
     self.albumId = albumId;
     self.title = title;
+    self.size = size;
 
     [self setArtwork:image size:size];
 

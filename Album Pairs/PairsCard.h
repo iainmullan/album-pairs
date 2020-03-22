@@ -18,5 +18,6 @@
 @property (nonatomic) UIImageView* back;
 @property (nonatomic) UIImageView* front;
 @property (nonatomic) BOOL shown;
+@property (nonatomic) int size;
 
 @end

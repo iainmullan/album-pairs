@@ -48,7 +48,10 @@ static const float FLIP_SPEED = 0.6;
     self.front.layer.opacity = 0.5;
     
     UIImageView *tick = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tick.png"]];
-    tick.frame = CGRectMake(30, 30, 40, 40);
+    
+    int tickSize = 40;
+    int pos = (self.size / 2) - (tickSize / 2);
+    tick.frame = CGRectMake(pos, pos, tickSize, tickSize);
     
     [self insertSubview:tick
            aboveSubview:self.front];
